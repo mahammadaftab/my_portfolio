@@ -202,6 +202,7 @@ export default function Contact() {
                         size={20}
                         loop={true}
                         autoplay={true}
+                        ariaLabel="Loading animation"
                       />
                     </>
                   ) : (
@@ -233,7 +234,7 @@ export default function Contact() {
                       href="mailto:contact@example.com" 
                       className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
                     >
-                      contact@example.com
+                      mdaftabeditz360@gmail.com
                     </a>
                   </div>
                 </div>
@@ -248,7 +249,7 @@ export default function Contact() {
                       href="tel:+11234567890" 
                       className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
                     >
-                      +1 (123) 456-7890
+                      +91 8970580082
                     </a>
                   </div>
                 </div>
@@ -260,7 +261,7 @@ export default function Contact() {
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">Location</h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      San Francisco, CA<br />
+                      Gadag, Karnataka<br />
                       Available for remote work worldwide
                     </p>
                   </div>
@@ -269,7 +270,17 @@ export default function Contact() {
               
               {/* Social Links */}
               <div className="mt-12">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Connect with me</h3>
+                <div className="flex items-center mb-4">
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">Connect with me</h3>
+                  <LottieAnimation 
+                    animationData={null}
+                    className="ml-2"
+                    size={24}
+                    loop={true}
+                    autoplay={true}
+                    ariaLabel="Social connection animation"
+                  />
+                </div>
                 <div className="flex space-x-4">
                   {[
                     { name: "GitHub", url: "#" },
@@ -280,27 +291,35 @@ export default function Contact() {
                     <a
                       key={social.name}
                       href={social.url}
-                      className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center"
                       aria-label={social.name}
                     >
                       <span className="font-medium">{social.name}</span>
+                      <LottieAnimation 
+                        animationData={null}
+                        className="ml-1"
+                        size={16}
+                        loop={true}
+                        autoplay={true}
+                        playOnHover={true}
+                        ariaLabel={`Animated icon for ${social.name}`}
+                      />
                     </a>
                   ))}
                 </div>
-              </div>
-              
-              {/* Calendar Booking */}
-              <div className="mt-12">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Schedule a Meeting</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  Want to discuss a project or just have a chat? Book a time that works for you.
-                </p>
-                <a
-                  href="#"
-                  className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 px-6 rounded-lg shadow hover:shadow-lg transition-all duration-300"
-                >
-                  Book a Call
-                </a>
+                
+                {/* 3D Cube Animation */}
+                <div className="mt-8 flex justify-center">
+                  <div className="relative">
+                    <LottieAnimation 
+                      animationData={null}
+                      size={80}
+                      loop={true}
+                      autoplay={true}
+                      ariaLabel="3D rotating cube animation"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>

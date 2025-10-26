@@ -50,6 +50,12 @@ export default function Skills() {
 
   const activeSkills = skillCategories.find(cat => cat.id === activeCategory)?.skills || [];
 
+  // Tech stack data
+  const techStack = [
+    "React", "Next.js", "TypeScript", "Node.js", "Python", 
+    "MongoDB", "PostgreSQL", "AWS", "Docker", "Tailwind CSS"
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16">
       <div className="container mx-auto px-4">
@@ -86,6 +92,7 @@ export default function Skills() {
                     size={16}
                     loop={true}
                     autoplay={true}
+                    ariaLabel="Active category indicator"
                   />
                 )}
               </button>
@@ -130,18 +137,46 @@ export default function Skills() {
             Technologies I Work With
           </h2>
           <div className="flex flex-wrap justify-center gap-6">
-            {[
-              "React", "Next.js", "TypeScript", "Node.js", "Python", 
-              "MongoDB", "PostgreSQL", "AWS", "Docker", "Tailwind CSS"
-            ].map((tech, index) => (
+            {techStack.map((tech, index) => (
               <motion.div
                 key={tech}
-                initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : index * 0.1 }}
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg flex items-center justify-center w-32 h-32"
+                initial={prefersReducedMotion ? { opacity: 1 } : { 
+                  opacity: 0, 
+                  y: 20,
+                  scale: 0.9 
+                }}
+                animate={prefersReducedMotion ? { opacity: 1 } : { 
+                  opacity: 1, 
+                  y: 0,
+                  scale: 1 
+                }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: prefersReducedMotion ? 0 : index * 0.1,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                whileHover={prefersReducedMotion ? {} : { 
+                  y: -10, 
+                  scale: 1.05,
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                  transition: { duration: 0.2 }
+                }}
+                whileTap={prefersReducedMotion ? {} : { 
+                  scale: 0.95 
+                }}
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg flex items-center justify-center w-32 h-32 cursor-pointer"
               >
-                <span className="text-lg font-semibold text-gray-900 dark:text-white">{tech}</span>
+                <div className="text-center">
+                  <div className="mb-2 flex justify-center">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                      <span className="text-white font-bold text-lg">
+                        {tech.charAt(0)}
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-lg font-semibold text-gray-900 dark:text-white">{tech}</span>
+                </div>
               </motion.div>
             ))}
           </div>

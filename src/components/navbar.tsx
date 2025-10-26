@@ -24,7 +24,7 @@ export default function Navbar() {
   // Close mobile menu when resizing to desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) { // Changed from 768 to 1024 to match lg breakpoint
         setMobileMenuOpen(false);
       }
     };
@@ -32,6 +32,11 @@ export default function Navbar() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Close mobile menu when pathname changes (navigation occurs)
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-sm dark:bg-black/80 border-b border-gray-200 dark:border-gray-800">
@@ -86,7 +91,7 @@ export default function Navbar() {
       </nav>
       {/* Mobile menu */}
       <div className={`lg:hidden ${mobileMenuOpen ? "block" : "hidden"}`}>
-        <div className="fixed inset-0 z-50"></div>
+        <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
         <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:sm:ring-gray-100/10">
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5 text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -123,7 +128,10 @@ export default function Navbar() {
                 <button
                   type="button"
                   className="flex items-center gap-2 rounded-md px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  onClick={() => {
+                    setTheme(theme === "dark" ? "light" : "dark");
+                    setMobileMenuOpen(false);
+                  }}
                 >
                   {theme === "dark" ? (
                     <>

@@ -7,6 +7,7 @@ declare global {
   }
 }
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import PDFViewer from "@/components/pdf-viewer";
@@ -15,7 +16,21 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 export default function Resume() {
   // Replace with actual resume file path
   const resumePath = "/resume.pdf";
+  const [fileExists, setFileExists] = useState(true);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  // Check if file exists
+  useState(() => {
+    fetch(resumePath)
+      .then(response => {
+        if (!response.ok) {
+          setFileExists(false);
+        }
+      })
+      .catch(() => {
+        setFileExists(false);
+      });
+  });
 
   const handleDownload = (format: string = 'pdf') => {
     // Implement analytics tracking
@@ -46,7 +61,9 @@ export default function Resume() {
   const handleCompressedDownload = (e: React.MouseEvent) => {
     e.preventDefault();
     handleDownload('compressed-pdf');
-    window.open(`${resumePath}?format=compressed`, '_blank');
+    if (fileExists) {
+      window.open(`${resumePath}?format=compressed`, '_blank');
+    }
   };
   
   const handleWordDownload = (e: React.MouseEvent) => {
@@ -104,13 +121,20 @@ export default function Resume() {
           {/* Download Button */}
           <div className="flex justify-center mb-8">
             <a
-              href={resumePath}
-              onClick={() => handleDownload('pdf')}
-              download
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              href={fileExists ? resumePath : "#"}
+              onClick={(e) => {
+                if (fileExists) {
+                  handleDownload('pdf');
+                } else {
+                  e.preventDefault();
+                  alert("Resume file not available. Please contact me directly for my resume.");
+                }
+              }}
+              download={fileExists}
+              className={`inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${!fileExists ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <ArrowDownTrayIcon className="h-5 w-5 mr-2" />
-              Download Resume (PDF)
+              {fileExists ? "Download Resume (PDF)" : "Resume Not Available"}
             </a>
           </div>
 
@@ -120,7 +144,22 @@ export default function Resume() {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Resume Preview</h3>
             </div>
             <div className="h-[600px]">
-              <PDFViewer file={resumePath} className="w-full h-full" />
+              {fileExists ? (
+                <PDFViewer file={resumePath} className="w-full h-full" />
+              ) : (
+                <div className="flex items-center justify-center h-full bg-gray-100 dark:bg-gray-900">
+                  <div className="text-center p-8">
+                    <div className="text-4xl mb-4">📄</div>
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Resume Not Available</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                      The resume file is currently not available for preview.
+                    </p>
+                    <p className="text-gray-500 dark:text-gray-500 text-sm">
+                      Please use the download button above to request a copy.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -133,7 +172,7 @@ export default function Resume() {
               <a 
                 href="#" 
                 onClick={handleCompressedDownload}
-                className="text-blue-600 dark:text-blue-400 hover:underline"
+                className={`text-blue-600 dark:text-blue-400 hover:underline ${!fileExists ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 Compressed PDF
               </a>

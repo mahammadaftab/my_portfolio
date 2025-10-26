@@ -26,6 +26,12 @@ export const metadata: Metadata = {
   keywords: ["portfolio", "developer", "frontend", "react", "nextjs", "typescript"],
   authors: [{ name: "Your Name" }], // TODO: Replace with your name
   creator: "Your Name", // TODO: Replace with your name
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

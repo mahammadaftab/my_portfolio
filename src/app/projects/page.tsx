@@ -60,8 +60,10 @@ export default function Projects() {
                 animationData={null}
                 className="ml-2"
                 size={16}
-                loop={true}
-                autoplay={true}
+                loop={false}
+                autoplay={false}
+                playOnClick={true}
+                ariaLabel="Checkmark animation"
               />
             )}
           </button>
@@ -81,8 +83,10 @@ export default function Projects() {
                   animationData={null}
                   className="ml-2"
                   size={16}
-                  loop={true}
-                  autoplay={true}
+                  loop={false}
+                  autoplay={false}
+                  playOnClick={true}
+                  ariaLabel="Checkmark animation"
                 />
               )}
             </button>

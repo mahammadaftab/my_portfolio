@@ -32,6 +32,7 @@ export default function NotFound() {
             size={40}
             loop={true}
             autoplay={!prefersReducedMotion}
+            ariaLabel="Warning animation"
           />
         </motion.h2>
         
@@ -60,6 +61,7 @@ export default function NotFound() {
               className="mr-2"
               loop={true}
               autoplay={!prefersReducedMotion}
+              ariaLabel="Arrow pointing left"
             />
             Back to Home
           </Link>

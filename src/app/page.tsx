@@ -23,7 +23,7 @@ export default function Home() {
   const threeSceneY = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const heroTextY = useTransform(scrollYProgress, [0, 1], [0, 50]);
 
-  const roles = ["Software Engineer", "Frontend Developer", "UI/UX Designer", "Problem Solver"];
+  const roles = ["Software Engineer", "Full Stack Developer", "UI/UX Designer", "Problem Solver"];
 
   useEffect(() => {
     const handleType = () => {
@@ -77,7 +77,7 @@ export default function Home() {
             style={{ y: prefersReducedMotion ? 0 : heroTextY }}
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Hi, I&#39;m <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Alex</span>
+              Hi, I&#39;m <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Mahammad Aftab</span>
             </h1>
             <div className="mt-6">
               <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300">
@@ -107,6 +107,8 @@ export default function Home() {
                   size={20}
                   loop={true}
                   autoplay={true}
+                  playOnHover={true}
+                  ariaLabel="Arrow pointing right"
                 />
               </Link>
               <Link
@@ -120,6 +122,8 @@ export default function Home() {
                   size={20}
                   loop={true}
                   autoplay={true}
+                  playOnHover={true}
+                  ariaLabel="Arrow pointing right"
                 />
               </Link>
             </div>

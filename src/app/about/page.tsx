@@ -44,8 +44,14 @@ export default function About() {
             <Tilt options={defaultOptions} className="w-full">
               <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-1 shadow-xl">
                 <div className="bg-white dark:bg-gray-800 rounded-2xl p-6">
-                  <div className="aspect-square rounded-xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-gray-500 dark:text-gray-400">Profile Photo</span>
+                  <div className="aspect-square rounded-xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                    <img 
+                      src="/images/profile.JPG" 
+                      alt="Mahammad Aftab" 
+                      className="w-full h-full object-cover"
+                      width={400}
+                      height={400}
+                    />
                   </div>
                 </div>
               </div>
@@ -62,10 +68,12 @@ export default function About() {
               Crafting Digital Experiences
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              I&#39;m a passionate software engineer with over 5 years of experience building 
-              scalable web applications. My journey in tech began with a curiosity about 
-              how things work, which led me to pursue computer science and eventually 
-              specialize in frontend development.
+              As a Computer Science Engineering student.
+            </p>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              I’m deeply passionate about leveraging technology to solve complex problems and create meaningful solutions. 
+              My academic background has provided me with a strong foundation in programming, algorithms, and system design, 
+              along with hands-on experience in languages like C, Java, and Website Design.
             </p>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               I believe in writing clean, maintainable code and creating intuitive user 
@@ -75,12 +83,12 @@ export default function About() {
             </p>
             <div className="grid grid-cols-2 gap-4 mt-8">
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">5+</h3>
-                <p className="text-gray-600 dark:text-gray-400">Years Experience</p>
+                <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">3 Year</h3>
+                <p className="text-gray-600 dark:text-gray-400">Computer Science</p>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">50+</h3>
-                <p className="text-gray-600 dark:text-gray-400">Projects Completed</p>
+                <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">15+</h3>
+                <p className="text-gray-600 dark:text-gray-400">Projects Completed in GitHub</p>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
                 <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">20+</h3>
