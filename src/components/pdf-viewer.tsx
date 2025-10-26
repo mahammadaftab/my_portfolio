@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import * as pdfjsLib from "pdfjs-dist";
 import { useTheme } from "next-themes";
-
-// Set the worker path for PDF.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
 
 interface PDFViewerProps {
   file: string;
@@ -19,12 +15,46 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
   const [numPages, setNumPages] = useState(0);
   const [retryCount, setRetryCount] = useState(0);
   const { theme } = useTheme();
-  const pdfRef = useRef<pdfjsLib.PDFDocumentProxy | null>(null);
+  const pdfRef = useRef<any>(null);
+  const renderTaskRef = useRef<any>(null);
+  const [pdfjsLib, setPdfjsLib] = useState<any>(null);
+
+  // Dynamically import pdfjs-dist on client side only
+  useEffect(() => {
+    const loadPdfJs = async () => {
+      try {
+        const pdfjs = await import("pdfjs-dist");
+        // Set the worker path for PDF.js
+        pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
+        setPdfjsLib(pdfjs);
+      } catch (err) {
+        console.error("Failed to load pdfjs-dist:", err);
+        setError("Failed to load PDF viewer. Please try again later.");
+        setLoading(false);
+      }
+    };
+    
+    loadPdfJs();
+  }, []);
 
   const loadPDF = async () => {
+    if (!pdfjsLib) return;
+    
     try {
       setLoading(true);
       setError(null);
+      
+      // Cancel any ongoing render task
+      if (renderTaskRef.current) {
+        renderTaskRef.current.cancel();
+        renderTaskRef.current = null;
+      }
+      
+      // Destroy previous PDF document if exists
+      if (pdfRef.current) {
+        await pdfRef.current.destroy();
+        pdfRef.current = null;
+      }
       
       // Load the PDF document
       const loadingTask = pdfjsLib.getDocument(file);
@@ -42,6 +72,9 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
       const context = canvas.getContext("2d");
       if (!context) return;
       
+      // Clear canvas
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      
       canvas.height = viewport.height;
       canvas.width = viewport.width;
       
@@ -55,10 +88,20 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
         canvas: canvas,
       };
       
-      await page.render(renderContext).promise;
+      // Create new render task
+      const renderTask = page.render(renderContext);
+      renderTaskRef.current = renderTask;
+      
+      await renderTask.promise;
+      renderTaskRef.current = null;
       setLoading(false);
       setRetryCount(0); // Reset retry count on success
-    } catch (err) {
+    } catch (err: any) {
+      // Ignore cancellation errors
+      if (err?.name === "RenderingCancelledException") {
+        return;
+      }
+      
       console.error("Error loading PDF:", err);
       
       // Retry up to 3 times
@@ -73,14 +116,32 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
   };
 
   useEffect(() => {
-    loadPDF();
+    if (pdfjsLib) {
+      loadPDF();
+    }
 
     return () => {
+      // Cleanup on unmount
+      if (renderTaskRef.current) {
+        renderTaskRef.current.cancel();
+        renderTaskRef.current = null;
+      }
+      
       if (pdfRef.current) {
         pdfRef.current.destroy();
+        pdfRef.current = null;
       }
     };
-  }, [file, theme]); // loadPDF is intentionally omitted as it's defined inside the component
+  }, [file, theme, pdfjsLib]);
+
+  // Show loading state while pdfjs-lib is loading
+  if (!pdfjsLib) {
+    return (
+      <div className={`flex items-center justify-center h-full ${className}`}>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className={`relative ${className}`}>
