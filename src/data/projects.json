@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "E-Commerce Platform",
+    "description": "A full-featured online shopping platform with payment integration and inventory management.",
+    "tags": ["React", "Node.js", "MongoDB"],
+    "image": "/images/projects/ecommerce.jpg",
+    "liveUrl": "https://example-ecommerce.com",
+    "githubUrl": "https://github.com/yourusername/ecommerce-platform"
+  },
+  {
+    "id": 2,
+    "title": "Task Management App",
+    "description": "A productivity application for teams to manage projects and collaborate in real-time.",
+    "tags": ["Next.js", "TypeScript", "Firebase"],
+    "image": "/images/projects/taskmanager.jpg",
+    "liveUrl": "https://example-taskmanager.com",
+    "githubUrl": "https://github.com/yourusername/task-manager"
+  },
+  {
+    "id": 3,
+    "title": "Portfolio Website",
+    "description": "A responsive portfolio website with 3D animations and dark mode support.",
+    "tags": ["React", "Three.js", "Tailwind CSS"],
+    "image": "/images/projects/portfolio.jpg",
+    "liveUrl": "https://your-portfolio-url.com",
+    "githubUrl": "https://github.com/yourusername/portfolio"
+  },
+  {
+    "id": 4,
+    "title": "Weather Dashboard",
+    "description": "A real-time weather application with location-based forecasts and interactive maps.",
+    "tags": ["React", "API Integration", "Chart.js"],
+    "image": "/images/projects/weather.jpg",
+    "liveUrl": "https://example-weather.com",
+    "githubUrl": "https://github.com/yourusername/weather-dashboard"
+  },
+  {
+    "id": 5,
+    "title": "Social Media Analytics",
+    "description": "A dashboard for tracking social media performance and generating insights.",
+    "tags": ["React", "D3.js", "Express"],
+    "image": "/images/projects/analytics.jpg",
+    "liveUrl": "https://example-analytics.com",
+    "githubUrl": "https://github.com/yourusername/social-analytics"
+  },
+  {
+    "id": 6,
+    "title": "Fitness Tracker",
+    "description": "A mobile-first application for tracking workouts, nutrition, and health metrics.",
+    "tags": ["React Native", "Redux", "Node.js"],
+    "image": "/images/projects/fitness.jpg",
+    "liveUrl": "https://example-fitness.com",
+    "githubUrl": "https://github.com/yourusername/fitness-tracker"
+  }
+]

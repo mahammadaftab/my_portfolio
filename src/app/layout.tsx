@@ -1,59 +1,58 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/contexts/theme-context";
+import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/navbar";
+import CustomCursor from "@/components/custom-cursor";
+import ScrollProgress from "@/components/scroll-progress";
+import Footer from "@/components/footer";
 
-const inter = Inter({
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
 });
 
-const poppins = Poppins({
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-poppins",
-  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Your Name - Full Stack Developer & UI/UX Designer",
-  description: "Passionate full-stack developer creating exceptional digital experiences. 5+ years of experience in React, Node.js, and modern web technologies.",
-  keywords: [
-    "full stack developer",
-    "react developer",
-    "next.js",
-    "typescript",
-    "ui/ux designer",
-    "web development",
-    "portfolio",
-  ],
-  authors: [{ name: "Your Name" }],
-  creator: "Your Name",
+  title: {
+    default: "Portfolio | Professional Developer",
+    template: "%s | Portfolio"
+  },
+  description: "Professional portfolio showcasing skills, projects, and experience",
+  keywords: ["portfolio", "developer", "frontend", "react", "nextjs", "typescript"],
+  authors: [{ name: "Your Name" }], // TODO: Replace with your name
+  creator: "Your Name", // TODO: Replace with your name
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yourportfolio.com",
-    title: "Your Name - Full Stack Developer",
-    description: "Passionate full-stack developer creating exceptional digital experiences.",
-    siteName: "Your Portfolio",
+    url: "https://your-portfolio-url.com", // TODO: Replace with your domain
+    title: "Portfolio | Professional Developer",
+    description: "Professional portfolio showcasing skills, projects, and experience",
+    images: [
+      {
+        url: "https://your-portfolio-url.com/og-image.jpg", // TODO: Replace with your OG image
+        width: 1200,
+        height: 630,
+        alt: "Portfolio Website",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your Name - Full Stack Developer",
-    description: "Passionate full-stack developer creating exceptional digital experiences.",
-    creator: "@yourusername",
+    title: "Portfolio | Professional Developer",
+    description: "Professional portfolio showcasing skills, projects, and experience",
+    images: ["https://your-portfolio-url.com/og-image.jpg"], // TODO: Replace with your OG image
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+  },
+  alternates: {
+    canonical: "https://your-portfolio-url.com", // TODO: Replace with your domain
   },
 };
 
@@ -64,9 +63,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900 dark:text-white`}
+      >
         <ThemeProvider>
-          {children}
+          <ScrollProgress />
+          <CustomCursor />
+          <Navbar />
+          <main className="min-h-screen pt-16">
+            {children}
+          </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

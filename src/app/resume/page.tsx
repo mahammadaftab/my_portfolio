@@ -1,0 +1,154 @@
+"use client";
+
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void;
+    plausible?: (eventName: string, options?: { props: Record<string, unknown> }) => void;
+  }
+}
+
+import { motion } from "framer-motion";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
+import PDFViewer from "@/components/pdf-viewer";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+
+export default function Resume() {
+  // Replace with actual resume file path
+  const resumePath = "/resume.pdf";
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const handleDownload = (format: string = 'pdf') => {
+    // Implement analytics tracking
+    if (typeof window !== 'undefined') {
+      // Google Analytics
+      if (window.gtag) {
+        window.gtag('event', 'download', {
+          event_category: 'Resume',
+          event_label: `${format} Download`,
+          value: 1
+        });
+      }
+      
+      // Plausible Analytics
+      if (window.plausible) {
+        window.plausible('Resume Download', { props: { format } });
+      }
+      
+      // Custom event for other analytics
+      window.dispatchEvent(new CustomEvent('resumeDownload', { 
+        detail: { format } 
+      }));
+    }
+    
+    console.log(`Resume download initiated: ${format}`);
+  };
+  
+  const handleCompressedDownload = (e: React.MouseEvent) => {
+    e.preventDefault();
+    handleDownload('compressed-pdf');
+    window.open(`${resumePath}?format=compressed`, '_blank');
+  };
+  
+  const handleWordDownload = (e: React.MouseEvent) => {
+    e.preventDefault();
+    handleDownload('word');
+    window.open('/resume.docx', '_blank');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">My Resume</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Download my resume to learn more about my professional background, skills, and achievements.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.7 }}
+          className="max-w-4xl mx-auto"
+        >
+          {/* Summary Section */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Professional Summary</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              Senior Frontend Developer with 5+ years of experience building scalable web applications 
+              using modern JavaScript frameworks. Passionate about creating intuitive user experiences 
+              and writing clean, maintainable code. Proven track record of delivering high-quality 
+              solutions in fast-paced environments.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center">
+                <span className="font-medium text-gray-900 dark:text-white mr-2">Location:</span>
+                <span className="text-gray-600 dark:text-gray-400">San Francisco, CA</span>
+              </div>
+              <div className="flex items-center">
+                <span className="font-medium text-gray-900 dark:text-white mr-2">Experience:</span>
+                <span className="text-gray-600 dark:text-gray-400">5+ Years</span>
+              </div>
+              <div className="flex items-center">
+                <span className="font-medium text-gray-900 dark:text-white mr-2">Availability:</span>
+                <span className="text-green-600 dark:text-green-400">Open to opportunities</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Download Button */}
+          <div className="flex justify-center mb-8">
+            <a
+              href={resumePath}
+              onClick={() => handleDownload('pdf')}
+              download
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <ArrowDownTrayIcon className="h-5 w-5 mr-2" />
+              Download Resume (PDF)
+            </a>
+          </div>
+
+          {/* Resume Preview */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Resume Preview</h3>
+            </div>
+            <div className="h-[600px]">
+              <PDFViewer file={resumePath} className="w-full h-full" />
+            </div>
+          </div>
+
+          {/* Alternative Formats */}
+          <div className="mt-8 text-center">
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              Need a different format?
+            </p>
+            <div className="flex justify-center gap-4">
+              <a 
+                href="#" 
+                onClick={handleCompressedDownload}
+                className="text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Compressed PDF
+              </a>
+              <span className="text-gray-400">|</span>
+              <a 
+                href="#" 
+                onClick={handleWordDownload}
+                className="text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Word Document
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
