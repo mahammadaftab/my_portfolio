@@ -2,52 +2,52 @@
   "experiences": [
     {
       "id": 1,
-      "role": "Senior Frontend Developer",
-      "company": "Tech Corp",
-      "period": "2022 - Present",
-      "description": "Leading frontend development for enterprise applications using React, TypeScript, and modern CSS frameworks.",
+      "title": "Senior Frontend Developer",
+      "company": "Tech Innovations Inc.",
+      "period": "2020 - Present",
+      "description": "Lead frontend development for enterprise SaaS platform serving 500+ clients. Implemented responsive design system used across 15+ products.",
       "responsibilities": [
-        "Architected and implemented scalable frontend solutions for enterprise clients",
-        "Mentored junior developers and conducted code reviews",
+        "Led a team of 5 frontend developers in building scalable web applications",
+        "Implemented design system used across 15+ products",
         "Optimized application performance, reducing load times by 40%",
-        "Implemented CI/CD pipelines for automated testing and deployment"
+        "Mentored junior developers and conducted code reviews"
       ]
     },
     {
       "id": 2,
-      "role": "Frontend Developer",
-      "company": "Digital Agency",
-      "period": "2020 - 2022",
-      "description": "Developed responsive web applications for clients in various industries using modern JavaScript frameworks.",
+      "title": "Frontend Developer",
+      "company": "Digital Solutions LLC",
+      "period": "2018 - 2020",
+      "description": "Developed and maintained 10+ client websites using React and Vue.js. Collaborated with UX designers to implement pixel-perfect interfaces.",
       "responsibilities": [
-        "Built 20+ client websites using React and Vue.js",
+        "Developed and maintained 10+ client websites using React and Vue.js",
         "Collaborated with UX designers to implement pixel-perfect interfaces",
         "Integrated RESTful APIs and third-party services",
-        "Implemented responsive design principles for cross-device compatibility"
+        "Implemented responsive design for cross-device compatibility"
       ]
     },
     {
       "id": 3,
-      "role": "Junior Developer",
-      "company": "StartUp Inc",
-      "period": "2019 - 2020",
-      "description": "Built and maintained web applications using HTML, CSS, and JavaScript. Collaborated with senior developers.",
+      "title": "Web Developer",
+      "company": "Creative Web Agency",
+      "period": "2016 - 2018",
+      "description": "Built responsive websites for various clients using HTML, CSS, and JavaScript. Optimized site performance and SEO for better rankings.",
       "responsibilities": [
-        "Developed and maintained company website and internal tools",
-        "Assisted in debugging and resolving production issues",
-        "Participated in Agile development processes and daily standups",
-        "Learned and implemented modern development practices"
+        "Built responsive websites for various clients using HTML, CSS, and JavaScript",
+        "Optimized site performance and SEO for better rankings",
+        "Collaborated with designers to translate mockups into functional websites",
+        "Maintained and updated existing client websites"
       ]
     }
   ],
   "certificates": [
     {
       "id": 1,
-      "title": "AWS Certified Solutions Architect",
-      "issuer": "Amazon Web Services",
-      "date": "2023",
+      "title": "Oracle University",
+      "issuer": "Generative AI",
+      "date": "2025",
       "description": "Validates ability to design and deploy scalable, highly available, and fault-tolerant systems on AWS.",
-      "link": "https://example-certificate-link.com/aws-certification"
+      "link": "/images/certificates/Oracle Certificate.pdf"
     },
     {
       "id": 2,
@@ -55,7 +55,7 @@
       "issuer": "Google Cloud",
       "date": "2022",
       "description": "Demonstrates proficiency in designing, building, and managing cloud applications using Google Cloud Platform.",
-      "link": "https://example-certificate-link.com/gcp-certification"
+      "link": "/images/certificates/gcp-certification.jpg"
     },
     {
       "id": 3,
@@ -63,7 +63,51 @@
       "issuer": "Cloud Native Computing Foundation",
       "date": "2021",
       "description": "Validates skills in configuring, administering, and troubleshooting Kubernetes clusters.",
-      "link": "https://example-certificate-link.com/kubernetes-certification"
+      "link": "/images/certificates/kubernetes-certification.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Certified Kubernetes Administrator",
+      "issuer": "Cloud Native Computing Foundation",
+      "date": "2021",
+      "description": "Validates skills in configuring, administering, and troubleshooting Kubernetes clusters.",
+      "link": "/images/certificates/kubernetes-certification.jpg"
+    }
+  ],
+
+  "hackthons": [
+    {
+      "id": 1,
+      "title": "Banglore Hackathon",
+      "issuer": "Banglore Institute of Technology (BIT)",
+      "date": "2025",
+      "description": "Validates ability to design and deploy scalable, highly available, and fault-tolerant systems on AWS.",
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/certificates/Oracle Certificate.pdf",
+          "caption": "Certificate of completion"
+        },
+        {
+          "type": "image",
+          "url": "/images/projects/project1.jpg",
+          "caption": "Project showcase"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Google Professional Cloud Developer",
+      "issuer": "Google Cloud",
+      "date": "2022",
+      "description": "Demonstrates proficiency in designing, building, and managing cloud applications using Google Cloud Platform.",
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/certificates/gcp-certification.jpg",
+          "caption": "GCP Certification"
+        }
+      ]
     }
   ]
 }

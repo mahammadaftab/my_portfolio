@@ -5,12 +5,31 @@ import { motion, useInView, useTransform, useScroll } from "framer-motion";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import experienceData from "@/data/experience.json";
 import CertificateLightbox from "@/components/certificate-lightbox";
+import HackathonLightbox from "@/components/hackthon-lightbox";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
+// Define the proper types for hackathon media
+interface HackathonMedia {
+  type: "image" | "pdf" | "video";
+  url: string;
+  caption?: string;
+}
+
+interface Hackathon {
+  id: number;
+  title: string;
+  issuer: string;
+  date: string;
+  description: string;
+  media: HackathonMedia[];
+}
+
 export default function Experience() {
-  const { experiences, certificates } = experienceData;
+  const { experiences, certificates, hackthons } = experienceData;
   const [selectedCertificate, setSelectedCertificate] = useState<typeof certificates[0] | null>(null);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [selectedHackathon, setSelectedHackathon] = useState<Hackathon | null>(null);
+  const [isCertificateLightboxOpen, setIsCertificateLightboxOpen] = useState(false);
+  const [isHackathonLightboxOpen, setIsHackathonLightboxOpen] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +48,7 @@ export default function Experience() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16">
-      <div ref={containerRef} className="container mx-auto px-4">
+      <div ref={containerRef} className="container mx-auto px-4 relative">
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,17 +111,19 @@ export default function Experience() {
                         {exp.period}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-2">{exp.role}</h3>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-2">{exp.title}</h3>
                     <p className="text-lg font-medium text-gray-700 dark:text-gray-300">{exp.company}</p>
                     <p className="text-gray-600 dark:text-gray-400 mt-3">{exp.description}</p>
-                    <ul className="mt-4 space-y-2">
-                      {exp.responsibilities.map((resp, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <span className="text-blue-600 dark:text-blue-400 mr-2 mt-1">•</span>
-                          <span className="text-gray-600 dark:text-gray-400">{resp}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {exp.responsibilities && exp.responsibilities.length > 0 && (
+                      <ul className="mt-4 space-y-2">
+                        {exp.responsibilities.map((resp, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-blue-600 dark:text-blue-400 mr-2 mt-1">•</span>
+                            <span className="text-gray-600 dark:text-gray-400">{resp}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </motion.div>
                 
@@ -137,6 +158,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.3 }}
+          className="mb-24"
         >
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
             Certifications
@@ -176,7 +198,7 @@ export default function Experience() {
                   <button 
                     onClick={() => {
                       setSelectedCertificate(cert);
-                      setIsLightboxOpen(true);
+                      setIsCertificateLightboxOpen(true);
                     }}
                     className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline"
                     aria-label={`View ${cert.title} certificate`}
@@ -189,11 +211,89 @@ export default function Experience() {
             })}
           </div>
         </motion.div>
-        
+
+        {/* Hackathons Section */}
+        <motion.div
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.4 }}
+        >
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            Hackathons
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {hackthons.map((hackathon, index) => {
+              const hackathonRef = useRef(null);
+              const isHackathonInView = useInView(hackathonRef, { once: true, margin: "-50px" });
+              
+              // Convert the hackathon data to the proper type
+              const typedHackathon: Hackathon = {
+                id: hackathon.id,
+                title: hackathon.title,
+                issuer: hackathon.issuer,
+                date: hackathon.date,
+                description: hackathon.description,
+                media: hackathon.media.map(media => ({
+                  type: media.type as "image" | "pdf" | "video",
+                  url: media.url,
+                  caption: media.caption
+                }))
+              };
+              
+              return (
+                <motion.div
+                  key={hackathon.id}
+                  ref={hackathonRef}
+                  initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 50 }}
+                  animate={prefersReducedMotion ? { opacity: 1 } : { 
+                    opacity: isHackathonInView ? 1 : 0, 
+                    y: isHackathonInView ? 0 : 50 
+                  }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: prefersReducedMotion ? 0 : index * 0.1,
+                    ease: "easeOut" 
+                  }}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">{hackathon.title}</h3>
+                      <p className="text-blue-600 dark:text-blue-400 font-medium">{hackathon.issuer}</p>
+                    </div>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                      {hackathon.date}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{hackathon.description}</p>
+                  <button 
+                    onClick={() => {
+                      setSelectedHackathon(typedHackathon);
+                      setIsHackathonLightboxOpen(true);
+                    }}
+                    className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline"
+                    aria-label={`View ${hackathon.title} hackathon`}
+                  >
+                    View Hackathon
+                    <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
+                  </button>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
         <CertificateLightbox 
           certificate={selectedCertificate} 
-          isOpen={isLightboxOpen} 
-          onClose={() => setIsLightboxOpen(false)} 
+          isOpen={isCertificateLightboxOpen} 
+          onClose={() => setIsCertificateLightboxOpen(false)} 
+        />
+        
+        <HackathonLightbox 
+          hackathon={selectedHackathon} 
+          isOpen={isHackathonLightboxOpen} 
+          onClose={() => setIsHackathonLightboxOpen(false)} 
         />
       </div>
     </div>

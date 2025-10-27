@@ -7,7 +7,7 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 export default function About() {
   const prefersReducedMotion = usePrefersReducedMotion();
   
-  const defaultOptions = {
+  const tiltOptions = {
     reverse: false,
     max: prefersReducedMotion ? 0 : 35,
     perspective: 1000,
@@ -21,7 +21,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative">
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ export default function About() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.7 }}
             className="w-full lg:w-1/2"
           >
-            <Tilt options={defaultOptions} className="w-full">
+            <Tilt options={tiltOptions} className="w-full">
               <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-1 shadow-xl">
                 <div className="bg-white dark:bg-gray-800 rounded-2xl p-6">
                   <div className="aspect-square rounded-xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">

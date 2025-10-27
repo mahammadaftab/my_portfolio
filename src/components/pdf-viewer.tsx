@@ -9,14 +9,14 @@ interface PDFViewerProps {
 }
 
 export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [numPages, setNumPages] = useState(0);
   const [retryCount, setRetryCount] = useState(0);
   const { theme } = useTheme();
   const pdfRef = useRef<any>(null);
-  const renderTaskRef = useRef<any>(null);
+  const renderTasksRef = useRef<any[]>([]);
   const [pdfjsLib, setPdfjsLib] = useState<any>(null);
 
   // Dynamically import pdfjs-dist on client side only
@@ -37,6 +37,48 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
     loadPdfJs();
   }, []);
 
+  const renderPage = async (pdf: any, pageNum: number) => {
+    try {
+      const page = await pdf.getPage(pageNum);
+      const viewport = page.getViewport({ scale: 1.5 });
+      
+      // Create canvas for this page
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      if (!context) return;
+      
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+      canvas.className = "w-full h-auto mb-4";
+      
+      // Set background based on theme
+      context.fillStyle = theme === "dark" ? "#111827" : "#ffffff";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      
+      const renderContext = {
+        canvasContext: context,
+        viewport: viewport,
+        canvas: canvas,
+      };
+      
+      // Create new render task
+      const renderTask = page.render(renderContext);
+      renderTasksRef.current.push(renderTask);
+      
+      await renderTask.promise;
+      
+      // Add canvas to container
+      if (containerRef.current) {
+        containerRef.current.appendChild(canvas);
+      }
+    } catch (err: any) {
+      // Ignore cancellation errors
+      if (err?.name !== "RenderingCancelledException") {
+        console.error(`Error rendering page ${pageNum}:`, err);
+      }
+    }
+  };
+
   const loadPDF = async () => {
     if (!pdfjsLib) return;
     
@@ -44,10 +86,17 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
       setLoading(true);
       setError(null);
       
-      // Cancel any ongoing render task
-      if (renderTaskRef.current) {
-        renderTaskRef.current.cancel();
-        renderTaskRef.current = null;
+      // Cancel any ongoing render tasks
+      renderTasksRef.current.forEach(task => {
+        if (task && task.cancel) {
+          task.cancel();
+        }
+      });
+      renderTasksRef.current = [];
+      
+      // Clear container
+      if (containerRef.current) {
+        containerRef.current.innerHTML = "";
       }
       
       // Destroy previous PDF document if exists
@@ -62,46 +111,17 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
       pdfRef.current = pdf;
       setNumPages(pdf.numPages);
       
-      // Render the first page
-      const page = await pdf.getPage(1);
-      const viewport = page.getViewport({ scale: 1.5 });
+      // Render all pages
+      const renderPromises = [];
+      for (let i = 1; i <= pdf.numPages; i++) {
+        renderPromises.push(renderPage(pdf, i));
+      }
       
-      const canvas = canvasRef.current;
-      if (!canvas) return;
+      await Promise.all(renderPromises);
       
-      const context = canvas.getContext("2d");
-      if (!context) return;
-      
-      // Clear canvas
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-      
-      // Set background based on theme
-      context.fillStyle = theme === "dark" ? "#111827" : "#ffffff";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-      
-      const renderContext = {
-        canvasContext: context,
-        viewport: viewport,
-        canvas: canvas,
-      };
-      
-      // Create new render task
-      const renderTask = page.render(renderContext);
-      renderTaskRef.current = renderTask;
-      
-      await renderTask.promise;
-      renderTaskRef.current = null;
       setLoading(false);
       setRetryCount(0); // Reset retry count on success
     } catch (err: any) {
-      // Ignore cancellation errors
-      if (err?.name === "RenderingCancelledException") {
-        return;
-      }
-      
       console.error("Error loading PDF:", err);
       
       // Retry up to 3 times
@@ -122,10 +142,12 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
 
     return () => {
       // Cleanup on unmount
-      if (renderTaskRef.current) {
-        renderTaskRef.current.cancel();
-        renderTaskRef.current = null;
-      }
+      renderTasksRef.current.forEach(task => {
+        if (task && task.cancel) {
+          task.cancel();
+        }
+      });
+      renderTasksRef.current = [];
       
       if (pdfRef.current) {
         pdfRef.current.destroy();
@@ -160,14 +182,14 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
         </div>
       )}
       
-      <canvas 
-        ref={canvasRef} 
-        className={`w-full h-auto ${loading || error ? "hidden" : ""}`}
+      <div 
+        ref={containerRef} 
+        className={`w-full ${loading || error ? "hidden" : ""}`}
       />
       
-      {!loading && !error && (
+      {!loading && !error && numPages > 1 && (
         <div className="absolute bottom-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded">
-          Page 1 of {numPages}
+          {numPages} pages
         </div>
       )}
     </div>

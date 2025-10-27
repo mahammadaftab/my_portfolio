@@ -58,7 +58,7 @@ export default function Skills() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative">
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}

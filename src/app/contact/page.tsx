@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -22,7 +22,13 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [isClient, setIsClient] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  // Fix for hydration error caused by browser extensions adding attributes
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const {
     register,
@@ -76,6 +82,54 @@ export default function Contact() {
       setIsSubmitting(false);
     }
   };
+
+  // Don't render form elements until client-side hydration is complete
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Get In Touch</h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              Have a project in mind or want to discuss potential opportunities? Feel free to reach out!
+            </p>
+          </div>
+          <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
+            <div className="w-full lg:w-1/2">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send me a message</h2>
+                <div className="space-y-6">
+                  {[...Array(5)].map((_, i) => (
+                    <div key={i} className="animate-pulse">
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                      <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                    </div>
+                  ))}
+                  <div className="animate-pulse h-12 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                </div>
+              </div>
+            </div>
+            <div className="w-full lg:w-1/2">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg h-full">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Information</h2>
+                <div className="space-y-6">
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className="animate-pulse flex items-start">
+                      <div className="h-10 w-10 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+                      <div className="ml-4 flex-1">
+                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-2"></div>
+                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16">

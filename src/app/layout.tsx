@@ -6,6 +6,8 @@ import Navbar from "@/components/navbar";
 import CustomCursor from "@/components/custom-cursor";
 import ScrollProgress from "@/components/scroll-progress";
 import Footer from "@/components/footer";
+import MobileView from "@/components/mobile-view";
+import DevToolsFixProvider from "@/components/devtools-fix-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,12 +28,6 @@ export const metadata: Metadata = {
   keywords: ["portfolio", "developer", "frontend", "react", "nextjs", "typescript"],
   authors: [{ name: "Your Name" }], // TODO: Replace with your name
   creator: "Your Name", // TODO: Replace with your name
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -62,6 +58,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -70,17 +73,20 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900 dark:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900 dark:text-white relative`}
       >
-        <ThemeProvider>
-          <ScrollProgress />
-          <CustomCursor />
-          <Navbar />
-          <main className="min-h-screen pt-16">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
+        <DevToolsFixProvider>
+          <ThemeProvider>
+            <ScrollProgress />
+            <CustomCursor />
+            <Navbar />
+            <MobileView />
+            <main className="min-h-screen pt-16 relative">
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
+        </DevToolsFixProvider>
       </body>
     </html>
   );

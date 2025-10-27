@@ -5,8 +5,8 @@
     "description": "A full-featured online shopping platform with payment integration and inventory management.",
     "tags": ["React", "Node.js", "MongoDB"],
     "image": "/images/projects/ecommerce.jpg",
-    "liveUrl": "https://example-ecommerce.com",
-    "githubUrl": "https://github.com/yourusername/ecommerce-platform"
+    "liveUrl": "https://my-e-commerce-eta-green.vercel.app/",
+    "githubUrl": "https://github.com/mahammadaftab/my-e-commerce"
   },
   {
     "id": 2,
