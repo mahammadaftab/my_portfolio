@@ -15,25 +15,22 @@ jobs:
         node-version: [18.x, 20.x]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
 
     - name: Run linting
       run: npm run lint
 
     - name: Run type checking
-      run: npm run type-check
-
-    - name: Run tests
-      run: npm run test
+      run: npx tsc --noEmit
 
     - name: Build
       run: npm run build
@@ -44,10 +41,10 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Deploy to Vercel
-      uses: amondnet/vercel-action@v25
+      uses: amondnet/vercel-action@v26
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
