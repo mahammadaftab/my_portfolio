@@ -338,8 +338,8 @@ export default function Contact() {
                 </div>
                 <div className="flex space-x-4">
                   {[
-                    { name: "GitHub", url: "#" },
-                    { name: "LinkedIn", url: "#" },
+                    { name: "GitHub", url: "https://github.com/mahammadaftab" },
+                    { name: "LinkedIn", url: "https://www.linkedin.com/in/mahammad-aftab" },
                     { name: "Twitter", url: "#" },
                     { name: "Dribbble", url: "#" }
                   ].map((social) => (

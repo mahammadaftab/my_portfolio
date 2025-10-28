@@ -139,11 +139,11 @@ export default function Home() {
         transition={{ delay: 1.5, duration: 0.5 }}
       >
         <div className="flex flex-col items-center">
-          <span className="text-sm text-gray-500 dark:text-gray-400 mb-2">Scroll to explore</span>
-          <div className="w-8 h-12 rounded-full border-2 border-gray-300 dark:border-gray-700 flex justify-center p-1">
+          <span className="text-sm text-gray-500 dark:text-gray-400 mb-2">click above Navigation to explore</span>
+          <div className="w-12 h-8 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center">
             <motion.div 
               className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"
-              animate={{ y: [0, 20, 0] }}
+              animate={{ x: [0, 20, 0] }}
               transition={{ repeat: Infinity, duration: 1.5 }}
             />
           </div>
