@@ -1,23 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Tilt } from "react-tilt";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import EducationIcon3D from "@/components/education-icon-3d";
 
 export default function About() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  
-  const tiltOptions = {
-    reverse: false,
-    max: prefersReducedMotion ? 0 : 35,
-    perspective: 1000,
-    scale: 1.1,
-    speed: prefersReducedMotion ? 0 : 1000,
-    transition: !prefersReducedMotion,
-    axis: null,
-    reset: !prefersReducedMotion,
-    easing: "cubic-bezier(.03,.98,.52,.99)",
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16">
@@ -41,21 +29,19 @@ export default function About() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.7 }}
             className="w-full lg:w-1/2"
           >
-            <Tilt options={tiltOptions} className="w-full">
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-1 shadow-xl">
-                <div className="bg-white dark:bg-gray-800 rounded-2xl p-6">
-                  <div className="aspect-square rounded-xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
-                    <img 
-                      src="/images/profile.JPG" 
-                      alt="Mahammad Aftab" 
-                      className="w-full h-full object-cover"
-                      width={400}
-                      height={400}
-                    />
-                  </div>
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-1 shadow-xl">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6">
+                <div className="aspect-square rounded-xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/images/profile.JPG" 
+                    alt="Mahammad Aftab" 
+                    className="w-full h-full object-cover"
+                    width={400}
+                    height={400}
+                  />
                 </div>
               </div>
-            </Tilt>
+            </div>
           </motion.div>
 
           <motion.div
@@ -68,11 +54,11 @@ export default function About() {
               Crafting Digital Experiences
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              As a Computer Science Engineering student.
+              As a Computer Science Engineering student pursuing my Bachelor's degree.
             </p>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              I’m deeply passionate about leveraging technology to solve complex problems and create meaningful solutions. 
-              My academic background has provided me with a strong foundation in programming, algorithms, and system design, 
+              I'm deeply passionate about leveraging technology to solve complex problems and create meaningful solutions. 
+              My educational journey has provided me with a strong foundation in programming, algorithms, and system design, 
               along with hands-on experience in languages like C, Java, and Website Design.
             </p>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -83,16 +69,16 @@ export default function About() {
             </p>
             <div className="grid grid-cols-2 gap-4 mt-8">
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">3 Year</h3>
-                <p className="text-gray-600 dark:text-gray-400">Computer Science</p>
+                <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">3rd Year</h3>
+                <p className="text-gray-600 dark:text-gray-400">Computer Science Engineering</p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
+                <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">Rural Engineering College</h3>
+                <p className="text-gray-600 dark:text-gray-400">Hulkoti, Gadag</p>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
                 <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">15+</h3>
-                <p className="text-gray-600 dark:text-gray-400">Projects Completed in GitHub</p>
-              </div>
-              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-                <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">20+</h3>
-                <p className="text-gray-600 dark:text-gray-400">Happy Clients</p>
+                <p className="text-gray-600 dark:text-gray-400">Projects Completed</p>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
                 <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">10+</h3>
@@ -102,6 +88,7 @@ export default function About() {
           </motion.div>
         </div>
 
+        {/* Education Section */}
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -109,60 +96,111 @@ export default function About() {
           className="mt-24"
         >
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-            My Journey
+            My Education
           </h2>
-          <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-600"></div>
-            
-            {/* Timeline items */}
-            <div className="mb-12 flex flex-col md:flex-row justify-between items-center w-full left-timeline">
-              <div className="order-1 w-full md:w-5/12"></div>
-              <div className="order-1 md:order-2 z-10">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 bg-white rounded-full"></div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* SSLC Education Card */}
+            <motion.div
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+              animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.1 }}
+              whileHover={prefersReducedMotion ? {} : { 
+                y: -10, 
+                scale: 1.03,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                transition: { duration: 0.3 }
+              }}
+              whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg cursor-pointer relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600"></div>
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-4">
+                  <EducationIcon3D type="book" size={40} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">SSLC (10th Grade)</h3>
+                  <p className="text-sm text-blue-600 dark:text-blue-400">2021</p>
                 </div>
               </div>
-              <div className="order-2 md:order-3 w-full md:w-5/12 px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Senior Frontend Developer</h3>
-                <p className="text-blue-600 dark:text-blue-400 font-medium">Tech Corp • 2022 - Present</p>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  Leading frontend development for enterprise applications using React, TypeScript, and modern CSS frameworks.
-                </p>
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Royal English Medium High School Gadag</h4>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Completed SSLC with a strong academic performance of 85.12%. Developed foundational skills in mathematics, science, and languages.
+              </p>
+              <div className="flex items-center text-sm">
+                <span className="font-medium text-gray-900 dark:text-white mr-2">Percentage:</span>
+                <span className="text-gray-600 dark:text-gray-400">85.12%</span>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="mb-12 flex flex-col md:flex-row justify-between items-center w-full right-timeline">
-              <div className="order-2 md:order-1 w-full md:w-5/12 px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Frontend Developer</h3>
-                <p className="text-blue-600 dark:text-blue-400 font-medium">Digital Agency • 2020 - 2022</p>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  Developed responsive web applications for clients in various industries using modern JavaScript frameworks.
-                </p>
-              </div>
-              <div className="order-1 md:order-2 z-10">
-                <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 bg-white rounded-full"></div>
+            {/* PUC Education Card */}
+            <motion.div
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+              animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.2 }}
+              whileHover={prefersReducedMotion ? {} : { 
+                y: -10, 
+                scale: 1.03,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                transition: { duration: 0.3 }
+              }}
+              whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg cursor-pointer relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-600"></div>
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mr-4">
+                  <EducationIcon3D type="lab" size={40} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Pre-University College</h3>
+                  <p className="text-sm text-blue-600 dark:text-blue-400">2021-2023</p>
                 </div>
               </div>
-              <div className="order-3 w-full md:w-5/12"></div>
-            </div>
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">KLE Societies Jagadguru Tontadarya P.U. College, Gadag</h4>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Completed Pre-University Course in Science stream with Physics, Chemistry, Mathematics, and Biology.
+              </p>
+              <div className="flex items-center text-sm">
+                <span className="font-medium text-gray-900 dark:text-white mr-2">Percentage:</span>
+                <span className="text-gray-600 dark:text-gray-400">85%</span>
+              </div>
+            </motion.div>
 
-            <div className="mb-12 flex flex-col md:flex-row justify-between items-center w-full left-timeline">
-              <div className="order-1 w-full md:w-5/12"></div>
-              <div className="order-1 md:order-2 z-10">
-                <div className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 bg-white rounded-full"></div>
+            {/* Engineering Education Card */}
+            <motion.div
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+              animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : 0.3 }}
+              whileHover={prefersReducedMotion ? {} : { 
+                y: -10, 
+                scale: 1.03,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                transition: { duration: 0.3 }
+              }}
+              whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg cursor-pointer relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-blue-600"></div>
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mr-4">
+                  <EducationIcon3D type="workstation" size={40} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Bachelor of Engineering</h3>
+                  <p className="text-sm text-blue-600 dark:text-blue-400">2023-Present</p>
                 </div>
               </div>
-              <div className="order-2 md:order-3 w-full md:w-5/12 px-6 py-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Junior Developer</h3>
-                <p className="text-blue-600 dark:text-blue-400 font-medium">StartUp Inc • 2019 - 2020</p>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  Built and maintained web applications using HTML, CSS, and JavaScript. Collaborated with senior developers.
-                </p>
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Rural Engineering College Hulkoti</h4>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Currently pursuing Computer Science Engineering with hands-on experience in programming and web development.
+              </p>
+              <div className="flex items-center text-sm">
+                <span className="font-medium text-gray-900 dark:text-white mr-2">Year:</span>
+                <span className="text-gray-600 dark:text-gray-400">3rd Year</span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

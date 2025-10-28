@@ -97,21 +97,16 @@ export default function Resume() {
           <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg mb-8">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Professional Summary</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              I am <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Mahammad Aftab</span>, a passionate and dedicated <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Computer Science Engineering student</span> with strong technical and problem-solving skills. 
+              I am <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Mahammad Aftab</span>, a passionate and dedicated <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Computer Science Engineering student</span> currently pursuing my Bachelor's degree. 
               I have hands-on experience in full-stack web development (MERN stack), generative AI, and blockchain technology. 
               I enjoy building innovative, user-friendly, and responsive web applications while continuously exploring emerging technologies. 
-              I am committed to applying my knowledge in real-world projects, contributing to dynamic teams, and growing as a skilled software engineer. 
               <br />Passionate about creating intuitive user experiences and writing clean, maintainable code. 
               Proven track record of delivering high-quality solutions in fast-paced environments.
             </p>
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center">
                 <span className="font-medium text-gray-900 dark:text-white mr-2">Degree:</span>
-                <span className="text-gray-600 dark:text-gray-400">Bachelor of Engineering</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-medium text-gray-900 dark:text-white mr-2">Course:</span>
-                <span className="text-gray-600 dark:text-gray-400">Computer Science</span>
+                <span className="text-gray-600 dark:text-gray-400">Bachelor of Engineering in Computer Science</span>
               </div>
               <div className="flex items-center">
                 <span className="font-medium text-gray-900 dark:text-white mr-2">Pursuing:</span>

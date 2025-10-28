@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import LottieAnimation from "@/components/lottie-animation";
+import ContactIcon3D from "@/components/contact-icon-3d";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -365,13 +366,7 @@ export default function Contact() {
                 {/* 3D Cube Animation */}
                 <div className="mt-8 flex justify-center">
                   <div className="relative">
-                    <LottieAnimation 
-                      animationData={null}
-                      size={80}
-                      loop={true}
-                      autoplay={true}
-                      ariaLabel="3D rotating cube animation"
-                    />
+                    <ContactIcon3D size={120} />
                   </div>
                 </div>
               </div>
