@@ -183,7 +183,6 @@ npm run test
 ### Utilities
 - next-themes (dark mode)
 - react-icons
-- react-tilt
 - @headlessui/react
 
 ## Contributing
