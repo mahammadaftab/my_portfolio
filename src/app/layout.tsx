@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar";
 import CustomCursor from "@/components/custom-cursor";
 import ScrollProgress from "@/components/scroll-progress";
 import Footer from "@/components/footer";
+import MobileView from "@/components/mobile-view";
 import DevToolsFixProvider from "@/components/devtools-fix-provider";
 
 const geistSans = Geist({
@@ -79,6 +80,7 @@ export default function RootLayout({
             <ScrollProgress />
             <CustomCursor />
             <Navbar />
+            <MobileView />
             <main className="min-h-screen pt-16 relative">
               {children}
             </main>

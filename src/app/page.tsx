@@ -140,7 +140,7 @@ export default function Home() {
       >
         <div className="flex flex-col items-center">
           <span className="text-sm text-gray-500 dark:text-gray-400 mb-2">click above Navigation to explore</span>
-          <div className="w-12 h-8 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center">
+          <div className="w-12 h-8 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center pb-8">
             <motion.div 
               className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"
               animate={{ x: [0, 20, 0] }}
