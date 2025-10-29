@@ -17,21 +17,23 @@ export default function CustomCursor() {
 
   useEffect(() => {
     let hideTimeoutId: NodeJS.Timeout;
+    let animationFrameId: number;
 
     const mouseMoveHandler = (e: MouseEvent) => {
       const currentTime = Date.now();
       const deltaTime = currentTime - lastTime.current;
       
-      if (deltaTime > 16) { // ~60fps limit
+      // Increased frame rate limit for smoother movement
+      if (deltaTime > 8) { // ~120fps limit (increased from 16)
         const newX = e.clientX;
         const newY = e.clientY;
         
-        // Calculate velocity
+        // Calculate velocity with enhanced sensitivity
         if (lastTime.current !== 0) {
           const deltaX = newX - lastPosition.current.x;
           const deltaY = newY - lastPosition.current.y;
-          const velocityX = deltaX / deltaTime;
-          const velocityY = deltaY / deltaTime;
+          const velocityX = deltaX / (deltaTime * 0.5); // Increased velocity sensitivity
+          const velocityY = deltaY / (deltaTime * 0.5);
           setVelocity({ x: velocityX, y: velocityY });
         }
         
@@ -42,14 +44,14 @@ export default function CustomCursor() {
         // Show cursor when moving
         setIsVisible(true);
         
-        // Update hue for colorful effects
-        hue.current = (hue.current + 2) % 360;
+        // Update hue for colorful effects at faster rate
+        hue.current = (hue.current + 5) % 360; // Increased hue change rate
         
-        // Create trail elements with vibrant colors
+        // Create trail elements with vibrant colors and enhanced responsiveness
         trailIdCounter.current += 1;
-        const newSize = Math.min(12, Math.max(4, 6 + Math.abs(velocity.x) + Math.abs(velocity.y)));
-        const newOpacity = Math.min(0.9, 0.4 + (Math.abs(velocity.x) + Math.abs(velocity.y)) * 0.08);
-        const newColor = `hsl(${(hue.current + Math.random() * 60) % 360}, 80%, 60%)`;
+        const newSize = Math.min(15, Math.max(3, 5 + Math.abs(velocity.x) + Math.abs(velocity.y) * 2)); // Enhanced size sensitivity
+        const newOpacity = Math.min(0.95, 0.3 + (Math.abs(velocity.x) + Math.abs(velocity.y)) * 0.12); // Increased opacity sensitivity
+        const newColor = `hsl(${(hue.current + Math.random() * 90) % 360}, 85%, 65%)`; // More vibrant colors
         
         const newTrailPoint = {
           id: trailIdCounter.current,
@@ -60,17 +62,22 @@ export default function CustomCursor() {
           color: newColor
         };
         
-        setTrail(prev => [...prev.slice(-25), newTrailPoint]);
+        setTrail(prev => [...prev.slice(-30), newTrailPoint]); // Increased trail length
         
-        // Remove trail point after delay
+        // Remove trail point after shorter delay for more responsive feel
         setTimeout(() => {
           setTrail(prev => prev.filter(p => p.id !== newTrailPoint.id));
-        }, 800);
+        }, 600); // Reduced from 800ms
         
         // Reset hide timeout
         clearTimeout(hideTimeoutId);
-        hideTimeoutId = setTimeout(() => setIsVisible(false), 2000);
+        hideTimeoutId = setTimeout(() => setIsVisible(false), 1500); // Reduced from 2000ms
       }
+      
+      // Use requestAnimationFrame for even smoother updates
+      animationFrameId = requestAnimationFrame(() => {
+        // This ensures the cursor updates at the browser's refresh rate
+      });
     };
 
     const mouseEnterHandler = () => setIsHovering(true);
@@ -91,7 +98,7 @@ export default function CustomCursor() {
     window.addEventListener("mouseleave", () => setIsVisible(false));
 
     // Initial hide timeout
-    hideTimeoutId = setTimeout(() => setIsVisible(false), 2000);
+    hideTimeoutId = setTimeout(() => setIsVisible(false), 1500);
 
     return () => {
       window.removeEventListener("mousemove", mouseMoveHandler);
@@ -104,6 +111,7 @@ export default function CustomCursor() {
       });
       
       clearTimeout(hideTimeoutId);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
@@ -129,18 +137,18 @@ export default function CustomCursor() {
             y: point.y - point.size / 2,
             width: point.size,
             height: point.size,
-            background: `radial-gradient(circle, ${point.color} 0%, ${isHovering ? 'rgba(147,51,234,0.6)' : 'rgba(59,130,246,0.6)'} 70%, transparent 100%)`,
-            boxShadow: `0 0 15px ${point.color}, 0 0 30px ${isHovering ? 'rgba(147,51,234,0.7)' : 'rgba(59,130,246,0.7)'}`,
+            background: `radial-gradient(circle, ${point.color} 0%, ${isHovering ? 'rgba(147,51,234,0.7)' : 'rgba(59,130,246,0.7)'} 70%, transparent 100%)`,
+            boxShadow: `0 0 18px ${point.color}, 0 0 35px ${isHovering ? 'rgba(147,51,234,0.8)' : 'rgba(59,130,246,0.8)'}`,
             opacity: point.opacity
           }}
           initial={{ scale: 0 }}
           animate={{ 
-            scale: [0, 1, 0.8],
+            scale: [0, 1.2, 0.7],
             opacity: [point.opacity, point.opacity, 0],
-            rotate: [0, Math.random() * 360]
+            rotate: [0, Math.random() * 420]
           }}
           transition={{ 
-            duration: 0.8, 
+            duration: 0.6, // Reduced duration for more responsive feel
             ease: "easeOut" 
           }}
         />
@@ -156,27 +164,27 @@ export default function CustomCursor() {
           width: 20,
           height: 20,
           background: isHovering 
-            ? "radial-gradient(circle, rgba(147,51,234,0.4) 0%, transparent 70%)" 
-            : "radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%)",
+            ? "radial-gradient(circle, rgba(147,51,234,0.5) 0%, transparent 70%)" 
+            : "radial-gradient(circle, rgba(59,130,246,0.5) 0%, transparent 70%)",
           border: isHovering 
-            ? "2px solid rgba(147,51,234,0.8)" 
-            : "2px solid rgba(59,130,246,0.8)",
-          opacity: 0.8,
+            ? "2px solid rgba(147,51,234,0.9)" 
+            : "2px solid rgba(59,130,246,0.9)",
+          opacity: 0.9,
           boxShadow: isHovering 
-            ? "0 0 20px rgba(147,51,234,0.6)" 
-            : "0 0 20px rgba(59,130,246,0.6)"
+            ? "0 0 25px rgba(147,51,234,0.7)" 
+            : "0 0 25px rgba(59,130,246,0.7)"
         }}
         animate={{
-          scale: isHovering ? 1.2 : 1 + Math.abs(velocity.x) * 0.3,
-          opacity: isHovering ? 1 : 0.7 + Math.abs(velocity.x) * 0.2,
+          scale: isHovering ? 1.4 : 1 + Math.abs(velocity.x) * 0.5, // Increased scale sensitivity
+          opacity: isHovering ? 1 : 0.8 + Math.abs(velocity.x) * 0.3, // Increased opacity sensitivity
           rotate: 360
         }}
         transition={{ 
           type: "spring", 
-          stiffness: 500, 
-          damping: 28,
+          stiffness: 1000, // Increased stiffness for faster response
+          damping: 20, // Reduced damping for more responsive movement
           rotate: { 
-            duration: 10, 
+            duration: 8, // Faster rotation
             repeat: Infinity, 
             ease: "linear" 
           }
@@ -186,10 +194,10 @@ export default function CustomCursor() {
         <div 
           className="absolute top-1/2 left-1/2 rounded-full transform -translate-x-1/2 -translate-y-1/2"
           style={{
-            width: isHovering ? 12 : 8,
-            height: isHovering ? 12 : 8,
+            width: isHovering ? 14 : 10,
+            height: isHovering ? 14 : 10,
             background: `conic-gradient(from ${hue.current}deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b, #3b82f6)`,
-            boxShadow: "0 0 10px rgba(255,255,255,0.8)"
+            boxShadow: "0 0 12px rgba(255,255,255,0.9)"
           }}
         />
       </motion.div>
@@ -198,25 +206,25 @@ export default function CustomCursor() {
       <motion.div
         className="fixed top-0 left-0 rounded-full pointer-events-none z-[9997]"
         style={{
-          x: position.x - 20 - velocity.x * 4,
-          y: position.y - 20 - velocity.y * 4,
-          width: 30,
-          height: 30,
-          background: `conic-gradient(from ${hue.current}deg, rgba(59,130,246,0.3), rgba(139,92,246,0.3), rgba(236,72,153,0.3), rgba(245,158,11,0.3), rgba(59,130,246,0.3))`,
-          opacity: 0.5,
-          filter: "blur(8px)"
-        }}
-        animate={{
           x: position.x - 20 - velocity.x * 6,
           y: position.y - 20 - velocity.y * 6,
-          scale: 1.5 + Math.abs(velocity.x + velocity.y) * 0.4,
-          opacity: Math.min(0.8, 0.3 + (Math.abs(velocity.x) + Math.abs(velocity.y)) * 0.1),
+          width: 30,
+          height: 30,
+          background: `conic-gradient(from ${hue.current}deg, rgba(59,130,246,0.4), rgba(139,92,246,0.4), rgba(236,72,153,0.4), rgba(245,158,11,0.4), rgba(59,130,246,0.4))`,
+          opacity: 0.6,
+          filter: "blur(6px)"
+        }}
+        animate={{
+          x: position.x - 20 - velocity.x * 8,
+          y: position.y - 20 - velocity.y * 8,
+          scale: 1.8 + Math.abs(velocity.x + velocity.y) * 0.6, // Increased scale sensitivity
+          opacity: Math.min(0.9, 0.4 + (Math.abs(velocity.x) + Math.abs(velocity.y)) * 0.15), // Increased opacity sensitivity
           rotate: hue.current
         }}
         transition={{ 
           type: "spring", 
-          stiffness: 800, 
-          damping: 30 
+          stiffness: 1200, // Increased stiffness for faster response
+          damping: 25 // Reduced damping for more responsive movement
         }}
       />
     </>

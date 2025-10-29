@@ -167,7 +167,7 @@ export default function CertificateLightbox({ certificate, isOpen, onClose }: Ce
   return (
     <AnimatePresence>
       {isOpen && certificate && (
-        <Transition.Root show={isOpen} as={Fragment}>
+        <Transition.Root show={isOpen && !!certificate} as={Fragment}>
           <Dialog
             as="div"
             className="relative z-50"
@@ -217,6 +217,18 @@ export default function CertificateLightbox({ certificate, isOpen, onClose }: Ce
                         </button>
                       </div>
                       
+                      {/* Mobile close button */}
+                      <div className="absolute right-0 top-0 pr-4 pt-4 sm:hidden">
+                        <button
+                          type="button"
+                          className="rounded-md bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                          onClick={onClose}
+                        >
+                          <span className="sr-only">Close</span>
+                          <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                        </button>
+                      </div>
+                      
                       <div className="sm:flex sm:items-start">
                         <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
                           <Dialog.Title
@@ -238,27 +250,27 @@ export default function CertificateLightbox({ certificate, isOpen, onClose }: Ce
                               <>
                                 <button
                                   onClick={goToPrevious}
-                                  className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group"
+                                  className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group md:p-2"
                                   aria-label="Previous media"
                                 >
                                   <motion.div
                                     whileHover={{ x: -5 }}
                                     transition={{ duration: 0.2 }}
                                   >
-                                    <ChevronLeftIcon className="h-6 w-6" />
+                                    <ChevronLeftIcon className="h-6 w-6 md:h-5 md:w-5" />
                                   </motion.div>
                                 </button>
                                 
                                 <button
                                   onClick={goToNext}
-                                  className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group"
+                                  className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group md:p-2"
                                   aria-label="Next media"
                                 >
                                   <motion.div
                                     whileHover={{ x: 5 }}
                                     transition={{ duration: 0.2 }}
                                   >
-                                    <ChevronRightIcon className="h-6 w-6" />
+                                    <ChevronRightIcon className="h-6 w-6 md:h-5 md:w-5" />
                                   </motion.div>
                                 </button>
                               </>

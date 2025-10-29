@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { SunIcon, MoonIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -202,6 +202,18 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
           >
             <div className="px-6 py-4 space-y-1">
+              {/* Mobile menu close button */}
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <span className="sr-only">Close main menu</span>
+                  <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+              </div>
+              
               {navigation.map((item) => (
                 <Link
                   key={item.name}
