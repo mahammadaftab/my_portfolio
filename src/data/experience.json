@@ -40,40 +40,77 @@
       ]
     }
   ],
+
   "certificates": [
     {
       "id": 1,
       "title": "Oracle University",
       "issuer": "Generative AI",
       "date": "2025",
-      "description": "Validates ability to design and deploy scalable, highly available, and fault-tolerant systems on AWS.",
-      "link": "/images/certificates/Oracle Certificate.pdf"
+      "description": "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
+      "media": [
+        {
+          "type": "pdf",
+          "url": "/images/certificates/Oracle Certificate.pdf",
+          "caption": "Certificate of completion"
+        }
+      ]
     },
     {
       "id": 2,
-      "title": "Google Professional Cloud Developer",
+      "title": "STP computer education",
       "issuer": "Google Cloud",
-      "date": "2022",
-      "description": "Demonstrates proficiency in designing, building, and managing cloud applications using Google Cloud Platform.",
-      "link": "/images/certificates/gcp-certification.jpg"
+      "date": "2023-2025",
+      "description": "Certificates Collections in STP computer education (Basic Computer, Tally Prime, HTML, CSS, Photoshop)",
+      "media": [
+        {
+          "type": "pdf",
+          "url": "/images/certificates/basic computer certificate.pdf",
+          "caption": "Basic Computer Certificate"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/tallyprimecertificate.pdf",
+          "caption": "Tally Prime Certificate"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/htmlcertificate.pdf",
+          "caption": "HTML Certification"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/csscertificate.pdf",
+          "caption": "CSS Certification"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/photoshopcertificate.pdf",
+          "caption": "Photoshop Certification"
+        }
+      ]
     },
     {
       "id": 3,
-      "title": "Certified Kubernetes Administrator",
-      "issuer": "Cloud Native Computing Foundation",
-      "date": "2021",
-      "description": "Validates skills in configuring, administering, and troubleshooting Kubernetes clusters.",
-      "link": "/images/certificates/kubernetes-certification.jpg"
-    },
-    {
-      "id": 4,
-      "title": "Certified Kubernetes Administrator",
-      "issuer": "Cloud Native Computing Foundation",
-      "date": "2021",
-      "description": "Validates skills in configuring, administering, and troubleshooting Kubernetes clusters.",
-      "link": "/images/certificates/kubernetes-certification.jpg"
+      "title": "My Bharat",
+      "issuer": "My Bharat Certificate",
+      "date": "2025",
+      "description": "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/certificates/Youth Affairs.jpeg",
+          "caption": "Certificate of Youth Affairs"
+        },
+        {
+          "type": "image",
+          "url": "/images/certificates/Sardar.jpeg",
+          "caption": "Certificate of sardar 150 Young Leaders Programs"
+        }
+      ]
     }
   ],
+
 
   "hackthons": [
     {
@@ -81,31 +118,42 @@
       "title": "Banglore Hackathon",
       "issuer": "Banglore Institute of Technology (BIT)",
       "date": "2025",
-      "description": "Validates ability to design and deploy scalable, highly available, and fault-tolerant systems on AWS.",
+      "description": "Participated in a 24-hour hackathon focused on building innovative solutions for Medical Health with AI. Our team developed a real-time disease detection system using machine learning.",
       "media": [
         {
           "type": "image",
-          "url": "/images/certificates/Oracle Certificate.pdf",
-          "caption": "Certificate of completion"
+          "url": "/images/hackathons/certificate.jpeg",
+          "caption": "Certificate of Participation"
         },
         {
           "type": "image",
-          "url": "/images/projects/project1.jpg",
-          "caption": "Project showcase"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Google Professional Cloud Developer",
-      "issuer": "Google Cloud",
-      "date": "2022",
-      "description": "Demonstrates proficiency in designing, building, and managing cloud applications using Google Cloud Platform.",
-      "media": [
+          "url": "/images/hackathons/0xDay.jpeg",
+          "caption": "0x.Day Certificate"
+        },
         {
           "type": "image",
-          "url": "/images/certificates/gcp-certification.jpg",
-          "caption": "GCP Certification"
+          "url": "/images/hackathons/MyImage.jpeg",
+          "caption": "My Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/GroupImage.jpeg",
+          "caption": "Presentation Time"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/TeamImage.jpeg",
+          "caption": "Team Photo"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/Team.jpeg",
+          "caption": "Team Photo"
+        },
+        {
+          "type": "video",
+          "url": "/images/hackathons/hackthonVedio.mp4",
+          "caption": "Short Vedio"
         }
       ]
     }

@@ -9,10 +9,13 @@ export default function Footer() {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    // Update time every second
+    // Update time every second with UTC formatting to avoid locale issues
     const timer = setInterval(() => {
       const now = new Date();
-      setTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+      // Use UTC formatting to ensure consistent rendering between server and client
+      const hours = now.getUTCHours().toString().padStart(2, '0');
+      const minutes = now.getUTCMinutes().toString().padStart(2, '0');
+      setTime(`${hours}:${minutes}`);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -47,7 +50,7 @@ export default function Footer() {
               {/* Live time display */}
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-sm text-gray-500">Currently working | {time}</span>
+                <span className="text-sm text-gray-500">Current Time | {time} UTC</span>
               </div>
             </motion.div>
           </div>
@@ -62,59 +65,33 @@ export default function Footer() {
             >
               <h3 className="text-lg font-semibold text-white mb-4">Navigate</h3>
               <ul className="space-y-2">
-                {[
-                  { name: "Home", href: "/" },
-                  { name: "About", href: "/about" },
-                  { name: "Projects", href: "/projects" },
-                  { name: "Contact", href: "/contact" }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <Link 
-                      href={item.href} 
-                      className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group"
-                    >
-                      <span className="group-hover:ml-1 transition-all duration-300">•</span>
-                      <span className="ml-2">{item.name}</span>
-                    </Link>
-                  </li>
-                ))}
+                <li><Link href="/" className="text-gray-400 hover:text-white transition-colors duration-300">Home</Link></li>
+                <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors duration-300">About</Link></li>
+                <li><Link href="/skills" className="text-gray-400 hover:text-white transition-colors duration-300">Skills</Link></li>
+                <li><Link href="/projects" className="text-gray-400 hover:text-white transition-colors duration-300">Projects</Link></li>
               </ul>
             </motion.div>
           </div>
 
-          {/* Connect Links */}
-          <div className="md:col-span-3">
+          {/* Quick Links */}
+          <div className="md:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-lg font-semibold text-white mb-4">Connect</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                {[
-                  { name: "GitHub", href: "https://github.com/mahammadaftab" },
-                  { name: "LinkedIn", href: "https://www.linkedin.com/in/mahammad-aftab" },
-                  { name: "Email", href: "mailto:mdaftabeditz360@gmail.com" }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <a 
-                      href={item.href} 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group"
-                    >
-                      <span className="group-hover:ml-1 transition-all duration-300">↗</span>
-                      <span className="ml-2">{item.name}</span>
-                    </a>
-                  </li>
-                ))}
+                <li><Link href="/experience" className="text-gray-400 hover:text-white transition-colors duration-300">Experience</Link></li>
+                <li><Link href="/resume" className="text-gray-400 hover:text-white transition-colors duration-300">Resume</Link></li>
+                <li><Link href="/contact" className="text-gray-400 hover:text-white transition-colors duration-300">Contact</Link></li>
               </ul>
             </motion.div>
           </div>
 
-          {/* CTA Section */}
-          <div className="md:col-span-3">
+          {/* Contact Info */}
+          <div className="md:col-span-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +99,7 @@ export default function Footer() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <h3 className="text-lg font-semibold text-white">Let's Collaborate</h3>
+              <h3 className="text-lg font-semibold text-white mb-4">Let's Connect</h3>
               <p className="text-gray-400 text-sm">
                 Have a project in mind? Let's create something amazing together.
               </p>
@@ -148,11 +125,8 @@ export default function Footer() {
         >
           <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0">
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} Mahammad Aftab. All rights reserved.
-            </p>
-            <div className="hidden md:block w-1 h-1 bg-gray-600 rounded-full mx-4"></div>
-            <p className="text-gray-600 text-sm">
-              Crafted with <span className="text-red-500">❤</span> using Next.js & TypeScript
+              {/* Use UTC full year to avoid locale issues */}
+              © {new Date().getUTCFullYear()} Mahammad Aftab. All rights reserved.
             </p>
           </div>
           

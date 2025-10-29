@@ -158,13 +158,13 @@ export default function About() {
                   <p className="text-sm text-blue-600 dark:text-blue-400">2021-2023</p>
                 </div>
               </div>
-              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">KLE Societies Jagadguru Tontadarya P.U. College, Gadag</h4>
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">KLE Societies Jagadguru Tontadarya P.U College, Gadag</h4>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 Completed Pre-University Course in Science stream with Physics, Chemistry, Mathematics, and Biology.
               </p>
               <div className="flex items-center text-sm">
                 <span className="font-medium text-gray-900 dark:text-white mr-2">Percentage:</span>
-                <span className="text-gray-600 dark:text-gray-400">85%</span>
+                <span className="text-gray-600 dark:text-gray-400">70%</span>
               </div>
             </motion.div>
 

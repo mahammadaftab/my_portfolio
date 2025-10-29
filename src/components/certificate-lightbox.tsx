@@ -2,8 +2,14 @@
 
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon, ArrowTopRightOnSquareIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { motion, AnimatePresence } from "framer-motion";
+
+interface Media {
+  type: "image" | "pdf" | "video";
+  url: string;
+  caption?: string;
+}
 
 interface Certificate {
   id: number;
@@ -11,7 +17,7 @@ interface Certificate {
   issuer: string;
   date: string;
   description: string;
-  link: string;
+  media: Media[];
 }
 
 interface CertificateLightboxProps {
@@ -23,7 +29,9 @@ interface CertificateLightboxProps {
 export default function CertificateLightbox({ certificate, isOpen, onClose }: CertificateLightboxProps) {
   const cancelButtonRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const [isPdf, setIsPdf] = useState(false);
+  const [isVideo, setIsVideo] = useState(false);
 
   // Close modal on Escape key press
   useEffect(() => {
@@ -43,15 +51,41 @@ export default function CertificateLightbox({ certificate, isOpen, onClose }: Ce
     };
   }, [isOpen, onClose]);
 
+  // Reset current media index when certificate changes
   useEffect(() => {
-    if (certificate) {
-      // Check if the certificate is a PDF based on file extension
-      setIsPdf(certificate.link.toLowerCase().endsWith('.pdf'));
+    setCurrentMediaIndex(0);
+  }, [certificate?.id]);
+
+  // Update media type when current media index changes
+  useEffect(() => {
+    if (certificate && certificate.media && certificate.media.length > 0) {
+      const currentMedia = certificate.media[currentMediaIndex];
+      setIsPdf(currentMedia.url.toLowerCase().endsWith('.pdf'));
+      setIsVideo(currentMedia.type === 'video');
       setIsLoading(true);
     }
-  }, [certificate]);
+  }, [certificate, currentMediaIndex]);
 
-  if (!certificate) return null;
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!certificate || !certificate.media || certificate.media.length <= 1) return;
+      
+      if (e.key === "ArrowLeft") {
+        goToPrevious();
+      } else if (e.key === "ArrowRight") {
+        goToNext();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, certificate]);
 
   const handleMediaLoad = () => {
     setIsLoading(false);
@@ -61,9 +95,78 @@ export default function CertificateLightbox({ certificate, isOpen, onClose }: Ce
     setIsLoading(false);
   };
 
+  const goToPrevious = () => {
+    if (!certificate || !certificate.media || certificate.media.length <= 1) return;
+    
+    setCurrentMediaIndex((prev) => 
+      prev === 0 ? certificate.media.length - 1 : prev - 1
+    );
+  };
+
+  const goToNext = () => {
+    if (!certificate || !certificate.media || certificate.media.length <= 1) return;
+    
+    setCurrentMediaIndex((prev) => 
+      prev === certificate.media.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const renderMedia = () => {
+    if (!certificate || !certificate.media || certificate.media.length === 0) return null;
+    
+    const currentMedia = certificate.media[currentMediaIndex];
+    
+    if (!currentMedia) return null;
+    
+    if (isPdf) {
+      return (
+        <iframe
+          src={currentMedia.url}
+          className={`w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+          onLoad={handleMediaLoad}
+          onError={handleMediaError}
+          title={`${certificate.title} certificate media ${currentMediaIndex + 1}`}
+        />
+      );
+    } else if (isVideo) {
+      return (
+        <video
+          src={currentMedia.url}
+          controls
+          className={`w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+          onLoadedData={handleMediaLoad}
+          onError={handleMediaError}
+          title={`${certificate.title} certificate video ${currentMediaIndex + 1}`}
+        />
+      );
+    } else {
+      return (
+        <img
+          src={currentMedia.url}
+          alt={`${certificate.title} certificate media ${currentMediaIndex + 1}`}
+          className={`w-full h-full object-contain ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+          onLoad={handleMediaLoad}
+          onError={handleMediaError}
+        />
+      );
+    }
+  };
+
+  // Render nothing if not open or no certificate
+  if (!isOpen || !certificate) {
+    return null;
+  }
+
+  // Render nothing if certificate has no media
+  if (!certificate.media || certificate.media.length === 0) {
+    return null;
+  }
+
+  const currentMedia = certificate.media[currentMediaIndex];
+
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isOpen && certificate && (
         <Transition.Root show={isOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -129,31 +232,61 @@ export default function CertificateLightbox({ certificate, isOpen, onClose }: Ce
                             </p>
                           </div>
                           
-                          <div className="mt-4">
+                          <div className="mt-4 relative">
+                            {/* Media navigation arrows - centered and professional */}
+                            {certificate.media.length > 1 && (
+                              <>
+                                <button
+                                  onClick={goToPrevious}
+                                  className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group"
+                                  aria-label="Previous media"
+                                >
+                                  <motion.div
+                                    whileHover={{ x: -5 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    <ChevronLeftIcon className="h-6 w-6" />
+                                  </motion.div>
+                                </button>
+                                
+                                <button
+                                  onClick={goToNext}
+                                  className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group"
+                                  aria-label="Next media"
+                                >
+                                  <motion.div
+                                    whileHover={{ x: 5 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    <ChevronRightIcon className="h-6 w-6" />
+                                  </motion.div>
+                                </button>
+                              </>
+                            )}
+                            
+                            {/* Media counter */}
+                            {certificate.media.length > 1 && (
+                              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 bg-black/30 backdrop-blur-sm text-white text-sm px-3 py-1 rounded-full">
+                                {currentMediaIndex + 1} / {certificate.media.length}
+                              </div>
+                            )}
+                            
+                            {/* Media display area */}
                             <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-4 relative">
                               {isLoading && (
                                 <div className="absolute inset-0 flex items-center justify-center">
                                   <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
                                 </div>
                               )}
-                              {isPdf ? (
-                                <iframe
-                                  src={certificate.link}
-                                  className={`w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-                                  onLoad={handleMediaLoad}
-                                  onError={handleMediaError}
-                                  title={`${certificate.title} certificate`}
-                                />
-                              ) : (
-                                <img
-                                  src={certificate.link}
-                                  alt={`${certificate.title} certificate`}
-                                  className={`w-full h-full object-contain ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-                                  onLoad={handleMediaLoad}
-                                  onError={handleMediaError}
-                                />
-                              )}
+                              {renderMedia()}
                             </div>
+                            
+                            {/* Media caption */}
+                            {currentMedia && currentMedia.caption && (
+                              <p className="text-sm text-gray-600 dark:text-gray-400 italic mb-4 text-center">
+                                {currentMedia.caption}
+                              </p>
+                            )}
                             
                             <div className="prose dark:prose-invert max-w-none mb-6">
                               <p className="text-gray-600 dark:text-gray-400">
@@ -163,13 +296,13 @@ export default function CertificateLightbox({ certificate, isOpen, onClose }: Ce
                             
                             <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                               <a
-                                href={certificate.link}
+                                href={currentMedia.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
                               >
                                 <ArrowTopRightOnSquareIcon className="h-5 w-5 mr-2" />
-                                View Certificate
+                                View Media
                               </a>
                             </div>
                           </div>

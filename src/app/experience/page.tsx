@@ -8,11 +8,20 @@ import CertificateLightbox from "@/components/certificate-lightbox";
 import HackathonLightbox from "@/components/hackthon-lightbox";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
-// Define the proper types for hackathon media
-interface HackathonMedia {
+// Define the proper types for certificate and hackathon media
+interface Media {
   type: "image" | "pdf" | "video";
   url: string;
   caption?: string;
+}
+
+interface Certificate {
+  id: number;
+  title: string;
+  issuer: string;
+  date: string;
+  description: string;
+  media: Media[];
 }
 
 interface Hackathon {
@@ -21,12 +30,12 @@ interface Hackathon {
   issuer: string;
   date: string;
   description: string;
-  media: HackathonMedia[];
+  media: Media[];
 }
 
 export default function Experience() {
   const { experiences, certificates, hackthons } = experienceData;
-  const [selectedCertificate, setSelectedCertificate] = useState<typeof certificates[0] | null>(null);
+  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const [selectedHackathon, setSelectedHackathon] = useState<Hackathon | null>(null);
   const [isCertificateLightboxOpen, setIsCertificateLightboxOpen] = useState(false);
   const [isHackathonLightboxOpen, setIsHackathonLightboxOpen] = useState(false);
@@ -166,6 +175,20 @@ export default function Experience() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {certificates.map((cert, index) => {
+              // Convert the certificate data to the proper type
+              const typedCertificate: Certificate = {
+                id: cert.id,
+                title: cert.title,
+                issuer: cert.issuer,
+                date: cert.date,
+                description: cert.description,
+                media: cert.media ? cert.media.map(media => ({
+                  type: media.type as "image" | "pdf" | "video",
+                  url: media.url,
+                  caption: media.caption
+                })) : []
+              };
+              
               const certRef = useRef(null);
               const isCertInView = useInView(certRef, { once: true, margin: "-50px" });
               
@@ -197,7 +220,7 @@ export default function Experience() {
                   <p className="text-gray-600 dark:text-gray-400 mb-4">{cert.description}</p>
                   <button 
                     onClick={() => {
-                      setSelectedCertificate(cert);
+                      setSelectedCertificate(typedCertificate);
                       setIsCertificateLightboxOpen(true);
                     }}
                     className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline"

@@ -52,8 +52,8 @@ export default function Skills() {
 
   // Tech stack data
   const techStack = [
-    "React", "Next.js", "TypeScript", "Node.js", "Python", 
-    "MongoDB", "PostgreSQL", "AWS", "Docker", "Tailwind CSS"
+    "Java", "Python", "C", "Next.js", "TypeScript", "Javascript", "MongoDB", "Express.js", 
+    "React.js", "Node.js","PostgreSQL", "Prisma", "Html/CSS", "Tailwind CSS"
   ];
 
   return (

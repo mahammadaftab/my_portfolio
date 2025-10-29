@@ -54,7 +54,7 @@ export default function HackathonLightbox({ hackathon, isOpen, onClose }: Hackat
   // Reset current media index when hackathon changes
   useEffect(() => {
     setCurrentMediaIndex(0);
-  }, [hackathon]);
+  }, [hackathon?.id]);
 
   // Update media type when current media index changes
   useEffect(() => {
@@ -66,9 +66,26 @@ export default function HackathonLightbox({ hackathon, isOpen, onClose }: Hackat
     }
   }, [hackathon, currentMediaIndex]);
 
-  if (!hackathon || !hackathon.media || hackathon.media.length === 0) return null;
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!hackathon || !hackathon.media || hackathon.media.length <= 1) return;
+      
+      if (e.key === "ArrowLeft") {
+        goToPrevious();
+      } else if (e.key === "ArrowRight") {
+        goToNext();
+      }
+    };
 
-  const currentMedia = hackathon.media[currentMediaIndex];
+    if (isOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, hackathon]);
 
   const handleMediaLoad = () => {
     setIsLoading(false);
@@ -79,18 +96,28 @@ export default function HackathonLightbox({ hackathon, isOpen, onClose }: Hackat
   };
 
   const goToPrevious = () => {
+    if (!hackathon || !hackathon.media || hackathon.media.length <= 1) return;
+    
     setCurrentMediaIndex((prev) => 
       prev === 0 ? hackathon.media.length - 1 : prev - 1
     );
   };
 
   const goToNext = () => {
+    if (!hackathon || !hackathon.media || hackathon.media.length <= 1) return;
+    
     setCurrentMediaIndex((prev) => 
       prev === hackathon.media.length - 1 ? 0 : prev + 1
     );
   };
 
   const renderMedia = () => {
+    if (!hackathon || !hackathon.media || hackathon.media.length === 0) return null;
+    
+    const currentMedia = hackathon.media[currentMediaIndex];
+    
+    if (!currentMedia) return null;
+    
     if (isPdf) {
       return (
         <iframe
@@ -125,10 +152,22 @@ export default function HackathonLightbox({ hackathon, isOpen, onClose }: Hackat
     }
   };
 
+  // Render nothing if not open or no hackathon
+  if (!isOpen || !hackathon) {
+    return null;
+  }
+
+  // Render nothing if hackathon has no media
+  if (!hackathon.media || hackathon.media.length === 0) {
+    return null;
+  }
+
+  const currentMedia = hackathon.media[currentMediaIndex];
+
   return (
     <AnimatePresence>
-      {isOpen && (
-        <Transition.Root show={isOpen} as={Fragment}>
+      {isOpen && hackathon && (
+        <Transition.Root show={isOpen && !!hackathon} as={Fragment}>
           <Dialog
             as="div"
             className="relative z-50"
@@ -193,29 +232,42 @@ export default function HackathonLightbox({ hackathon, isOpen, onClose }: Hackat
                             </p>
                           </div>
                           
-                          <div className="mt-4">
-                            {/* Media navigation */}
+                          <div className="mt-4 relative">
+                            {/* Media navigation arrows - centered and professional */}
                             {hackathon.media.length > 1 && (
-                              <div className="flex justify-between items-center mb-2">
+                              <>
                                 <button
                                   onClick={goToPrevious}
-                                  className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                                  className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group"
                                   aria-label="Previous media"
                                 >
-                                  <ChevronLeftIcon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+                                  <motion.div
+                                    whileHover={{ x: -5 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    <ChevronLeftIcon className="h-6 w-6" />
+                                  </motion.div>
                                 </button>
-                                
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
-                                  {currentMediaIndex + 1} of {hackathon.media.length}
-                                </span>
                                 
                                 <button
                                   onClick={goToNext}
-                                  className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                                  className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group"
                                   aria-label="Next media"
                                 >
-                                  <ChevronRightIcon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+                                  <motion.div
+                                    whileHover={{ x: 5 }}
+                                    transition={{ duration: 0.2 }}
+                                  >
+                                    <ChevronRightIcon className="h-6 w-6" />
+                                  </motion.div>
                                 </button>
+                              </>
+                            )}
+                            
+                            {/* Media counter */}
+                            {hackathon.media.length > 1 && (
+                              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 bg-black/30 backdrop-blur-sm text-white text-sm px-3 py-1 rounded-full">
+                                {currentMediaIndex + 1} / {hackathon.media.length}
                               </div>
                             )}
                             
@@ -230,11 +282,11 @@ export default function HackathonLightbox({ hackathon, isOpen, onClose }: Hackat
                             </div>
                             
                             {/* Media caption */}
-                            {currentMedia.caption && (
+                            {currentMedia && currentMedia.caption && (
                               <p className="text-sm text-gray-600 dark:text-gray-400 italic mb-4 text-center">
-                {currentMedia.caption}
-              </p>
-            )}
+                                {currentMedia.caption}
+                              </p>
+                            )}
                             
                             <div className="prose dark:prose-invert max-w-none mb-6">
                               <p className="text-gray-600 dark:text-gray-400">
