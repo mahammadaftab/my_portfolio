@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
+import { SunIcon, MoonIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -20,23 +20,9 @@ const navigation = [
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-
-  // Check if we're on mobile/tablet
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    
-    checkIsMobile();
-    window.addEventListener("resize", checkIsMobile);
-    
-    return () => {
-      window.removeEventListener("resize", checkIsMobile);
-    };
-  }, []);
 
   // Handle scroll effect
   useEffect(() => {
@@ -47,11 +33,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Hide navbar on mobile since MobileView handles it
-  if (isMobile) {
-    return null;
-  }
 
   return (
     <header 
@@ -95,6 +76,18 @@ export default function Navbar() {
               </motion.span>
             </Link>
           </motion.div>
+        </div>
+        
+        {/* Mobile menu button */}
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300"
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
+            <span className="sr-only">Open main menu</span>
+            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+          </button>
         </div>
         
         <div className="hidden lg:flex lg:gap-x-1">
@@ -192,11 +185,56 @@ export default function Navbar() {
       
       {/* Animated underline that spans full width on hover */}
       <motion.div 
-        className="h-0.5 bg-gradient-to-r from-blue-500/20 via-blue-500 to-blue-500/20 mt-4"
+        className="h-0.5 bg-gradient-to-r from-blue-500/20 via-blue-500 to-blue-500/20 mt-2"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: isHovering ? 1 : 0 }}
         transition={{ duration: 0.5 }}
       />
+      
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 shadow-lg"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="px-6 py-4 space-y-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`block px-3 py-2 rounded-md text-base font-medium ${
+                    pathname === item.href
+                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30"
+                      : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <div className="pt-4 flex items-center justify-between">
+                <span className="text-gray-700 dark:text-gray-300">Theme</span>
+                <button
+                  type="button"
+                  className="rounded-full p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                >
+                  <span className="sr-only">Toggle theme</span>
+                  {theme === "dark" ? (
+                    <SunIcon className="h-5 w-5" aria-hidden="true" />
+                  ) : (
+                    <MoonIcon className="h-5 w-5" aria-hidden="true" />
+                  )}
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

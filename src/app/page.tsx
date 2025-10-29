@@ -4,8 +4,192 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import Link from "next/link";
 import ThreeScene from "@/components/three-scene";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Stars, PointMaterial } from "@react-three/drei";
+import * as THREE from "three";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import LottieAnimation from "@/components/lottie-animation";
+
+// Enhanced Space Galaxy Background with multiple layers
+function SpaceGalaxy() {
+  const galaxyRef = useRef<THREE.Group>(null);
+  const nebulaRef = useRef<THREE.Group>(null);
+  const starsRef = useRef<THREE.Group>(null);
+  
+  // Create multiple star layers for depth
+  const [distantStars] = useState(() => {
+    const points = [];
+    for (let i = 0; i < 5000; i++) {
+      points.push(
+        (Math.random() - 0.5) * 2000,
+        (Math.random() - 0.5) * 2000,
+        (Math.random() - 0.5) * 2000
+      );
+    }
+    return new Float32Array(points);
+  });
+  
+  const [mediumStars] = useState(() => {
+    const points = [];
+    for (let i = 0; i < 3000; i++) {
+      points.push(
+        (Math.random() - 0.5) * 1000,
+        (Math.random() - 0.5) * 1000,
+        (Math.random() - 0.5) * 1000
+      );
+    }
+    return new Float32Array(points);
+  });
+  
+  const [nearStars] = useState(() => {
+    const points = [];
+    for (let i = 0; i < 2000; i++) {
+      points.push(
+        (Math.random() - 0.5) * 500,
+        (Math.random() - 0.5) * 500,
+        (Math.random() - 0.5) * 500
+      );
+    }
+    return new Float32Array(points);
+  });
+  
+  useFrame((state) => {
+    if (galaxyRef.current) {
+      // Slow galaxy rotation
+      galaxyRef.current.rotation.y = state.clock.elapsedTime * 0.02;
+    }
+    
+    if (nebulaRef.current) {
+      // Nebula pulsing effect
+      nebulaRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.1) * 0.01;
+    }
+    
+    if (starsRef.current) {
+      // Subtle starfield movement
+      starsRef.current.rotation.y = state.clock.elapsedTime * 0.005;
+    }
+  });
+  
+  return (
+    <>
+      {/* Distant star layer */}
+      <group ref={starsRef}>
+        <points>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              count={distantStars.length / 3}
+              array={distantStars}
+              itemSize={3}
+              args={[distantStars, 3]}
+            />
+          </bufferGeometry>
+          <PointMaterial
+            color="#ffffff"
+            size={1}
+            sizeAttenuation={true}
+            transparent={true}
+            opacity={0.8}
+          />
+        </points>
+        
+        {/* Medium star layer */}
+        <points>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              count={mediumStars.length / 3}
+              array={mediumStars}
+              itemSize={3}
+              args={[mediumStars, 3]}
+            />
+          </bufferGeometry>
+          <PointMaterial
+            color="#ffffff"
+            size={1.5}
+            sizeAttenuation={true}
+            transparent={true}
+            opacity={0.9}
+          />
+        </points>
+        
+        {/* Near star layer */}
+        <points>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              count={nearStars.length / 3}
+              array={nearStars}
+              itemSize={3}
+              args={[nearStars, 3]}
+            />
+          </bufferGeometry>
+          <PointMaterial
+            color="#ffffff"
+            size={2}
+            sizeAttenuation={true}
+            transparent={true}
+            opacity={1}
+          />
+        </points>
+      </group>
+      
+      {/* Colorful nebula clouds with pulsing effect */}
+      <group ref={nebulaRef}>
+        <mesh position={[30, 20, -80]} rotation={[0, 0, 0.3]}>
+          <sphereGeometry args={[60, 64, 64]} />
+          <meshBasicMaterial 
+            color="#4b0082" 
+            transparent 
+            opacity={0.05} 
+            side={THREE.BackSide}
+          />
+        </mesh>
+        
+        <mesh position={[-40, -25, -100]} rotation={[0.5, 0, 0]}>
+          <sphereGeometry args={[50, 64, 64]} />
+          <meshBasicMaterial 
+            color="#8b008b" 
+            transparent 
+            opacity={0.07} 
+            side={THREE.BackSide}
+          />
+        </mesh>
+        
+        <mesh position={[0, 40, -120]} rotation={[0, 0.7, 0]}>
+          <sphereGeometry args={[45, 64, 64]} />
+          <meshBasicMaterial 
+            color="#191970" 
+            transparent 
+            opacity={0.06} 
+            side={THREE.BackSide}
+          />
+        </mesh>
+        
+        <mesh position={[50, -30, -60]} rotation={[0.2, 0.5, 0.1]}>
+          <sphereGeometry args={[35, 64, 64]} />
+          <meshBasicMaterial 
+            color="#ff4500" 
+            transparent 
+            opacity={0.04} 
+            side={THREE.BackSide}
+          />
+        </mesh>
+      </group>
+      
+      {/* Additional star layers for extra depth */}
+      <Stars 
+        radius={400} 
+        depth={200} 
+        count={20000} 
+        factor={15} 
+        saturation={0} 
+        fade 
+        speed={0.2} 
+      />
+    </>
+  );
+}
 
 export default function Home() {
   const [text, setText] = useState("");
@@ -51,9 +235,19 @@ export default function Home() {
   }, [text, isDeleting, loopNum, typingSpeed]); // roles is intentionally omitted as it's static
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black">
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* 3D Space Galaxy Background */}
+      <div className="fixed inset-0 z-0">
+        <Canvas camera={{ position: [0, 0, 100], fov: 60 }}>
+          <SpaceGalaxy />
+          <ambientLight intensity={0.05} />
+          <pointLight position={[100, 100, 100]} intensity={0.3} color="#4b0082" />
+          <pointLight position={[-100, -100, -100]} intensity={0.3} color="#191970" />
+        </Canvas>
+      </div>
+      
       {/* Hero Section */}
-      <div ref={containerRef} className="container mx-auto px-4 py-16 md:py-24">
+      <div ref={containerRef} className="container mx-auto px-4 py-16 md:py-24 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* 3D Scene */}
           <motion.div 
@@ -63,7 +257,7 @@ export default function Home() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.8 }}
             style={{ y: prefersReducedMotion ? 0 : threeSceneY }}
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl backdrop-blur-sm">
               <ThreeScene />
             </div>
           </motion.div>
@@ -76,29 +270,29 @@ export default function Home() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.2 }}
             style={{ y: prefersReducedMotion ? 0 : heroTextY }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Hi, I&#39;m <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Mahammad Aftab</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
+              Hi, I&#39;m <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Mahammad Aftab</span>
             </h1>
             <div className="mt-6">
-              <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300">
+              <h2 className="text-2xl md:text-3xl font-semibold text-gray-200">
                 <span className="inline-block min-w-[280px] text-left">
                   {text}
                   <motion.span 
-                    className="ml-1 inline-block h-8 w-1 bg-blue-600"
+                    className="ml-1 inline-block h-8 w-1 bg-blue-400"
                     animate={{ opacity: [1, 0] }}
                     transition={{ repeat: Infinity, duration: 0.8 }}
                   />
                 </span>
               </h2>
             </div>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+            <p className="mt-6 text-lg text-gray-300 max-w-2xl">
               I build exceptional digital experiences that are fast, accessible, visually appealing, and responsive. 
               Even if you don&#39;t hire me, these qualities should be baseline for whatever you build.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
                 href="/projects"
-                className="rounded-md bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-300 transform hover:-translate-y-1 flex items-center"
+                className="rounded-md bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-base font-semibold text-white shadow-lg hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-300 transform hover:-translate-y-1 flex items-center"
               >
                 View Projects
                 <LottieAnimation 
@@ -113,7 +307,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/contact"
-                className="rounded-md bg-white dark:bg-gray-800 px-6 py-3 text-base font-semibold text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-300 flex items-center"
+                className="rounded-md bg-white/10 backdrop-blur-sm px-6 py-3 text-base font-semibold text-white shadow-lg ring-1 ring-inset ring-white/20 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-300 flex items-center"
               >
                 Contact Me
                 <LottieAnimation 
@@ -130,25 +324,6 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
-      
-      {/* Scroll Indicator */}
-      <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-      >
-        <div className="flex flex-col items-center">
-          <span className="text-sm text-gray-500 dark:text-gray-400 mb-2">click above Navigation to explore</span>
-          <div className="w-12 h-8 rounded-full border-2 border-gray-300 dark:border-gray-700 flex items-center pb-8">
-            <motion.div 
-              className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"
-              animate={{ x: [0, 20, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
-            />
-          </div>
-        </div>
-      </motion.div>
     </div>
   );
 }

@@ -72,19 +72,19 @@ async function checkRateLimit(ip: string): Promise<boolean> {
 
 // Initialize Resend client
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-const contactEmail = process.env.CONTACT_EMAIL || "contact@example.com";
-
-// Email service configuration
-const EMAIL_SERVICE = process.env.EMAIL_SERVICE || "console";
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "contact@example.com";
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "mdaftabeditz360@gmail.com";
 
 export async function POST(request: Request) {
   try {
+    console.log("Contact form submission received");
+    
     // Rate limiting
     const ip = request.headers.get("x-forwarded-for") ?? "127.0.0.1";
+    console.log("Request IP:", ip);
     
     const isAllowed = await checkRateLimit(ip);
     if (!isAllowed) {
+      console.log("Rate limit exceeded for IP:", ip);
       return NextResponse.json(
         { error: "Too many requests. Please try again later." },
         { status: 429 }
@@ -92,11 +92,13 @@ export async function POST(request: Request) {
     }
     
     const body = await request.json();
+    console.log("Form data received:", body);
     
     // Validate required fields
     const { name, email, subject, message } = body;
     
     if (!name || !email || !subject || !message) {
+      console.log("Missing required fields:", { name, email, subject, message });
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -106,6 +108,7 @@ export async function POST(request: Request) {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
+      console.log("Invalid email format:", email);
       return NextResponse.json(
         { error: "Invalid email format" },
         { status: 400 }
@@ -115,9 +118,10 @@ export async function POST(request: Request) {
     // Send email using Resend if available, otherwise fallback to console
     if (resend) {
       try {
-        await resend.emails.send({
-          from: contactEmail,
-          to: contactEmail,
+        console.log("Sending email via Resend to:", CONTACT_EMAIL);
+        const emailResult = await resend.emails.send({
+          from: CONTACT_EMAIL,
+          to: CONTACT_EMAIL,
           subject: `Contact Form: ${subject}`,
           text: `Name: ${name}
 Email: ${email}
@@ -126,13 +130,30 @@ Message:
 ${message}`,
           replyTo: email,
         });
-      } catch (emailError) {
+        console.log("Email sent successfully:", emailResult);
+      } catch (emailError: any) {
         console.error("Failed to send email:", emailError);
+        console.error("Error details:", {
+          message: emailError.message,
+          status: emailError.status,
+          body: emailError.body
+        });
+        
+        // Check if it's a domain verification error
+        if (emailError.message && emailError.message.includes('domain is not verified')) {
+          return NextResponse.json(
+            { 
+              error: "Email service configuration issue. Please contact the site administrator." 
+            },
+            { status: 500 }
+          );
+        }
+        
         // Don't fail the request if email sending fails, but log it
       }
     } else {
       // Log to console as fallback
-      console.log("Contact form submission:", { name, email, subject, message });
+      console.log("Contact form submission (no Resend):", { name, email, subject, message });
     }
     
     // Simulate async operation
