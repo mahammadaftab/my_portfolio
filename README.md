@@ -99,8 +99,8 @@ NEXT_PUBLIC_GA_ID=your_google_analytics_id
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=your-plausible-domain.com
 
 # For rate limiting (optional, for production)
-UPSTASH_REDIS_URL=your_upstash_redis_url
-UPSTASH_REDIS_TOKEN=your_upstash_redis_token
+UPSTASH_REDIS_REST_URL=your_upstash_redis_url
+UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token
 ```
 
 ## Deployment
@@ -198,10 +198,3 @@ See [Enhancements Summary](docs/enhancements-summary.md) for a complete list of 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Framer Motion](https://www.framer.com/motion)
-- [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)

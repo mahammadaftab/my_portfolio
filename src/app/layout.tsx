@@ -20,22 +20,22 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Portfolio | Professional Developer",
+    default: "Mahammad Aftab",
     template: "%s | Portfolio"
   },
   description: "Professional portfolio showcasing skills, projects, and experience",
   keywords: ["portfolio", "developer", "frontend", "react", "nextjs", "typescript"],
-  authors: [{ name: "Your Name" }], // TODO: Replace with your name
-  creator: "Your Name", // TODO: Replace with your name
+  authors: [{ name: "Mahammad Aftab" }], // TODO: Replace with your name
+  creator: "Mahammad Aftab", // TODO: Replace with your name
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-portfolio-url.com", // TODO: Replace with your domain
-    title: "Portfolio | Professional Developer",
+    url: "https://mahammadaftab.vercel.app/", // TODO: Replace with your domain
+    title: "Portfolio | Mahammad Aftab",
     description: "Professional portfolio showcasing skills, projects, and experience",
     images: [
       {
-        url: "https://your-portfolio-url.com/og-image.jpg", // TODO: Replace with your OG image
+        url: "https://mahammadaftab.vercel.app/og-image.jpg", // TODO: Replace with your OG image
         width: 1200,
         height: 630,
         alt: "Portfolio Website",
@@ -44,16 +44,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Portfolio | Professional Developer",
+    title: "Portfolio | Mahammad Aftab",
     description: "Professional portfolio showcasing skills, projects, and experience",
-    images: ["https://your-portfolio-url.com/og-image.jpg"], // TODO: Replace with your OG image
+    images: ["https://mahammadaftab.vercel.app/og-image.jpg"], // TODO: Replace with your OG image
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://your-portfolio-url.com", // TODO: Replace with your domain
+    canonical: "https://mahammadaftab.vercel.app/", // TODO: Replace with your domain
   },
 };
 

@@ -4,14 +4,14 @@ import { Resend } from "resend";
 // Use Upstash Redis for rate limiting in production, fallback to in-memory
 let redis: null | any = null;
 
-if (process.env.UPSTASH_REDIS_URL && process.env.UPSTASH_REDIS_TOKEN) {
+if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
   try {
     // Dynamically import to avoid issues in development
     const RedisModule = await import("@upstash/redis");
     const Redis = RedisModule.Redis;
     redis = new Redis({
-      url: process.env.UPSTASH_REDIS_URL,
-      token: process.env.UPSTASH_REDIS_TOKEN,
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN,
     });
   } catch (error) {
     console.warn("Failed to initialize Redis:", error);

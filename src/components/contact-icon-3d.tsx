@@ -17,13 +17,13 @@ function RealisticAstronaut() {
       const time = state.clock.elapsedTime;
       const cycleTime = time % 20; // 20 second cycle
       
-      // X-axis movement - increased breadth (-10 to +10 units)
+      // X-axis movement - increased breadth (-15 to +15 units for wider movement)
       if (cycleTime < 10) {
         // Moving from left to right (0-10 seconds)
-        groupRef.current.position.x = -10 + (cycleTime / 10) * 20;
+        groupRef.current.position.x = -15 + (cycleTime / 10) * 30;
       } else {
         // Moving from right to left (10-20 seconds)
-        groupRef.current.position.x = 10 - ((cycleTime - 10) / 10) * 20;
+        groupRef.current.position.x = 15 - ((cycleTime - 10) / 10) * 30;
       }
       
       // Y-axis floating motion
@@ -318,16 +318,181 @@ function RealisticAstronaut() {
   );
 }
 
+// Space Galaxy Background - Matching the home page implementation
+function SpaceGalaxy() {
+  const galaxyRef = useRef<THREE.Group>(null);
+  const nebulaRef = useRef<THREE.Group>(null);
+  const starsRef = useRef<THREE.Group>(null);
+  
+  // Create multiple star layers for depth
+  const distantStars = new Float32Array(5000 * 3);
+  const mediumStars = new Float32Array(3000 * 3);
+  const nearStars = new Float32Array(2000 * 3);
+  
+  for (let i = 0; i < 5000; i++) {
+    distantStars[i * 3] = (Math.random() - 0.5) * 2000;
+    distantStars[i * 3 + 1] = (Math.random() - 0.5) * 2000;
+    distantStars[i * 3 + 2] = (Math.random() - 0.5) * 2000;
+  }
+  
+  for (let i = 0; i < 3000; i++) {
+    mediumStars[i * 3] = (Math.random() - 0.5) * 1000;
+    mediumStars[i * 3 + 1] = (Math.random() - 0.5) * 1000;
+    mediumStars[i * 3 + 2] = (Math.random() - 0.5) * 1000;
+  }
+  
+  for (let i = 0; i < 2000; i++) {
+    nearStars[i * 3] = (Math.random() - 0.5) * 500;
+    nearStars[i * 3 + 1] = (Math.random() - 0.5) * 500;
+    nearStars[i * 3 + 2] = (Math.random() - 0.5) * 500;
+  }
+  
+  useFrame((state) => {
+    if (galaxyRef.current) {
+      // Slow galaxy rotation
+      galaxyRef.current.rotation.y = state.clock.elapsedTime * 0.02;
+    }
+    
+    if (nebulaRef.current) {
+      // Nebula pulsing effect
+      nebulaRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.1) * 0.01;
+    }
+    
+    if (starsRef.current) {
+      // Subtle starfield movement
+      starsRef.current.rotation.y = state.clock.elapsedTime * 0.005;
+    }
+  });
+  
+  return (
+    <>
+      {/* Distant star layer */}
+      <group ref={starsRef}>
+        <points>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              count={distantStars.length / 3}
+              array={distantStars}
+              itemSize={3}
+              args={[distantStars, 3]}
+            />
+          </bufferGeometry>
+          <pointsMaterial
+            color="#ffffff"
+            size={1}
+            sizeAttenuation={true}
+            transparent={true}
+            opacity={0.8}
+          />
+        </points>
+        
+        {/* Medium star layer */}
+        <points>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              count={mediumStars.length / 3}
+              array={mediumStars}
+              itemSize={3}
+              args={[mediumStars, 3]}
+            />
+          </bufferGeometry>
+          <pointsMaterial
+            color="#ffffff"
+            size={1.5}
+            sizeAttenuation={true}
+            transparent={true}
+            opacity={0.9}
+          />
+        </points>
+        
+        {/* Near star layer */}
+        <points>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              count={nearStars.length / 3}
+              array={nearStars}
+              itemSize={3}
+              args={[nearStars, 3]}
+            />
+          </bufferGeometry>
+          <pointsMaterial
+            color="#ffffff"
+            size={2}
+            sizeAttenuation={true}
+            transparent={true}
+            opacity={1}
+          />
+        </points>
+      </group>
+      
+      {/* Colorful nebula clouds with pulsing effect */}
+      <group ref={nebulaRef}>
+        <mesh position={[30, 20, -80]} rotation={[0, 0, 0.3]}>
+          <sphereGeometry args={[60, 64, 64]} />
+          <meshBasicMaterial 
+            color="#4b0082" 
+            transparent 
+            opacity={0.05} 
+            side={THREE.BackSide}
+          />
+        </mesh>
+        
+        <mesh position={[-40, -25, -100]} rotation={[0.5, 0, 0]}>
+          <sphereGeometry args={[50, 64, 64]} />
+          <meshBasicMaterial 
+            color="#8b008b" 
+            transparent 
+            opacity={0.07} 
+            side={THREE.BackSide}
+          />
+        </mesh>
+        
+        <mesh position={[0, 40, -120]} rotation={[0, 0.7, 0]}>
+          <sphereGeometry args={[45, 64, 64]} />
+          <meshBasicMaterial 
+            color="#191970" 
+            transparent 
+            opacity={0.06} 
+            side={THREE.BackSide}
+          />
+        </mesh>
+        
+        <mesh position={[50, -30, -60]} rotation={[0.2, 0.5, 0.1]}>
+          <sphereGeometry args={[35, 64, 64]} />
+          <meshBasicMaterial 
+            color="#ff4500" 
+            transparent 
+            opacity={0.04} 
+            side={THREE.BackSide}
+          />
+        </mesh>
+      </group>
+      
+      {/* Additional star layers for extra depth */}
+      <Stars 
+        radius={400} 
+        depth={200} 
+        count={20000} 
+        factor={15} 
+        saturation={0} 
+        fade 
+        speed={0.2} 
+      />
+    </>
+  );
+}
+
 // Advanced scene with dynamic lighting and effects
 function Scene() {
   return (
     <>
       {/* Advanced Lighting Setup */}
-      <ambientLight intensity={0.3} />
-      <pointLight position={[5, 5, 5]} intensity={1.2} color="#60a5fa" />
-      <pointLight position={[-5, -5, -5]} intensity={0.8} color="#3b82f6" />
-      <pointLight position={[0, 10, 0]} intensity={0.7} color="#ffffff" />
-      <pointLight position={[0, -10, 0]} intensity={0.5} color="#fbbf24" />
+      <ambientLight intensity={0.05} />
+      <pointLight position={[100, 100, 100]} intensity={0.3} color="#4b0082" />
+      <pointLight position={[-100, -100, -100]} intensity={0.3} color="#191970" />
       
       {/* Directional light for realistic shadows */}
       <directionalLight
@@ -338,26 +503,8 @@ function Scene() {
         shadow-mapSize-height={2048}
       />
       
-      {/* Stars with increased coverage for expanded breadth */}
-      <Stars 
-        radius={200} 
-        depth={150} 
-        count={15000} 
-        factor={15} 
-        saturation={0.2} 
-        fade 
-        speed={0.5} 
-      />
-      
-      {/* Nebula-like glow effect */}
-      <mesh position={[0, 0, -20]}>
-        <sphereGeometry args={[30, 32, 32]} />
-        <meshBasicMaterial 
-          color="#3b82f6" 
-          transparent 
-          opacity={0.05} 
-        />
-      </mesh>
+      {/* Space galaxy background matching home page */}
+      <SpaceGalaxy />
       
       {/* Realistic astronaut model */}
       <RealisticAstronaut />
@@ -365,15 +512,15 @@ function Scene() {
   );
 }
 
-export default function ContactIcon3D({ size = 500 }: { size?: number }) {
+export default function ContactIcon3D({ size = 300 }: { size?: number }) {
   return (
     <div 
-      className="w-full h-full"
-      style={{ width: '100%', height: '100%', minHeight: size, minWidth: size * 4 }}
+      className="w-full h-full aspect-square"
+      style={{ width: '100%', height: '100%', minHeight: size, minWidth: size }}
     >
       <Canvas 
         camera={{ position: [0, 0, 8], fov: 50 }}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '75%' }}
         shadows
       >
         <Suspense fallback={null}>

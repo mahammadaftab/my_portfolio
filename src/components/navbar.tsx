@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
-import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,13 +11,12 @@ const navigation = [
   { name: "About", href: "/about" },
   { name: "Skills", href: "/skills" },
   { name: "Projects", href: "/projects" },
-  { name: "Experience", href: "/experience" },
+  { name: "Achievements", href: "/experience" },
   { name: "Resume", href: "/resume" },
   { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
-  const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -122,46 +120,6 @@ export default function Navbar() {
         
         <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-2">
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            type="button"
-            className="rounded-full p-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-all duration-300"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            <span className="sr-only">Toggle theme</span>
-            <AnimatePresence mode="wait">
-              {theme === "dark" ? (
-                <motion.div
-                  key="sun"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <SunIcon className="h-5 w-5" aria-hidden="true" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="moon"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <MoonIcon className="h-5 w-5" aria-hidden="true" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
-          
-          <motion.div
-            className="h-6 w-px bg-gray-300 dark:bg-gray-700 mx-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHovering ? 1 : 0.5 }}
-            transition={{ duration: 0.3 }}
-          />
-          
-          <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="ml-2 relative inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
@@ -206,7 +164,7 @@ export default function Navbar() {
               <div className="flex justify-end">
                 <button
                   type="button"
-                  className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300"
+                  className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span className="sr-only">Close main menu</span>
@@ -228,20 +186,26 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-4 flex items-center justify-between">
-                <span className="text-gray-700 dark:text-gray-300">Theme</span>
-                <button
-                  type="button"
-                  className="rounded-full p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              <div className="pt-4 flex justify-center">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
                 >
-                  <span className="sr-only">Toggle theme</span>
-                  {theme === "dark" ? (
-                    <SunIcon className="h-5 w-5" aria-hidden="true" />
-                  ) : (
-                    <MoonIcon className="h-5 w-5" aria-hidden="true" />
-                  )}
-                </button>
+                  <span className="relative z-10">Hire Me</span>
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100"
+                    initial={false}
+                    animate={{ 
+                      x: ["-100%", "100%"] 
+                    }}
+                    transition={{ 
+                      duration: 0.8, 
+                      repeat: Infinity,
+                      repeatType: "loop"
+                    }}
+                  />
+                </motion.button>
               </div>
             </div>
           </motion.div>

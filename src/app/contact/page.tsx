@@ -155,7 +155,7 @@ export default function Contact() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.7 }}
             className="w-full lg:w-1/2"
           >
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-lg">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send me a message</h2>
               
               {submitSuccess && (
@@ -175,6 +175,7 @@ export default function Contact() {
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Name
                   </label>
+                  
                   <input
                     id="name"
                     type="text"
@@ -188,6 +189,7 @@ export default function Contact() {
                     <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name.message}</p>
                   )}
                 </div>
+                <br/>
                 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -206,6 +208,7 @@ export default function Contact() {
                     <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email.message}</p>
                   )}
                 </div>
+                <br/>
                 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -224,6 +227,7 @@ export default function Contact() {
                     <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.subject.message}</p>
                   )}
                 </div>
+                <br/>
                 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -242,6 +246,7 @@ export default function Contact() {
                     <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message.message}</p>
                   )}
                 </div>
+                <br /> <br/>
                 
                 <button
                   type="submit"
@@ -264,9 +269,11 @@ export default function Contact() {
                     "Send Message"
                   )}
                 </button>
+                <br/>
               </form>
             </div>
           </motion.div>
+
           
           {/* Contact Information */}
           <motion.div
@@ -275,10 +282,10 @@ export default function Contact() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.7, delay: prefersReducedMotion ? 0 : 0.2 }}
             className="w-full lg:w-1/2"
           >
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg h-full">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-lg h-full flex flex-col">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Information</h2>
               
-              <div className="space-y-6">
+              <div className="space-y-6 flex-grow">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                     <EnvelopeIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
@@ -287,7 +294,7 @@ export default function Contact() {
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white">Email</h3>
                     <a 
                       href="mailto:contact@example.com" 
-                      className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+                      className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 break-all"
                     >
                       mdaftabeditz360@gmail.com
                     </a>
@@ -324,49 +331,51 @@ export default function Contact() {
               </div>
               
               {/* Social Links */}
-              <div className="mt-12">
+              <div className="mt-8">
                 <div className="flex items-center mb-4">
                   <h3 className="text-lg font-medium text-gray-900 dark:text-white">Connect with me</h3>
-                  <LottieAnimation 
-                    animationData={null}
-                    className="ml-2"
-                    size={24}
-                    loop={true}
-                    autoplay={true}
-                    ariaLabel="Social connection animation"
-                  />
+                  <div className="ml-2">
+                    <LottieAnimation 
+                      animationData={null}
+                      size={24}
+                      loop={true}
+                      autoplay={true}
+                      ariaLabel="Social connection animation"
+                    />
+                  </div>
                 </div>
-                <div className="flex space-x-4">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
-                    { name: "GitHub", url: "https://github.com/mahammadaftab" },
                     { name: "LinkedIn", url: "https://www.linkedin.com/in/mahammad-aftab" },
+                    { name: "GitHub", url: "https://github.com/mahammadaftab" },
                     { name: "Twitter", url: "#" },
-                    { name: "Dribbble", url: "#" }
+                    { name: "Instagram", url: "https://www.instagram.com/mahammad_aftab_attari" }
                   ].map((social) => (
                     <a
                       key={social.name}
                       href={social.url}
-                      className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center"
+                      className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex flex-col items-center justify-center text-center min-h-[56px]"
                       aria-label={social.name}
                     >
-                      <span className="font-medium">{social.name}</span>
-                      <LottieAnimation 
-                        animationData={null}
-                        className="ml-1"
-                        size={16}
-                        loop={true}
-                        autoplay={true}
-                        playOnHover={true}
-                        ariaLabel={`Animated icon for ${social.name}`}
-                      />
+                      <span className="font-medium text-sm">{social.name}</span>
+                      <div className="mt-1">
+                        <LottieAnimation 
+                          animationData={null}
+                          size={16}
+                          loop={true}
+                          autoplay={true}
+                          playOnHover={true}
+                          ariaLabel={`Animated icon for ${social.name}`}
+                        />
+                      </div>
                     </a>
                   ))}
                 </div>
                 
                 {/* 3D Cube Animation */}
                 <div className="mt-8 flex justify-center">
-                  <div className="relative">
-                    <ContactIcon3D size={120} />
+                  <div className="relative w-full aspect-square max-w-[500px] max-h-[300px] mx-auto rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-gray-700">
+                    <ContactIcon3D size={400} />
                   </div>
                 </div>
               </div>
