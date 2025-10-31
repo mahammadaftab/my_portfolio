@@ -21,10 +21,10 @@
     "id": 3,
     "title": "Portfolio Website",
     "description": "A responsive portfolio website with 3D animations and dark mode support.",
-    "tags": ["React", "Three.js", "Tailwind CSS"],
-    "image": "/images/projects/portfolio.jpg",
-    "liveUrl": "https://your-portfolio-url.com",
-    "githubUrl": "https://github.com/yourusername/portfolio"
+    "tags": ["Next.js", "Three.js", "Tailwind CSS"],
+    "image": "/images/projects/Portfolio.png",
+    "liveUrl": "https://mahammadaftab.vercel.app/",
+    "githubUrl": "https://github.com/mahammadaftab/my_portfolio.git"
   },
   {
     "id": 4,
