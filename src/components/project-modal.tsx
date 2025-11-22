@@ -2,7 +2,7 @@
 
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon, ArrowTopRightOnSquareIcon, CodeBracketIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon, ArrowTopRightOnSquareIcon, CodeBracketIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectUrl {
@@ -39,6 +39,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   const cancelButtonRef = useRef(null);
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const [media, setMedia] = useState<ProjectMedia[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Update media when project changes
   useEffect(() => {
@@ -65,6 +66,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
       
       setMedia(allMedia);
       setCurrentMediaIndex(0);
+      // Set loading state when media changes
+      if (allMedia.length > 0) {
+        setIsLoading(true);
+      }
     }
   }, [project]);
 
@@ -74,17 +79,30 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
       if (e.key === "Escape") onClose();
     };
     
+    // Handle keyboard navigation
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!project || media.length <= 1) return;
+      
+      if (e.key === "ArrowLeft") {
+        prevMedia();
+      } else if (e.key === "ArrowRight") {
+        nextMedia();
+      }
+    };
+    
     if (isOpen) {
       document.addEventListener("keydown", handleEsc);
+      window.addEventListener("keydown", handleKeyDown);
       // Prevent body scroll when modal is open
       document.body.style.overflow = "hidden";
     }
     
     return () => {
       document.removeEventListener("keydown", handleEsc);
+      window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "auto";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, project, media.length]);
 
   if (!project) return null;
 
@@ -125,6 +143,14 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     return null;
   };
 
+  const handleMediaLoad = () => {
+    setIsLoading(false);
+  };
+
+  const handleMediaError = () => {
+    setIsLoading(false);
+  };
+
   const renderMedia = () => {
     if (media.length === 0) {
       return (
@@ -140,46 +166,61 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     
     if (currentMedia.type === "video") {
       return (
-        <div className="w-full h-full flex items-center justify-center bg-black">
+        <div className="w-full h-full flex items-center justify-center bg-black relative">
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+          )}
           <video 
             src={currentMedia.url} 
             controls 
-            className="max-h-full max-w-full object-contain"
+            autoPlay={false}
+            playsInline
+            preload="metadata"
+            className={`w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+            onLoadedData={handleMediaLoad}
+            onError={handleMediaError}
           >
             Your browser does not support the video tag.
           </video>
+          <div className="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-sm flex items-center">
+            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v8a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"></path>
+            </svg>
+            Video
+          </div>
         </div>
       );
     } else {
       return (
-        <img 
-          src={currentMedia.url} 
-          alt={currentMedia.label}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            // Fallback to placeholder if image fails to load
-            const target = e.target as HTMLImageElement;
-            if (target && target.parentElement) {
-              target.onerror = null;
-              target.parentElement.innerHTML = `
-                <div class="bg-gray-200 dark:bg-gray-700 w-full h-full flex items-center justify-center">
-                  <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                  </svg>
-                </div>
-              `;
-            }
-          }}
-        />
+        <>
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+          )}
+          <img 
+            src={currentMedia.url} 
+            alt={currentMedia.label}
+            className={`w-full h-full object-contain ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+            onLoad={handleMediaLoad}
+            onError={handleMediaError}
+          />
+        </>
       );
     }
   };
 
   const nextMedia = () => {
+    if (media.length <= 1) return;
+    setIsLoading(true);
     setCurrentMediaIndex((prev) => (prev + 1) % media.length);
   };
 
   const prevMedia = () => {
+    if (media.length <= 1) return;
+    setIsLoading(true);
     setCurrentMediaIndex((prev) => (prev - 1 + media.length) % media.length);
   };
 
@@ -246,35 +287,48 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                           </Dialog.Title>
                           
                           <div className="mt-4">
-                            <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-6 relative">
+                            <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-6 relative shadow-lg">
                               {media.length > 1 && (
                                 <>
                                   <button
                                     onClick={prevMedia}
-                                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all z-10"
+                                    className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group md:p-2"
+                                    aria-label="Previous media"
                                   >
-                                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                    </svg>
+                                    <motion.div
+                                      whileHover={{ x: -5 }}
+                                      transition={{ duration: 0.2 }}
+                                    >
+                                      <ChevronLeftIcon className="h-6 w-6 md:h-5 md:w-5" />
+                                    </motion.div>
                                   </button>
                                   <button
                                     onClick={nextMedia}
-                                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all z-10"
+                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 group md:p-2"
+                                    aria-label="Next media"
                                   >
-                                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
+                                    <motion.div
+                                      whileHover={{ x: 5 }}
+                                      transition={{ duration: 0.2 }}
+                                    >
+                                      <ChevronRightIcon className="h-6 w-6 md:h-5 md:w-5" />
+                                    </motion.div>
                                   </button>
                                 </>
                               )}
-                              
-                              <div className="w-full h-full flex items-center justify-center">
+                                                            
+                              <div className="w-full h-full flex items-center justify-center relative">
+                                {isLoading && (
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                                  </div>
+                                )}
                                 {renderMedia()}
                               </div>
-                              
+                                                            
                               {media.length > 1 && (
-                                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white text-sm px-2 py-1 rounded">
-                                  {currentMediaIndex + 1} / {media.length} - {media[currentMediaIndex]?.label}
+                                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 bg-black/30 backdrop-blur-sm text-white text-sm px-3 py-1 rounded-full">
+                                  {currentMediaIndex + 1} / {media.length}
                                 </div>
                               )}
                             </div>

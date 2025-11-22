@@ -108,6 +108,40 @@
           "caption": "Certificate of sardar 150 Young Leaders Programs"
         }
       ]
+    },
+    {
+      "id": 4,
+      "title": "LetsUpgrade",
+      "issuer": "LetsUpgrade Certificate",
+      "date": "2023",
+      "description": "LetsUpgrade is an online learning platform that provides courses in technology and soft skills.",
+      "media": [
+        {
+          "type": "pdf",
+          "url": "/images/certificates/Bootstrap CSS Bootcamp.pdf",
+          "caption": "Certificate of Completion CSS Bootcamp"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/Java Bootcamp.pdf",
+          "caption": "Certificate of Completion Java Bootcamp"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/C++ Bootcamp.pdf",
+          "caption": "Certificate of Completion C++ Bootcamp"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/HTML & CSS Bootcamp.pdf",
+          "caption": "Certificate of Completion HTML & CSS Bootcamp"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/GenAI 101 Mastering LLMs.pdf",
+          "caption": "Certificate of Completion GenAI 101 Mastering LLMs"
+        }
+      ]
     }
   ],
 

@@ -38,12 +38,12 @@
     ],
     "videos": [
       {
-        "url": "/videos/Food-Order-Easy.mp4",
+        "url": "/images/projects/Food-Order-Easy.mp4",
         "label": "Application Demo",
         "type": "video"
       },
       {
-        "url": "/videos/User Food-Order-Easy.mp4",
+        "url": "/images/projects/User Food-Order-Easy.mp4",
         "label": "User Experience",
         "type": "video"
       }
@@ -83,7 +83,7 @@
   {
     "id": 4,
     "title": "Durood Counter",
-    "description": "A durood counter application with计数器功能 and interactive maps.",
+    "description": "A durood counter application.",
     "tags": ["React", "API Integration", "Chart.js"],
     "images": [
       {
@@ -94,7 +94,7 @@
     ],
     "urls": [
       {
-        "label": "Demo",
+        "label": "Live Demo",
         "url": "https://durood-counter-jet.vercel.app/"
       }
     ],

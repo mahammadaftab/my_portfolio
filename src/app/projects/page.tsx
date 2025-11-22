@@ -88,6 +88,11 @@ export default function Projects() {
     return "";
   };
 
+  // Check if project has videos
+  const hasVideos = (project: Project) => {
+    return project.videos && project.videos.length > 0;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16">
       <div ref={containerRef} className="container mx-auto px-4 relative">
@@ -205,6 +210,14 @@ export default function Projects() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                   <div className="text-white text-sm font-medium">Click to view details</div>
                 </div>
+                {hasVideos(project) && (
+                  <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
+                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v8a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"></path>
+                    </svg>
+                    VIDEO
+                  </div>
+                )}
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
