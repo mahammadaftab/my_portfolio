@@ -1,0 +1,143 @@
+[
+  {
+    "id": 1,
+    "title": "E-Commerce Platform",
+    "description": "A full-featured online shopping platform with payment integration and inventory management.",
+    "tags": ["React", "Node.js", "MongoDB"],
+    "images": [
+      {
+        "url": "/images/projects/ecommerce.jpg",
+        "label": "Main Interface",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Demo",
+        "url": "https://my-e-commerce-eta-green.vercel.app/"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/my-e-commerce"
+  },
+  {
+    "id": 2,
+    "title": "Food-Order-Easy",
+    "description": "A food ordering application for easy ordering and delivery.",
+    "tags": ["React.js", "JavaScript", "Firebase"],
+    "images": [
+      {
+        "url": "/images/projects/food-order-frontend.png",
+        "label": "Frontend",
+        "type": "image"
+      },
+      {
+        "url": "/images/projects/food-order-admin.png",
+        "label": "Admin Panel",
+        "type": "image"
+      }
+    ],
+    "videos": [
+      {
+        "url": "/videos/Food-Order-Easy.mp4",
+        "label": "Application Demo",
+        "type": "video"
+      },
+      {
+        "url": "/videos/User Food-Order-Easy.mp4",
+        "label": "User Experience",
+        "type": "video"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Frontend",
+        "url": "https://food-order-easy-frontend.onrender.com/"
+      },
+      {
+        "label": "Admin Panel",
+        "url": "https://food-order-easy-admin.onrender.com/login"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/food-order-easy.git"
+  },
+  {
+    "id": 3,
+    "title": "Portfolio Website",
+    "description": "A responsive portfolio website with 3D animations and dark mode support.",
+    "tags": ["Next.js", "Three.js", "Tailwind CSS"],
+    "images": [
+      {
+        "url": "/images/projects/Portfolio.png",
+        "label": "Main Page",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Site",
+        "url": "https://mahammadaftab.vercel.app/"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/my_portfolio.git"
+  },
+  {
+    "id": 4,
+    "title": "Durood Counter",
+    "description": "A durood counter application with计数器功能 and interactive maps.",
+    "tags": ["React", "API Integration", "Chart.js"],
+    "images": [
+      {
+        "url": "/images/projects/Durood Counter.png",
+        "label": "Dashboard",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Demo",
+        "url": "https://durood-counter-jet.vercel.app/"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/Dawateislami_app.git"
+  },
+  {
+    "id": 5,
+    "title": "Social Media Analytics",
+    "description": "A dashboard for tracking social media performance and generating insights.",
+    "tags": ["React", "D3.js", "Express"],
+    "images": [
+      {
+        "url": "/images/projects/analytics.jpg",
+        "label": "Analytics View",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Demo",
+        "url": "https://example-analytics.com"
+      }
+    ],
+    "githubUrl": "https://github.com/yourusername/social-analytics"
+  },
+  {
+    "id": 6,
+    "title": "Fitness Tracker",
+    "description": "A mobile-first application for tracking workouts, nutrition, and health metrics.",
+    "tags": ["React Native", "Redux", "Node.js"],
+    "images": [
+      {
+        "url": "/images/projects/fitness.jpg",
+        "label": "Mobile Interface",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Web App",
+        "url": "https://example-fitness.com"
+      }
+    ],
+    "githubUrl": "https://github.com/yourusername/fitness-tracker"
+  }
+]

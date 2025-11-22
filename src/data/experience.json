@@ -1,0 +1,161 @@
+{
+  "experiences": [
+    {
+      "id": 1,
+      "title": "Senior Frontend Developer",
+      "company": "Tech Innovations Inc.",
+      "period": "2020 - Present",
+      "description": "Lead frontend development for enterprise SaaS platform serving 500+ clients. Implemented responsive design system used across 15+ products.",
+      "responsibilities": [
+        "Led a team of 5 frontend developers in building scalable web applications",
+        "Implemented design system used across 15+ products",
+        "Optimized application performance, reducing load times by 40%",
+        "Mentored junior developers and conducted code reviews"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Frontend Developer",
+      "company": "Digital Solutions LLC",
+      "period": "2018 - 2020",
+      "description": "Developed and maintained 10+ client websites using React and Vue.js. Collaborated with UX designers to implement pixel-perfect interfaces.",
+      "responsibilities": [
+        "Developed and maintained 10+ client websites using React and Vue.js",
+        "Collaborated with UX designers to implement pixel-perfect interfaces",
+        "Integrated RESTful APIs and third-party services",
+        "Implemented responsive design for cross-device compatibility"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Web Developer",
+      "company": "Creative Web Agency",
+      "period": "2016 - 2018",
+      "description": "Built responsive websites for various clients using HTML, CSS, and JavaScript. Optimized site performance and SEO for better rankings.",
+      "responsibilities": [
+        "Built responsive websites for various clients using HTML, CSS, and JavaScript",
+        "Optimized site performance and SEO for better rankings",
+        "Collaborated with designers to translate mockups into functional websites",
+        "Maintained and updated existing client websites"
+      ]
+    }
+  ],
+
+  "certificates": [
+    {
+      "id": 1,
+      "title": "Oracle University",
+      "issuer": "Generative AI",
+      "date": "2025",
+      "description": "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
+      "media": [
+        {
+          "type": "pdf",
+          "url": "/images/certificates/Oracle Certificate.pdf",
+          "caption": "Certificate of completion"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "STP computer education",
+      "issuer": "Basic Certificates",
+      "date": "2023-2025",
+      "description": "Certificates Collections in STP computer education (Basic Computer, Tally Prime, HTML, CSS, Photoshop)",
+      "media": [
+        {
+          "type": "pdf",
+          "url": "/images/certificates/basic computer certificate.pdf",
+          "caption": "Basic Computer Certificate"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/tallyprimecertificate.pdf",
+          "caption": "Tally Prime Certificate"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/htmlcertificate.pdf",
+          "caption": "HTML Certification"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/csscertificate.pdf",
+          "caption": "CSS Certification"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/certificates/photoshopcertificate.pdf",
+          "caption": "Photoshop Certification"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "My Bharat",
+      "issuer": "My Bharat Certificate",
+      "date": "2025",
+      "description": "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/certificates/Youth Affairs.jpeg",
+          "caption": "Certificate of Youth Affairs"
+        },
+        {
+          "type": "image",
+          "url": "/images/certificates/Sardar.jpeg",
+          "caption": "Certificate of sardar 150 Young Leaders Programs"
+        }
+      ]
+    }
+  ],
+
+
+  "hackthons": [
+    {
+      "id": 1,
+      "title": "Banglore Hackathon",
+      "issuer": "Banglore Institute of Technology (BIT)",
+      "date": "2025",
+      "description": "Participated in a 24-hour hackathon focused on building innovative solutions for Medical Health with AI. Our team developed a real-time disease detection system using machine learning.",
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/certificate.jpeg",
+          "caption": "Certificate of Participation"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/0xDay.jpeg",
+          "caption": "0x.Day Certificate"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/MyImage.jpeg",
+          "caption": "My Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/GroupImage.jpeg",
+          "caption": "Presentation Time"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/TeamImage.jpeg",
+          "caption": "Team Photo"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/Team.jpeg",
+          "caption": "Team Photo"
+        },
+        {
+          "type": "video",
+          "url": "/images/hackathons/hackthonVedio.mp4",
+          "caption": "Short Vedio"
+        }
+      ]
+    }
+  ]
+}
