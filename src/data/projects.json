@@ -1,6 +1,26 @@
 [
-  {
+    {
     "id": 1,
+    "title": "Accident and Crime Report App",
+    "description": "A full-featured crime report app with user authentication and data storage.",
+    "tags": ["Next.js", "Node.js", "NeonDB"],
+    "images": [
+      {
+        "url": "/images/projects/Crime Report App.png",
+        "label": "Main Interface",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Demo",
+        "url": "https://crime-report-app-one.vercel.app/"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/crime_report_app.git"
+  },
+  {
+    "id": 2,
     "title": "E-Commerce Platform",
     "description": "A full-featured online shopping platform with payment integration and inventory management.",
     "tags": ["React", "Node.js", "MongoDB"],
@@ -20,10 +40,10 @@
     "githubUrl": "https://github.com/mahammadaftab/my-e-commerce"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Food-Order-Easy",
     "description": "A food ordering application for easy ordering and delivery.",
-    "tags": ["React.js", "JavaScript", "Firebase"],
+    "tags": ["React.js", "JavaScript", "MongoDB"],
     "images": [
       {
         "url": "/images/projects/food-order-frontend.png",
@@ -61,7 +81,7 @@
     "githubUrl": "https://github.com/mahammadaftab/food-order-easy.git"
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Portfolio Website",
     "description": "A responsive portfolio website with 3D animations and dark mode support.",
     "tags": ["Next.js", "Three.js", "Tailwind CSS"],
@@ -81,10 +101,10 @@
     "githubUrl": "https://github.com/mahammadaftab/my_portfolio.git"
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "Durood Counter",
     "description": "A durood counter application.",
-    "tags": ["React", "API Integration", "Chart.js"],
+    "tags": ["React", "Tailwind CSS", "vite"],
     "images": [
       {
         "url": "/images/projects/Durood Counter.png",
@@ -101,43 +121,84 @@
     "githubUrl": "https://github.com/mahammadaftab/Dawateislami_app.git"
   },
   {
-    "id": 5,
-    "title": "Social Media Analytics",
-    "description": "A dashboard for tracking social media performance and generating insights.",
-    "tags": ["React", "D3.js", "Express"],
+    "id": 6,
+    "title": "Java Development Quiz App",
+    "description": "A quiz app for testing java development knowledge.",
+    "tags": ["React", "springboot", "Maven"],
     "images": [
       {
-        "url": "/images/projects/analytics.jpg",
-        "label": "Analytics View",
+        "url": "/images/projects/Quiz App.png",
+        "label": "Quiz View",
         "type": "image"
+      }
+    ],
+    "videos": [
+      {
+        "url": "/images/projects/Java Development Quiz App.mp4",
+        "label": "Application Demo",
+        "type": "video"
       }
     ],
     "urls": [
       {
         "label": "Live Demo",
-        "url": "https://example-analytics.com"
+        "url": ""
       }
     ],
-    "githubUrl": "https://github.com/yourusername/social-analytics"
+    "githubUrl": "https://github.com/mahammadaftab/Quiz_Game.git"
   },
   {
-    "id": 6,
-    "title": "Fitness Tracker",
-    "description": "A mobile-first application for tracking workouts, nutrition, and health metrics.",
-    "tags": ["React Native", "Redux", "Node.js"],
+    "id": 7,
+    "title": "Java Development Currency Converter",
+    "description": "A currency converter application for java development.",
+    "tags": ["React", "springboot", "Maven"],
     "images": [
       {
-        "url": "/images/projects/fitness.jpg",
-        "label": "Mobile Interface",
+        "url": "/images/projects/Currency Converter.png",
+        "label": "Home Interface",
         "type": "image"
+      }
+    ],
+    "videos": [
+      {
+        "url": "/images/projects/Java Development Currency Converter.mp4",
+        "label": "Application Demo",
+        "type": "video"
       }
     ],
     "urls": [
       {
         "label": "Web App",
-        "url": "https://example-fitness.com"
+        "url": ""
       }
     ],
-    "githubUrl": "https://github.com/yourusername/fitness-tracker"
+    "githubUrl": "https://github.com/mahammadaftab/Currency_converter.git"
+  },
+    {
+    "id": 8,
+    "title": "Java Development Weather Forecast",
+    "description": "A Weather forecast application for java development.",
+    "tags": ["React", "springboot", "Maven"],
+    "images": [
+      {
+        "url": "/images/projects/Weather Forecast.png",
+        "label": "Home Interface",
+        "type": "image"
+      }
+    ],
+    "videos": [
+      {
+        "url": "/images/projects/Java Development Weather Forecast.mp4",
+        "label": "Application Demo",
+        "type": "video"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Web App",
+        "url": ""
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/Weather_Forecast.git"
   }
 ]

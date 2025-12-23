@@ -2,25 +2,25 @@
   "experiences": [
     {
       "id": 1,
-      "title": "Senior Frontend Developer",
-      "company": "Tech Innovations Inc.",
-      "period": "2020 - Present",
-      "description": "Lead frontend development for enterprise SaaS platform serving 500+ clients. Implemented responsive design system used across 15+ products.",
+      "title": "Internshala Python Course with Training Program",
+      "company": "Internshala",
+      "period": "Nov 1 2025 - Jan 15 2026",
+      "description": "Learned Python programming and its applications through a comprehensive training program at Internshala.",
       "responsibilities": [
-        "Led a team of 5 frontend developers in building scalable web applications",
-        "Implemented design system used across 15+ products",
-        "Optimized application performance, reducing load times by 40%",
-        "Mentored junior developers and conducted code reviews"
+        "Learned Python programming and its applications through a comprehensive training program at Internshala",
+        "Built responsive websites for various clients using HTML, CSS, and JavaScript",
+        "Optimized site performance and SEO for better rankings",
+        "Completed a Python course with a training program at Internshala"
       ]
     },
     {
       "id": 2,
       "title": "Frontend Developer",
-      "company": "Digital Solutions LLC",
-      "period": "2018 - 2020",
-      "description": "Developed and maintained 10+ client websites using React and Vue.js. Collaborated with UX designers to implement pixel-perfect interfaces.",
+      "company": "Project Done",
+      "period": "2025 - Present",
+      "description": "Developed and maintained 10+ client websites using React and javascript Collaborated with UX designers to implement pixel-perfect interfaces.",
       "responsibilities": [
-        "Developed and maintained 10+ client websites using React and Vue.js",
+        "Developed and maintained 10+ client websites using React and javascript",
         "Collaborated with UX designers to implement pixel-perfect interfaces",
         "Integrated RESTful APIs and third-party services",
         "Implemented responsive design for cross-device compatibility"
@@ -30,10 +30,10 @@
       "id": 3,
       "title": "Web Developer",
       "company": "Creative Web Agency",
-      "period": "2016 - 2018",
+      "period": "2025 - Present",
       "description": "Built responsive websites for various clients using HTML, CSS, and JavaScript. Optimized site performance and SEO for better rankings.",
       "responsibilities": [
-        "Built responsive websites for various clients using HTML, CSS, and JavaScript",
+        "Built responsive websites for various clients using react.js, next.js, HTML, CSS, JavaScript and more",
         "Optimized site performance and SEO for better rankings",
         "Collaborated with designers to translate mockups into functional websites",
         "Maintained and updated existing client websites"
