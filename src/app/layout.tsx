@@ -19,7 +19,6 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mahammadaftab.vercel.app"),
   title: {
     default: "Mahammad Aftab",
     template: "%s | Portfolio"
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
     description: "Professional portfolio showcasing skills, projects, and experience",
     images: [
       {
-        url: "/images/projects/Portfolio.png",
+        url: "https://mahammadaftab.vercel.app/og-image.jpg", // TODO: Replace with your OG image
         width: 1200,
         height: 630,
         alt: "Portfolio Website",
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Portfolio | Mahammad Aftab",
     description: "Professional portfolio showcasing skills, projects, and experience",
-    images: ["/images/projects/Portfolio.png"],
+    images: ["https://mahammadaftab.vercel.app/og-image.jpg"], // TODO: Replace with your OG image
   },
   robots: {
     index: true,
