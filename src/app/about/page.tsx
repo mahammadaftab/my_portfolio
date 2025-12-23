@@ -33,7 +33,7 @@ export default function About() {
               <div className="bg-white dark:bg-gray-800 rounded-2xl p-6">
                 <div className="aspect-square rounded-xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/images/profile.JPG" 
+                    src="/images/profile.jpg" 
                     alt="Mahammad Aftab" 
                     className="w-full h-full object-cover"
                     width={400}
