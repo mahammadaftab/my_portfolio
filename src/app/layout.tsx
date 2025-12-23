@@ -19,24 +19,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mahammadaftab.vercel.app/'), // Replace with your actual domain
+  metadataBase: new URL("https://mahammadaftab.vercel.app"),
   title: {
-    default: "Mahammad Aftab", // Replace with your actual name
+    default: "Mahammad Aftab",
     template: "%s | Portfolio"
   },
   description: "Professional portfolio showcasing skills, projects, and experience",
   keywords: ["portfolio", "developer", "frontend", "react", "nextjs", "typescript"],
-  authors: [{ name: "Mahammad Aftab" }], // Replace with your actual name
-  creator: "Mahammad Aftab", // Replace with your actual name
+  authors: [{ name: "Mahammad Aftab" }], // TODO: Replace with your name
+  creator: "Mahammad Aftab", // TODO: Replace with your name
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mahammadaftab.vercel.app/", // Replace with your actual domain
-    title: "Portfolio | Mahammad Aftab", // Replace with your actual name
+    url: "https://mahammadaftab.vercel.app/", // TODO: Replace with your domain
+    title: "Portfolio | Mahammad Aftab",
     description: "Professional portfolio showcasing skills, projects, and experience",
     images: [
       {
-        url: "/images/og-image.jpg", // Replace with your actual OG image path
+        url: "/images/projects/Portfolio.png",
         width: 1200,
         height: 630,
         alt: "Portfolio Website",
@@ -45,16 +45,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Portfolio | Mahammad Aftab", // Replace with your actual name
+    title: "Portfolio | Mahammad Aftab",
     description: "Professional portfolio showcasing skills, projects, and experience",
-    images: ["/images/og-image.jpg"], // Replace with your actual OG image path
+    images: ["/images/projects/Portfolio.png"],
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://mahammadaftab.vercel.app/", // Replace with your actual domain
+    canonical: "https://mahammadaftab.vercel.app/", // TODO: Replace with your domain
   },
 };
 
