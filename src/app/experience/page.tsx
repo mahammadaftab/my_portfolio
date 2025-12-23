@@ -6,6 +6,7 @@ import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import experienceData from "@/data/experience.json";
 import CertificateLightbox from "@/components/certificate-lightbox";
 import HackathonLightbox from "@/components/hackthon-lightbox";
+import InternshipLightbox from "@/components/internship-lightbox";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 // Define the proper types for certificate and hackathon media
@@ -33,12 +34,23 @@ interface Hackathon {
   media: Media[];
 }
 
+interface Internship {
+  id: number;
+  title: string;
+  issuer: string;
+  date: string;
+  description: string;
+  media: Media[];
+}
+
 export default function Experience() {
-  const { experiences, certificates, hackthons } = experienceData;
+  const { experiences, certificates, internships, hackthons } = experienceData;
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const [selectedHackathon, setSelectedHackathon] = useState<Hackathon | null>(null);
+  const [selectedInternship, setSelectedInternship] = useState<Internship | null>(null);
   const [isCertificateLightboxOpen, setIsCertificateLightboxOpen] = useState(false);
   const [isHackathonLightboxOpen, setIsHackathonLightboxOpen] = useState(false);
+  const [isInternshipLightboxOpen, setIsInternshipLightboxOpen] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -235,6 +247,79 @@ export default function Experience() {
           </div>
         </motion.div>
 
+        {/* Internships Section */}
+        <motion.div
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.4 }}
+          className="mb-24"
+        >
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            Internships
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {internships.map((internship, index) => {
+              const internshipRef = useRef(null);
+              const isInternshipInView = useInView(internshipRef, { once: true, margin: "-50px" });
+              
+              // Convert the internship data to the proper type
+              const typedInternship: Internship = {
+                id: internship.id,
+                title: internship.title,
+                issuer: internship.issuer,
+                date: internship.date,
+                description: internship.description,
+                media: internship.media.map(media => ({
+                  type: media.type as "image" | "pdf" | "video",
+                  url: media.url,
+                  caption: media.caption
+                }))
+              };
+              
+              return (
+                <motion.div
+                  key={internship.id}
+                  ref={internshipRef}
+                  initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 50 }}
+                  animate={prefersReducedMotion ? { opacity: 1 } : { 
+                    opacity: isInternshipInView ? 1 : 0, 
+                    y: isInternshipInView ? 0 : 50 
+                  }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: prefersReducedMotion ? 0 : index * 0.1,
+                    ease: "easeOut" 
+                  }}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">{internship.title}</h3>
+                      <p className="text-blue-600 dark:text-blue-400 font-medium">{internship.issuer}</p>
+                    </div>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                      {internship.date}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{internship.description}</p>
+                  <button 
+                    onClick={() => {
+                      setSelectedInternship(typedInternship);
+                      setIsInternshipLightboxOpen(true);
+                    }}
+                    className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium group-hover:underline"
+                    aria-label={`View ${internship.title} internship`}
+                  >
+                    View Internship
+                    <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
+                  </button>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
         {/* Hackathons Section */}
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
@@ -317,6 +402,12 @@ export default function Experience() {
           hackathon={selectedHackathon} 
           isOpen={isHackathonLightboxOpen} 
           onClose={() => setIsHackathonLightboxOpen(false)} 
+        />
+        
+        <InternshipLightbox 
+          internship={selectedInternship} 
+          isOpen={isInternshipLightboxOpen} 
+          onClose={() => setIsInternshipLightboxOpen(false)} 
         />
       </div>
     </div>

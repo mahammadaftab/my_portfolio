@@ -113,7 +113,7 @@
       "id": 4,
       "title": "LetsUpgrade",
       "issuer": "LetsUpgrade Certificate",
-      "date": "2023",
+      "date": "2025",
       "description": "LetsUpgrade is an online learning platform that provides courses in technology and soft skills.",
       "media": [
         {
@@ -142,9 +142,53 @@
           "caption": "Certificate of Completion GenAI 101 Mastering LLMs"
         }
       ]
+    },
+        {
+      "id": 5,
+      "title": "Internshala Certificate",
+      "issuer": "Python Programming with AI Course Completion Certificate",
+      "date": "2025",
+      "description": "Internshala Python Programming with AI Course Completion Certificate",
+      "media": [
+        {
+          "type": "pdf",
+          "url": "/images/certificates/python course.pdf",
+          "caption": "Certificate of completion"
+        }
+      ]
     }
   ],
 
+  "internships": [
+    {
+      "id": 1,
+      "title": "Pinnacle Labs Internship Offer Letter",
+      "issuer": "Offer Letter",
+      "date": "Nov 2025",
+      "description": "Gained hands-on experience in Pinnacle Labs and collaborated with senior developers on client projects. Developed a real-time Projects using Java Development.",
+      "media": [
+        {
+          "type": "pdf",
+          "url": "/images/certificates/Pinnacle Lab Offer Letter.pdf",
+          "caption": "Internship Offer Letter"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Pinnacle Labs Internship Certificate",
+      "issuer": "Certificate",
+      "date": "Dec 2025",
+      "description": "Worked on a real-time projects and learned modern frontend development practices. Developed a real-time disease detection system using Java Development.",
+      "media": [
+        {
+          "type": "pdf",
+          "url": "/images/certificates/Pinnacle Lab Certificate.pdf",
+          "caption": "Internship Completion Certificate"
+        }
+      ]
+    }
+  ],
 
   "hackthons": [
     {

@@ -35,9 +35,10 @@ export default function About() {
                   <img 
                     src="/images/profile.jpg" 
                     alt="Mahammad Aftab" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-xl"
                     width={400}
                     height={400}
+                    style={{ objectPosition: "center top" }}
                   />
                 </div>
               </div>
