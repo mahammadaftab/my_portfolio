@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mahammadaftab.vercel.app'), // Replace with your actual domain
+  metadataBase: new URL('https://mahammadaftab.vercel.app/'), // Replace with your actual domain
   title: {
     default: "Mahammad Aftab", // Replace with your actual name
     template: "%s | Portfolio"
