@@ -190,48 +190,336 @@
     }
   ],
 
+  "bootcamps": [
+    {
+      "id": 1,
+      "title": "𝐃𝐚𝐲 𝟏",
+      "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
+      "date": "6th Apr, 2026",
+      "description": ["Central and Local Inauguration of IDE BootCamp", 
+                      "Session 1: Design Thinking Basics.", 
+                      "Session 2: From Idea to Impact: Building a Startup Journey Powered by AI.", 
+                      "Session 3: problem identification and opportunity discovery."],
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 1/Solo.jpeg",
+          "caption": "Solo Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 1/ID Cards.jpeg",
+          "caption": "Id Cards Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 1/Banners.jpeg",
+          "caption": "Banners Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 1/Auditorium.jpeg",
+          "caption": "Auditorium Classes Image"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "𝐃𝐚𝐲 𝟐",
+      "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
+      "date": "7th Apr, 2026",
+      "description": ["Session 4: customer discovery lab: identify customer segments and build customer personas", 
+                      "Session 5: crafting your unique value proposition: explore opportunities for differentiation ", 
+                      "Session 6: mastering your business model: lean Canvas overview and hands-On sketching " 
+                      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 2/Solo.jpeg",
+          "caption": "Solo Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 2/Hall.jpeg",
+          "caption": "Comunicate with Founders Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 2/Auditorium.jpeg",
+          "caption": "Auditorium Classes Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 2/Group.jpg",
+          "caption": "Group Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 2/meeting.jpeg",
+          "caption": "Meeting Image"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "𝐃𝐚𝐲 𝟑",
+      "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
+      "date": "8th Apr, 2026",
+      "description": ["Session 7: Pitch your lean Canvas: An interactive feedback session", 
+                      "Session 8: revenue models: important and impact ", 
+                      "Session 9: prototype to MVP: transforming validation into actionable insights ",
+                      "Incubator Visit: Guided Tour and Interaction with Startups 'We Visit in Amrith Noni Company'"
+                      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 3/Solo.jpeg",
+          "caption": "Solo Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 3/Group.jpeg",
+          "caption": "Group Image with Amrith Noni Founder"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 3/Noni.jpeg",
+          "caption": "Amrith Noni Company Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 3/Hall.jpeg",
+          "caption": "Classroom Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 3/Banner.jpeg",
+          "caption": "Solo with Banner Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 3/College.jpeg",
+          "caption": "College Main Gate Image"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "𝐃𝐚𝐲 𝟒",
+      "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
+      "date": "9th Apr, 2026",
+      "description": ["Session 10: introduction to product design and development: Aligning product design with business goals", 
+                      "Session 11: financial literacy:  planning and projecting financial for your venture"
+                      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 4/Solo.jpeg",
+          "caption": "Solo Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 4/founder.png",
+          "caption": "With Founders Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 4/idea.jpeg",
+          "caption": "Idea Presentation in JNNC College Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 4/ideation.jpeg",
+          "caption": "Startup projects Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 4/selfie.jpeg",
+          "caption": "Selfie Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 4/group.jpeg",
+          "caption": "Group Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 4/banner.jpeg",
+          "caption": "with Banner Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 4/Group Selfie.jpeg",
+          "caption": "Group Selfie Image"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "𝐃𝐚𝐲 𝟓",
+      "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
+      "date": "10th Apr, 2026",
+      "description": ["Unlocking Innovation: Commercialization, IP, and Funding for Student Startups", 
+                      "Pitch Presentation Mastery: Assessment and Insightful Feedback", 
+                      "Valedictory Session"
+                      ],
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 5/Group.jpeg",
+          "caption": "Certificate Ceremony Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 5/Certificate.jpeg",
+          "caption": "Certificate Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 5/E-Certificate.jpeg",
+          "caption": "E-Certificate Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/bootCamp/Day 5/Solo.jpeg",
+          "caption": "Solo Selfie Image"
+        }
+      ]
+    }
+  ],
+
   "hackthons": [
     {
       "id": 1,
+      "title": "🏆 Bangalore Hackathon",
+      "issuer": "Kristu Jayanti University Bangalore",
+      "date": "10th & 11th Feb, 2026",
+      "description": "Secured 2nd Position out of 50+ teams in a national-level hackathon. Built an innovative AI-powered solution that impressed industry judges with its technical excellence and real-world impact.",
+      "achievement": "2nd Position Winner",
+      "highlighted": true,
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/Prize.jpeg",
+          "caption": "Award Ceremony"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/Certificate.jpeg",
+          "caption": "2nd Position Award Certificate"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/hackathons/KJU/e-certificate.pdf",
+          "caption": "E-Certificate"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/ID card.jpeg",
+          "caption": "2nd Position"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/Group.jpeg",
+          "caption": "Winning Team"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/Solo.jpeg",
+          "caption": "Solo Image"
+        }
+      ]
+    },
+    {
+      "id": 2,
       "title": "Banglore Hackathon",
       "issuer": "Banglore Institute of Technology (BIT)",
-      "date": "2025",
+      "date": "04th & 05th Oct, 2025",
       "description": "Participated in a 24-hour hackathon focused on building innovative solutions for Medical Health with AI. Our team developed a real-time disease detection system using machine learning.",
       "media": [
         {
           "type": "image",
-          "url": "/images/hackathons/certificate.jpeg",
+          "url": "/images/hackathons/BIT/certificate.jpeg",
           "caption": "Certificate of Participation"
         },
         {
           "type": "image",
-          "url": "/images/hackathons/0xDay.jpeg",
+          "url": "/images/hackathons/BIT/0xDay.jpeg",
           "caption": "0x.Day Certificate"
         },
         {
           "type": "image",
-          "url": "/images/hackathons/MyImage.jpeg",
+          "url": "/images/hackathons/BIT/MyImage.jpeg",
           "caption": "My Image"
         },
         {
           "type": "image",
-          "url": "/images/hackathons/GroupImage.jpeg",
+          "url": "/images/hackathons/BIT/GroupImage.jpeg",
           "caption": "Presentation Time"
         },
         {
           "type": "image",
-          "url": "/images/hackathons/TeamImage.jpeg",
+          "url": "/images/hackathons/BIT/TeamImage.jpeg",
           "caption": "Team Photo"
         },
         {
           "type": "image",
-          "url": "/images/hackathons/Team.jpeg",
+          "url": "/images/hackathons/BIT/Team.jpeg",
           "caption": "Team Photo"
         },
         {
           "type": "video",
-          "url": "/images/hackathons/hackthonVedio.mp4",
+          "url": "/images/hackathons/BIT/hackthonVedio.mp4",
           "caption": "Short Vedio"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Mysuru Hackathon",
+      "issuer": "Vidyavardhaka Engineering College, Mysuru",
+      "date": "11th & 12th Apr, 2026",
+      "description": "Participated in INFOTHON 6.O a 24-hour National-level hackathon.",
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/VVCE/Certificate.jpeg",
+          "caption": "Certificate of Participation"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/VVCE/Team.jpeg",
+          "caption": "Working With Team"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/VVCE/Explain.jpeg",
+          "caption": "Presentation Time"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/VVCE/Group Certificate.jpeg",
+          "caption": "Group Certificates"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/VVCE/Group.jpeg",
+          "caption": "Group Photo"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/VVCE/Venue.jpeg",
+          "caption": "Venue Photo"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/VVCE/Solo.jpeg",
+          "caption": "Solo Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/VVCE/College.jpeg",
+          "caption": "College Image"
         }
       ]
     }
