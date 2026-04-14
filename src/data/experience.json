@@ -391,47 +391,6 @@
   "hackthons": [
     {
       "id": 1,
-      "title": "🏆 Bangalore Hackathon",
-      "issuer": "Kristu Jayanti University Bangalore",
-      "date": "10th & 11th Feb, 2026",
-      "description": "Secured 2nd Position out of 50+ teams in a national-level hackathon. Built an innovative AI-powered solution that impressed industry judges with its technical excellence and real-world impact.",
-      "achievement": "2nd Position Winner",
-      "highlighted": true,
-      "media": [
-        {
-          "type": "image",
-          "url": "/images/hackathons/KJU/Prize.jpeg",
-          "caption": "Award Ceremony"
-        },
-        {
-          "type": "image",
-          "url": "/images/hackathons/KJU/Certificate.jpeg",
-          "caption": "2nd Position Award Certificate"
-        },
-        {
-          "type": "pdf",
-          "url": "/images/hackathons/KJU/e-certificate.pdf",
-          "caption": "E-Certificate"
-        },
-        {
-          "type": "image",
-          "url": "/images/hackathons/KJU/ID card.jpeg",
-          "caption": "2nd Position"
-        },
-        {
-          "type": "image",
-          "url": "/images/hackathons/KJU/Group.jpeg",
-          "caption": "Winning Team"
-        },
-        {
-          "type": "image",
-          "url": "/images/hackathons/KJU/Solo.jpeg",
-          "caption": "Solo Image"
-        }
-      ]
-    },
-    {
-      "id": 2,
       "title": "Banglore Hackathon",
       "issuer": "Banglore Institute of Technology (BIT)",
       "date": "04th & 05th Oct, 2025",
@@ -471,6 +430,47 @@
           "type": "video",
           "url": "/images/hackathons/BIT/hackthonVedio.mp4",
           "caption": "Short Vedio"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "🏆 Bangalore Hackathon",
+      "issuer": "Kristu Jayanti University Bangalore",
+      "date": "10th & 11th Feb, 2026",
+      "description": "Secured 2nd Position out of 50+ teams in a national-level hackathon. Built an innovative AI-powered solution that impressed industry judges with its technical excellence and real-world impact.",
+      "achievement": "2nd Position Winner",
+      "highlighted": true,
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/Prize.jpeg",
+          "caption": "Award Ceremony"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/Certificate.jpeg",
+          "caption": "2nd Position Award Certificate"
+        },
+        {
+          "type": "pdf",
+          "url": "/images/hackathons/KJU/e-certificate.pdf",
+          "caption": "E-Certificate"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/ID card.jpeg",
+          "caption": "2nd Position"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/Group.jpeg",
+          "caption": "Winning Team"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/KJU/Solo.jpeg",
+          "caption": "Solo Image"
         }
       ]
     },
