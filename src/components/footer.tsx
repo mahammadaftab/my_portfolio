@@ -29,7 +29,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 to-black border-t border-gray-800">
+    <footer className="relative z-50 bg-black/60 backdrop-blur-xl border-t border-white/10">
       <div className="container mx-auto px-4 py-6">
         {/* Copyright Section */}
         <motion.div 

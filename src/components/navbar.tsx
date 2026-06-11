@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon, UsersIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,6 +21,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [visitorCount, setVisitorCount] = useState<number>(1248);
 
   // Handle scroll effect
   useEffect(() => {
@@ -30,6 +31,36 @@ export default function Navbar() {
     
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Fetch and increment visitor count
+  useEffect(() => {
+    const trackVisitor = async () => {
+      try {
+        const hasVisited = sessionStorage.getItem("hasVisited");
+        
+        if (!hasVisited) {
+          // New session: Increment count
+          sessionStorage.setItem("hasVisited", "true");
+          const response = await fetch("/api/visitors", { method: "POST" });
+          if (response.ok) {
+            const data = await response.json();
+            setVisitorCount(data.count);
+          }
+        } else {
+          // Existing session: Just get current count
+          const response = await fetch("/api/visitors");
+          if (response.ok) {
+            const data = await response.json();
+            setVisitorCount(data.count);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to track visitor:", error);
+      }
+    };
+
+    trackVisitor();
   }, []);
 
   return (
@@ -118,7 +149,24 @@ export default function Navbar() {
           ))}
         </div>
         
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-2">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
+          {/* Visitor Counter */}
+          <div className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800/60 px-3 py-1.5 rounded-full border border-gray-200 dark:border-gray-700/60 shadow-sm transition-all duration-300 hover:shadow-md hover:border-blue-500/30">
+            <UsersIcon className="w-4 h-4 text-blue-500" />
+            <span>Visitors:</span>
+            <AnimatePresence mode="popLayout">
+              <motion.span
+                key={visitorCount}
+                initial={{ y: -10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 10, opacity: 0 }}
+                className="font-bold text-blue-600 dark:text-blue-400 min-w-[36px] text-center inline-block"
+              >
+                {visitorCount.toLocaleString()}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -172,6 +220,17 @@ export default function Navbar() {
                 </button>
               </div>
               
+              {/* Mobile Visitor Counter */}
+              <div className="flex items-center justify-center mb-4 pb-4 border-b border-gray-100 dark:border-gray-800">
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800/60 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700/60">
+                  <UsersIcon className="w-4 h-4 text-blue-500" />
+                  <span>Total Visitors:</span>
+                  <span className="font-bold text-blue-600 dark:text-blue-400">
+                    {visitorCount.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+
               {navigation.map((item) => (
                 <Link
                   key={item.name}

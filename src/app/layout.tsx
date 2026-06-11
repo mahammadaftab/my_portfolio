@@ -72,14 +72,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900 dark:text-white relative`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900 dark:text-white relative flex flex-col min-h-screen`}
       >
         <DevToolsFixProvider>
           <ThemeProvider>
             <ScrollProgress />
             <CustomCursor />
             <Navbar />
-            <main className="min-h-screen pt-16 relative">
+            <main className="flex-1 relative pt-16 flex flex-col">
               {children}
             </main>
             <Footer />
