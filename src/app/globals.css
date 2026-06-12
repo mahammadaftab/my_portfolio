@@ -152,3 +152,54 @@ body {
   background-size: 200% auto;
   animation: gradient-text-flow 4s ease infinite;
 }
+
+/* === Projects Page — Enterprise Redesign Animations === */
+
+/* Subtle shimmer for featured project card */
+@keyframes card-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-card-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: card-shimmer 8s ease-in-out infinite;
+}
+
+/* Gentle floating for ambient background elements */
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.02); }
+}
+.animate-float-subtle {
+  animation: float-subtle 8s ease-in-out infinite;
+}
+
+/* Pulsing border glow for featured project */
+@keyframes border-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+.animate-border-glow {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+/* Image reveal on load */
+@keyframes image-reveal {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+.animate-image-reveal {
+  animation: image-reveal 0.8s ease-out forwards;
+}
+
+/* Stagger children */
+@keyframes stagger-fade-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}

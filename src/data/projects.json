@@ -1,9 +1,78 @@
 [
-    {
+  {
     "id": 1,
+    "title": "CertForge AI — The Enterprise Certification Intelligence OS",
+    "description": "Predicting readiness, architecting success, and bridging the gap between workforce potential and technical mastery.",
+    "tags": {
+      "backend": ["Python 3.11 + FastAPI", "MongoDB Atlas + Beanie ODM (Async)", "LangGraph + LangChain", "Scikit-Learn + Joblib", "WebSocket"],
+      "frontend": ["React + Vite + TypeScript", "Framer Motion + GSAP", "React Three Fiber (Three.js)", "Recharts + D3.js", "Tailwind CSS + ShadCN"]
+    },
+    "images": [
+      {
+        "url": "/images/projects/CertForge-AI.png",
+        "label": "Main Interface",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Demo",
+        "url": "https://cert-forge-ai.vercel.app/"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/CertForge-AI"
+  },
+
+  {
+    "id": 2,
+    "title": "OpenEnv: Email Triage",
+    "description": "OpenEnv simulates autonomous Spam Email Detect for automated Email classification - a critical real-world challenge faced by logistics companies worldwide.",
+    "tags": ["Python + Libraries", "HuggingFace", "Reinforcement Learning", "OPENENV", "Agent", "Dockerfile", "Rewards", "Action"],
+    "images": [
+      {
+        "url": "/images/projects/OpenEnv Email Triage.png",
+        "label": "Main Interface",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Demo",
+        "url": "https://huggingface.co/spaces/mahammadaftab/OpenEnv"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/OpenEnv"
+  },
+
+  {
+    "id": 3,
+    "title": "🏛 CivicAI: Multi-Agent Society Decision & Resource Management Environment",
+    "description": "Train AI agents to manage societal decision-making under uncertainty. Government planning • Resource allocation • Crisis response • Economic balancing",
+    "tags": ["Python + Libraries", "HuggingFace", "Multi-Agent", "Dockerfile", "Rewards", "Action"],
+    "images": [
+      {
+        "url": "/images/projects/CivicAI.png",
+        "label": "Main Interface",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Demo",
+        "url": "https://huggingface.co/spaces/mahammadaftab/CivicAI"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/AI_Society_Simulator"
+  },
+
+  {
+    "id": 4,
     "title": "Accident and Crime Report App",
     "description": "A full-featured crime report app with user authentication and data storage.",
-    "tags": ["Next.js", "Node.js", "NeonDB"],
+    "tags": {
+      "backend": ["Next.js API Routes", "PostgreSQL (NeonDB)", "Prisma ORM", "GeminiAI API", "Mapbox"],
+      "frontend": ["Next.js 14+ (App Router)", "TypeScript", "Tailwind CSS", "Framer Motion", "Lucide React Icons + React Toastify", "React Hook Form + Zod for validation"]
+    },
     "images": [
       {
         "url": "/images/projects/Crime Report App.png",
@@ -19,11 +88,39 @@
     ],
     "githubUrl": "https://github.com/mahammadaftab/crime_report_app.git"
   },
+
   {
-    "id": 2,
+    "id": 5,
+    "title": "Tourism and Travel Tech",
+    "description": "A full-stack tourism platform with AI-powered personalized itineraries, real-time travel intelligence, and sustainability-focused recommendations.",
+    "tags": {
+      "backend": ["Node.js + Express.js", "MongoDB + Mongoose", "JWT + REST APIs", "Open-Meteo API + PredictHQ API"],
+      "frontend": ["React + Vite", "TypeScript", "Tailwind CSS", "Framer Motion", "Lucide React"]
+    },
+    "images": [
+      {
+        "url": "/images/projects/Tourism and Travel Tech.png",
+        "label": "Main Interface",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Demo",
+        "url": "https://tourism-and-travel-tech.vercel.app/"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/Tourism_and_Travel_Tech"
+  },
+
+  {
+    "id": 6,
     "title": "E-Commerce Platform",
     "description": "A full-featured online shopping platform with payment integration and inventory management.",
-    "tags": ["React", "Node.js", "MongoDB"],
+    "tags": {
+      "backend": ["Node.js + Express.js", "MongoDB + Mongoose", "JWT + Bcrypt.js", "Dotenv + Cors"],
+      "frontend": ["React + Vite", "JavaScript", "Tailwind CSS", "Framer Motion"]
+    },
     "images": [
       {
         "url": "/images/projects/ecommerce.jpg",
@@ -40,10 +137,13 @@
     "githubUrl": "https://github.com/mahammadaftab/my-e-commerce"
   },
   {
-    "id": 3,
+    "id": 7,
     "title": "Food-Order-Easy",
     "description": "A food ordering application for easy ordering and delivery.",
-    "tags": ["React.js", "JavaScript", "MongoDB"],
+    "tags": {
+      "backend": ["Node.js + Express.js", "MongoDB + Mongoose", "JWT + Bcrypt.js", "Dotenv + Cors"],
+      "frontend": ["React + Vite", "JavaScript", "Tailwind CSS", "Framer Motion"]
+    },
     "images": [
       {
         "url": "/images/projects/food-order-frontend.png",
@@ -81,10 +181,12 @@
     "githubUrl": "https://github.com/mahammadaftab/food-order-easy.git"
   },
   {
-    "id": 4,
+    "id": 8,
     "title": "Portfolio Website",
     "description": "A responsive portfolio website with 3D animations and dark mode support.",
-    "tags": ["Next.js", "Three.js", "Tailwind CSS"],
+    "tags": {
+      "frontend": ["Next.js 15", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"]
+    },
     "images": [
       {
         "url": "/images/projects/Portfolio.png",
@@ -101,7 +203,7 @@
     "githubUrl": "https://github.com/mahammadaftab/my_portfolio.git"
   },
   {
-    "id": 5,
+    "id": 9,
     "title": "Durood Counter",
     "description": "A durood counter application.",
     "tags": ["React", "Tailwind CSS", "vite"],
@@ -121,10 +223,10 @@
     "githubUrl": "https://github.com/mahammadaftab/Dawateislami_app.git"
   },
   {
-    "id": 6,
+    "id": 10,
     "title": "Java Development Quiz App",
     "description": "A quiz app for testing java development knowledge.",
-    "tags": ["React", "springboot", "Maven"],
+    "tags": ["Java JDK 17", "springboot", "Maven", "React.js"],
     "images": [
       {
         "url": "/images/projects/Quiz App.png",
@@ -148,10 +250,10 @@
     "githubUrl": "https://github.com/mahammadaftab/Quiz_Game.git"
   },
   {
-    "id": 7,
+    "id": 11,
     "title": "Java Development Currency Converter",
     "description": "A currency converter application for java development.",
-    "tags": ["React", "springboot", "Maven"],
+    "tags": ["Java JDK 17", "springboot", "Apache Maven", "React.js", "Node.js"],
     "images": [
       {
         "url": "/images/projects/Currency Converter.png",
@@ -174,11 +276,14 @@
     ],
     "githubUrl": "https://github.com/mahammadaftab/Currency_converter.git"
   },
-    {
-    "id": 8,
+  {
+    "id": 12,
     "title": "Java Development Weather Forecast",
     "description": "A Weather forecast application for java development.",
-    "tags": ["React", "springboot", "Maven"],
+    "tags": {
+      "backend": ["Java JDK 17", "Spring Boot", "MongoDB", "Caffeine Cache + WeatherAPI integrations"],
+      "frontend": ["React.js + Vite", "TypeScript", "Tailwind CSS", "React Hooks"]
+    },
     "images": [
       {
         "url": "/images/projects/Weather Forecast.png",
