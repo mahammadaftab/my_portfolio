@@ -421,120 +421,199 @@ export default function About() {
   return (
     <div className="min-h-screen bg-[#030712] text-white overflow-hidden">
       {/* ── Section 1: Hero Banner ─────────────────────────────────────── */}
-      <section className="relative min-h-[85vh] flex items-center justify-center py-20 overflow-hidden">
-        {/* Gradient mesh background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#030712] via-[#0c1222] to-[#0f0720] animate-gradient-mesh" />
+      <section className="relative h-screen min-h-[700px] lg:min-h-[800px] w-full flex items-center justify-center overflow-hidden bg-[#02040A]">
+        {/* Deep ambient backgrounds */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Subtle grid pattern */}
+          <div 
+            className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)]"
+          />
+          {/* Ambient lighting */}
+          <motion.div
+            animate={{ 
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 -left-1/4 w-[50vw] h-[50vw] bg-indigo-600/10 rounded-full blur-[180px]"
+          />
+          <motion.div
+            animate={{ 
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute bottom-1/4 right-0 w-[40vw] h-[40vw] bg-blue-600/10 rounded-full blur-[150px]"
+          />
+          {/* Intense glow right behind profile */}
+          <div className="absolute top-1/2 right-[10%] -translate-y-1/2 w-[30vw] h-[30vw] bg-purple-600/15 rounded-full blur-[120px]" />
+        </div>
 
-        {/* Subtle grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
+        <div className="container mx-auto px-6 md:px-12 relative z-10 w-full max-w-[1600px] -mt-12 lg:-mt-20 2xl:-mt-24">
+          <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-10 lg:gap-8 pt-12 lg:pt-0">
+            
+            {/* Left Section (55% on Desktop) */}
+            <div className="flex-1 lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left">
+              
+              {/* Status Badge */}
+              <motion.div
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4 shadow-lg shadow-black/20"
+              >
+                <span className="relative flex h-2 w-2 lg:h-2.5 lg:w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 lg:h-2.5 lg:w-2.5 bg-emerald-500"></span>
+                </span>
+                <span className="text-[10px] lg:text-xs font-semibold text-emerald-400/90 tracking-widest uppercase">Open for Opportunities</span>
+              </motion.div>
 
-        {/* Floating gradient orbs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-[150px] pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[200px] pointer-events-none" />
+              {/* Intro & Name */}
+              <motion.div
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                className="mb-2 lg:mb-3 text-lg md:text-xl lg:text-2xl text-gray-300 font-medium tracking-tight"
+              >
+                Hi, I&apos;m <span className="text-white font-bold">Mahammad Aftab</span>
+              </motion.div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-            {/* Profile Photo */}
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.8, ease: "easeOut" }}
-              className="relative mb-8"
-            >
-              {/* Glow ring */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 rounded-full animate-profile-glow opacity-75 blur-sm" />
-              <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-white/20">
-                <Image
-                  src="/images/profile.jpg"
-                  alt="Mahammad Aftab — AI Engineer & Full-Stack Developer"
-                  fill
-                  priority
-                  className="object-cover object-top"
-                />
-              </div>
-              {/* Status badge */}
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1 bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-full">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.8)]" />
-                <span className="text-[10px] font-bold tracking-wider uppercase text-green-400">Open to Work</span>
-              </div>
-            </motion.div>
+              {/* Headline */}
+              <motion.h1
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                className="text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-[5.5rem] 2xl:text-[6rem] font-black tracking-tighter mb-5 lg:mb-6 leading-[0.9] flex flex-col"
+              >
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
+                  Architecting
+                </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
+                  Intelligent
+                </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
+                  Systems.
+                </span>
+              </motion.h1>
 
-            {/* Name */}
-            <motion.h1
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.3 }}
-              className="text-5xl md:text-7xl font-black tracking-tight mb-4"
-            >
-              <span className="bg-gradient-to-r from-blue-300 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-gradient-text">
-                Mahammad Aftab
-              </span>
-            </motion.h1>
+              {/* Bio */}
+              <motion.p
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                className="text-base md:text-lg lg:text-xl text-gray-400 font-normal tracking-wide mb-8 leading-relaxed max-w-[600px]"
+              >
+                I bridge the gap between complex AI algorithms and robust scalable web architectures. 
+                Specializing in <span className="text-white font-medium">Generative AI</span>, <span className="text-white font-medium">Cloud Computing</span>, 
+                and <span className="text-white font-medium">Enterprise Software Development</span>.
+              </motion.p>
 
-            {/* Title */}
-            <motion.p
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.5 }}
-              className="text-base md:text-lg text-gray-400 font-medium tracking-wide max-w-2xl mb-8"
-            >
-              <span className="text-white/90 font-semibold">AI Engineer</span>
-              <span className="mx-2 text-indigo-400/60">·</span>
-              <span className="text-white/90 font-semibold">Generative AI Specialist</span>
-              <span className="mx-2 text-indigo-400/60">·</span>
-              <span className="text-white/90 font-semibold">Full-Stack Developer</span>
-              <span className="mx-2 text-indigo-400/60">·</span>
-              <span className="text-white/90 font-semibold">Cloud Architect</span>
-            </motion.p>
-
-            {/* Social Links */}
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.7 }}
-              className="flex items-center gap-4"
-            >
-              {[
-                { icon: FaGithub, href: "https://github.com/mahammadaftab", label: "GitHub" },
-                { icon: FaLinkedin, href: "https://linkedin.com/in/mahammadaftab", label: "LinkedIn" },
-                { icon: FaEnvelope, href: "mailto:mahammadaftab.dev@gmail.com", label: "Email" },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="group flex items-center justify-center w-11 h-11 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 transition-all duration-300"
+              {/* Action Buttons & Social Links */}
+              <motion.div
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+                className="flex flex-col sm:flex-row items-center gap-5 lg:gap-6"
+              >
+                <Link 
+                  href="/projects"
+                  className="group relative inline-flex items-center justify-center gap-3 px-6 py-3 lg:px-8 lg:py-4 bg-white text-black text-base lg:text-lg font-semibold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]"
                 >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-purple-100 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="relative flex items-center gap-2">
+                    View Case Studies
+                    <HiOutlineRocketLaunch className="w-5 h-5 lg:w-6 lg:h-6 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Link>
+                
+                <div className="flex items-center gap-3 lg:gap-4">
+                  {[
+                    { icon: FaGithub, href: "https://github.com/mahammadaftab", label: "GitHub" },
+                    { icon: FaLinkedin, href: "https://www.linkedin.com/in/mahammad-aftab", label: "LinkedIn" },
+                    { icon: FaEnvelope, href: "mailto:mdaftabeditz360@gmail.com", label: "Email" },
+                  ].map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="group flex items-center justify-center w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/30 hover:-translate-y-1 transition-all duration-300 backdrop-blur-md shadow-xl"
+                    >
+                      <social.icon className="w-5 h-5 lg:w-6 lg:h-6 group-hover:scale-110 transition-transform" />
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Section: Profile Avatar (45% on Desktop) */}
+            <div className="lg:w-[45%] flex justify-center lg:justify-end items-center relative mt-8 lg:mt-0">
+              <motion.div
+                initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-[400px] lg:h-[400px] xl:w-[480px] xl:h-[480px] flex-shrink-0"
+              >
+                {/* Decorative Rings */}
+                <div className="absolute inset-[-20px] lg:inset-[-30px] rounded-full border border-white/10 animate-[spin_10s_linear_infinite]" />
+                <div className="absolute inset-[-40px] lg:inset-[-60px] rounded-full border border-white/5 animate-[spin_15s_linear_infinite_reverse]" />
+                
+                {/* Orbiting Icons */}
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -left-4 top-12 lg:-left-12 lg:top-24 w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_30px_rgba(97,218,251,0.2)] z-20"
+                >
+                  <FaReact className="w-5 h-5 lg:w-8 lg:h-8 text-[#61DAFB]" />
+                </motion.div>
+                <motion.div
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  className="absolute -right-2 bottom-12 lg:-right-8 lg:bottom-24 w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_30px_rgba(49,120,198,0.2)] z-20"
+                >
+                  <SiTypescript className="w-5 h-5 lg:w-8 lg:h-8 text-[#3178C6]" />
+                </motion.div>
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute left-12 -top-6 lg:left-24 lg:-top-12 w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)] z-20"
+                >
+                  <SiNextdotjs className="w-5 h-5 lg:w-8 lg:h-8 text-white" />
+                </motion.div>
+
+                {/* Profile Image */}
+                <div className="relative w-full h-full rounded-full overflow-hidden border-[4px] border-white/10 shadow-[0_0_80px_rgba(79,70,229,0.2)] z-10">
+                  <Image
+                    src="/images/profile.jpg"
+                    alt="Mahammad Aftab"
+                    fill
+                    priority
+                    className="object-cover object-top hover:scale-105 transition-transform duration-700"
+                  />
+                  {/* Inner overlay for subtle dimming/blending */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-transparent pointer-events-none" />
+                </div>
+              </motion.div>
+            </div>
+
           </div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 lg:gap-3 z-20"
         >
+          <span className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold hidden sm:block">Scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5"
+            className="w-4 h-6 lg:w-5 lg:h-8 rounded-full border border-white/20 flex items-start justify-center p-1"
           >
             <motion.div
-              animate={{ opacity: [0.3, 1, 0.3], height: ["4px", "10px", "4px"] }}
+              animate={{ opacity: [0.3, 1, 0.3], height: ["4px", "8px", "4px"] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="w-1 bg-white/50 rounded-full"
             />
