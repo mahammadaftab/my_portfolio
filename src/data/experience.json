@@ -371,18 +371,36 @@
         },
         {
           "type": "image",
+          "url": "/images/BootCamp/Day 5/Solo.jpeg",
+          "caption": "Solo Selfie Image"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "BootCamp Certificate",
+      "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
+      "date": "10th Apr, 2026",
+      "description": "Certificate of Completion for successfully participating in the 5-day Innovation, Design, and Entrepreneurship (IDE) BootCamp.",
+      "media": [
+        {
+          "type": "image",
           "url": "/images/BootCamp/Day 5/Certificate.jpeg",
           "caption": "Certificate Image"
-        },
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "BootCamp E-Certificate",
+      "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
+      "date": "10th Apr, 2026",
+      "description": "Digital E-Certificate awarded for successfully completing Phase 1 of the IDE BootCamp.",
+      "media": [
         {
           "type": "image",
           "url": "/images/BootCamp/Day 5/E-Certificate.jpeg",
           "caption": "E-Certificate Image"
-        },
-        {
-          "type": "image",
-          "url": "/images/BootCamp/Day 5/Solo.jpeg",
-          "caption": "Solo Selfie Image"
         }
       ]
     }
@@ -391,7 +409,9 @@
   "hackthons": [
     {
       "id": 1,
+      "mode": "Offline",
       "title": "Banglore Hackathon",
+      "githubLink": "https://github.com/mahammadaftab/mediassist-ai",
       "issuer": "Banglore Institute of Technology (BIT)",
       "date": "04th & 05th Oct, 2025",
       "description": "Participated in a 24-hour hackathon focused on building innovative solutions for Medical Health with AI. Our team developed a real-time disease detection system using machine learning.",
@@ -435,11 +455,15 @@
     },
     {
       "id": 2,
+      "mode": "Offline",
       "title": "🏆 Bangalore Hackathon",
+      "githubLink": "https://github.com/mahammadaftab/Tourism_and_Travel_Tech",
+      "liveLink": "https://tourism-and-travel-tech.vercel.app/",
       "issuer": "Kristu Jayanti University Bangalore",
       "date": "10th & 11th Feb, 2026",
       "description": "Secured 2nd Position out of 50+ teams in a national-level hackathon. Built an innovative AI-powered solution that impressed industry judges with its technical excellence and real-world impact.",
       "achievement": "2nd Position Winner",
+      "keyAchievement": "Ranked #2 among 50+ competing teams",
       "highlighted": true,
       "media": [
         {
@@ -476,7 +500,9 @@
     },
     {
       "id": 3,
+      "mode": "Offline",
       "title": "Mysuru Hackathon",
+      "githubLink": "https://github.com/mahammadaftab/AI-Career-Guidance-Platform-for-Rural-Students",
       "issuer": "Vidyavardhaka Engineering College, Mysuru",
       "date": "11th & 12th Apr, 2026",
       "description": "Participated in INFOTHON 6.O a 24-hour National-level hackathon.",
@@ -520,6 +546,89 @@
           "type": "image",
           "url": "/images/hackathons/VVCE/College.jpeg",
           "caption": "College Image"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "mode": "Online",
+      "title": "HackerRank Orchestrate May 2026",
+      "githubLink": "https://github.com/mahammadaftab/hackerrank-orchestrate-may26",
+      "issuer": "HackerRank",
+      "date": "1st & 2nd May, 2026",
+      "description": "Participated in HackerRank Orchestrate May 2026, a 24-hour online hackathon focused on building innovative solutions for Traige Agent.",
+      "achievement": "1081st Place",
+      "highlighted": false,
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/HackerRank/Certificate.png",
+          "caption": "Certificate of Participation"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "mode": "Offline",
+      "title": "Hugging Face × Meta PyTorch Hackathon",
+      "githubLink": "https://github.com/yourusername/your-repo",
+      "liveLink": "https://your-live-demo.com",
+      "issuer": "Scaler School of Technology, Bangalore",
+      "date": "25th & 26th April 2026",
+      "description": "Participating in the Scaler School of Technology, 𝗕𝗔𝗡𝗚𝗔𝗟𝗢𝗥𝗘\n\n𝗣𝗥𝗜𝗠𝗔𝗥𝗬 𝗦𝗣𝗢𝗡𝗦𝗢𝗥: Meta\n𝗘𝗖𝗢𝗦𝗬𝗦𝗧𝗘𝗠 𝗣𝗔𝗥𝗧𝗡𝗘𝗥: Hugging Face\n𝗙𝗥𝗔𝗠𝗘𝗪𝗢𝗥𝗞 𝗣𝗔𝗥𝗧𝗡𝗘𝗥: PyTorch\n𝗣𝗢𝗪𝗘𝗥𝗘𝗗 𝗕𝗬: Scaler School of Technology\n\nGrateful to be here as a 𝗙𝗜𝗡𝗔𝗟𝗜𝗦𝗧, representing one of the 𝗧𝗢𝗣 𝟴𝟬𝟬 𝗧𝗘𝗔𝗠𝗦 selected from 𝟯𝟭,𝟬𝟬𝟬+ 𝗥𝗘𝗚𝗜𝗦𝗧𝗥𝗔𝗧𝗜𝗢𝗡𝗦 across the country. Additionally, proud to be part of the Hugging Face × Meta  PyTorch ecosystem, alongside 𝟱𝟮,𝟬𝟬𝟬+ 𝗗𝗘𝗩𝗘𝗟𝗢𝗣𝗘𝗥𝗦 𝗪𝗢𝗥𝗟𝗗𝗪𝗜𝗗𝗘.\n\n💡 𝗟𝗘𝗔𝗥𝗡𝗜𝗡𝗚 & 𝗙𝗢𝗖𝗨𝗦\n\nExploring 𝗥𝗘𝗜𝗡𝗙𝗢𝗥𝗖𝗘𝗠𝗘𝗡𝗧 𝗟𝗘𝗔𝗥𝗡𝗜𝗡𝗚 in real-world scenarios\n\nI would appreciate connecting with professionals who have insights into real-world clinical challenges, as we aim to build impactful AI-driven solutions.",
+      "achievement": "GRAND FINALE FINALIST",
+      "keyAchievement": "Top 800 Teams out of 31,000+ Registrations",
+      "highlighted": true,
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/FinalistCard_Mahammad Aftab Mahammadarasul Umachagi_page-0001.jpg",
+          "caption": "Finalist Card"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/FinalistCard_Team SmartDeveloper_page-0001.jpg",
+          "caption": "Team Finalist Card"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/20260425_152030.jpg.jpeg",
+          "caption": "Event Photo 1"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/IMG-20260425-WA0034.jpg.jpeg",
+          "caption": "Event Photo 2"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/IMG-20260425-WA0041.jpg.jpeg",
+          "caption": "Event Photo 3"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/IMG_20260426_044059.jpg.jpeg",
+          "caption": "Event Photo 4"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/IMG_20260426_044404.jpg.jpeg",
+          "caption": "Event Photo 5"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/IMG_20260426_060622.jpg.jpeg",
+          "caption": "Event Photo 6"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/Screenshot_2026_0426_070455.jpg.jpeg",
+          "caption": "Screenshot"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/SST/Warrior.avif",
+          "caption": "Warrior Profile"
         }
       ]
     }

@@ -397,12 +397,55 @@ export default function Projects() {
   const [filter, setFilter] = useState("all");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [expandedStat, setExpandedStat] = useState<string | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Get count of all unique technologies for tech stats
-  const allTagsCount = Array.from(
+  // Get all unique technologies for tech stats
+  const allTags = Array.from(
     new Set(typedProjects.flatMap((project) => project.tags))
-  ).length;
+  ).sort();
+  const allTagsCount = allTags.length;
+
+  const stats = [
+    {
+      id: "shipped",
+      value: typedProjects.length,
+      suffix: "+",
+      label: "Projects Shipped",
+      gradient: "from-blue-500 to-cyan-400",
+      icon: "🚀",
+      items: typedProjects.map(p => ({ id: p.id, label: p.title, action: () => handleSelectProject(p) }))
+    },
+    {
+      id: "tech",
+      value: allTagsCount,
+      suffix: "",
+      label: "Tech Stack",
+      gradient: "from-indigo-500 to-purple-400",
+      icon: "⚡",
+      items: allTags.map(t => ({ id: t, label: t, type: "tag" }))
+    },
+    {
+      id: "demos",
+      value: typedProjects.filter((p) => hasVideos(p)).length,
+      suffix: "",
+      label: "Live Demos",
+      gradient: "from-purple-500 to-pink-400",
+      icon: "🎬",
+      items: typedProjects.filter(p => hasVideos(p)).map(p => ({ id: p.id, label: p.title, action: () => handleSelectProject(p) }))
+    },
+    {
+      id: "deployed",
+      value: typedProjects.filter(
+        (p) => p.urls && p.urls.length > 0 && p.urls[0].url
+      ).length,
+      suffix: "",
+      label: "Deployed Live",
+      gradient: "from-emerald-500 to-teal-400",
+      icon: "🌐",
+      items: typedProjects.filter(p => p.urls && p.urls.length > 0 && p.urls[0].url).map(p => ({ id: p.id, label: p.title, url: p.urls![0].url, action: () => window.open(p.urls![0].url, '_blank') }))
+    },
+  ];
 
   const filteredProjects =
     filter === "all"
@@ -638,7 +681,7 @@ export default function Projects() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500" />
               </span>
               <span className="text-[11px] font-bold text-indigo-400/90 tracking-[0.2em] uppercase">
-                Project Portfolio
+                Project Section
               </span>
             </motion.div>
 
@@ -683,64 +726,104 @@ export default function Projects() {
 
             {/* Metrics — glassmorphism cards */}
             <motion.div
+              layout
               initial={
                 prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
               }
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
-              className="flex flex-wrap justify-center gap-4 md:gap-6"
+              className="flex flex-wrap justify-center gap-4 md:gap-6 items-start"
             >
-              {[
-                {
-                  value: typedProjects.length,
-                  suffix: "+",
-                  label: "Projects Shipped",
-                  gradient: "from-blue-500 to-cyan-400",
-                  icon: "🚀",
-                },
-                {
-                  value: allTagsCount,
-                  suffix: "",
-                  label: "Tech Stack",
-                  gradient: "from-indigo-500 to-purple-400",
-                  icon: "⚡",
-                },
-                {
-                  value: typedProjects.filter((p) => hasVideos(p)).length,
-                  suffix: "",
-                  label: "Live Demos",
-                  gradient: "from-purple-500 to-pink-400",
-                  icon: "🎬",
-                },
-                {
-                  value: typedProjects.filter(
-                    (p) => p.urls && p.urls.length > 0 && p.urls[0].url
-                  ).length,
-                  suffix: "",
-                  label: "Deployed Live",
-                  gradient: "from-emerald-500 to-teal-400",
-                  icon: "🌐",
-                },
-              ].map((stat, i) => (
+              {stats.map((stat) => (
                 <motion.div
-                  key={stat.label}
-                  whileHover={prefersReducedMotion ? {} : { y: -4, scale: 1.03 }}
-                  className="group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl px-6 py-5 md:px-8 md:py-6 min-w-[140px] overflow-hidden transition-shadow duration-300 hover:shadow-[0_8px_40px_rgba(99,102,241,0.12)]"
+                  layout
+                  key={stat.id}
+                  onClick={() => setExpandedStat(expandedStat === stat.id ? null : stat.id)}
+                  whileHover={prefersReducedMotion || expandedStat === stat.id ? {} : { y: -4, scale: 1.03 }}
+                  className={`group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl px-6 py-5 md:px-8 md:py-6 min-w-[140px] md:min-w-[180px] overflow-hidden transition-all duration-500 cursor-pointer ${
+                    expandedStat === stat.id
+                      ? "bg-white/[0.08] border-white/[0.2] shadow-[0_16px_60px_rgba(99,102,241,0.2)] md:min-w-[240px] flex-grow md:flex-grow-0"
+                      : "hover:shadow-[0_8px_40px_rgba(99,102,241,0.12)] hover:border-white/[0.12]"
+                  }`}
                 >
                   {/* Top accent line */}
-                  <div
-                    className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${stat.gradient} opacity-50 group-hover:opacity-100 transition-opacity duration-300`}
+                  <motion.div
+                    layout="position"
+                    className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${stat.gradient} opacity-50 group-hover:opacity-100 transition-opacity duration-500`}
                   />
-                  <div className="text-lg mb-2">{stat.icon}</div>
-                  <div
-                    className={`text-3xl md:text-4xl font-black bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}
+                  <motion.div layout="position" className="text-lg mb-2">{stat.icon}</motion.div>
+                  <motion.div
+                    layout="position"
+                    className={`text-3xl md:text-4xl font-black bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent flex items-center justify-between`}
                   >
-                    {stat.value}
-                    <span className="text-xl">{stat.suffix}</span>
-                  </div>
-                  <div className="text-[11px] text-gray-500 font-semibold tracking-wider uppercase mt-1.5">
+                    <div>
+                      {stat.value}
+                      <span className="text-xl">{stat.suffix}</span>
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    layout="position"
+                    className="text-[11px] text-gray-500 font-semibold tracking-wider uppercase mt-1.5 flex justify-between items-center"
+                  >
                     {stat.label}
-                  </div>
+                    <motion.div
+                      animate={{ rotate: expandedStat === stat.id ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="ml-2 text-gray-500/50"
+                    >
+                      ▼
+                    </motion.div>
+                  </motion.div>
+
+                  <AnimatePresence>
+                    {expandedStat === stat.id && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, filter: "blur(4px)" }}
+                        animate={{ opacity: 1, height: "auto", filter: "blur(0px)" }}
+                        exit={{ opacity: 0, height: 0, filter: "blur(4px)" }}
+                        transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-4 mt-4 border-t border-white/[0.08] max-h-[220px] overflow-y-auto custom-scrollbar pr-2 -mr-2">
+                          {stat.id === "tech" ? (
+                            <div className="flex flex-wrap gap-1.5 pb-2">
+                              {stat.items.map(item => (
+                                <span
+                                  key={item.id}
+                                  className={`px-2 py-1 text-[10px] font-semibold tracking-wide rounded bg-gradient-to-r ${
+                                    tagGradients[item.label as string] || "from-indigo-400/20 to-blue-500/20"
+                                  } text-gray-300 border border-white/[0.04] whitespace-nowrap`}
+                                >
+                                  {item.label}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="flex flex-col gap-1 pb-2">
+                              {stat.items.map(item => (
+                                <div
+                                  key={item.id}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if ('action' in item && typeof item.action === 'function') {
+                                      item.action();
+                                    }
+                                  }}
+                                  className="text-left group/item flex items-center gap-2 p-2 rounded-lg hover:bg-white/[0.06] transition-colors cursor-pointer"
+                                >
+                                  <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${stat.gradient} opacity-50 group-hover/item:opacity-100 transition-opacity`} />
+                                  <span className="text-[13px] text-gray-400 group-hover/item:text-white transition-colors truncate">
+                                    {item.label}
+                                  </span>
+                                  {(item as any).url && <HiOutlineArrowTopRightOnSquare className="w-3.5 h-3.5 text-gray-500 group-hover/item:text-indigo-400 ml-auto shrink-0" />}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ))}
             </motion.div>
@@ -895,6 +978,44 @@ export default function Projects() {
           </AnimatedSection>
         </motion.div>
       </AnimatePresence>
+
+      {/* ── Explore More CTA ──────────────────────────────────────────────── */}
+      <AnimatedSection className="py-16 md:py-24 relative overflow-hidden" id="explore-more">
+        {/* Background glow for CTA */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[600px] h-full max-h-[400px] bg-indigo-500/10 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center bg-white/[0.02] border border-white/[0.05] rounded-3xl p-8 md:p-12 lg:p-16 backdrop-blur-xl relative overflow-hidden group hover:border-white/[0.1] transition-colors duration-500">
+            {/* Animated border gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+            
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-white/10 flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-indigo-500/20 group-hover:scale-110 transition-transform duration-500">
+              <FaGithub className="w-8 h-8 text-white" />
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-4 tracking-tight">
+              Explore More
+            </h2>
+            <p className="text-gray-400 text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+              Want to see what else I'm working on? Check out my GitHub profile for open-source contributions, experimental projects, and more code.
+            </p>
+            
+            <a
+              href="https://github.com/mahammadaftab"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-gray-900 font-bold tracking-wide hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.3)] relative overflow-hidden group/btn"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-100 via-white to-indigo-100 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+              <span className="relative z-10 flex items-center gap-2">
+                <FaGithub className="w-5 h-5" />
+                View GitHub Profile
+              </span>
+              <HiOutlineArrowTopRightOnSquare className="w-4 h-4 relative z-10" />
+            </a>
+          </div>
+        </div>
+      </AnimatedSection>
 
       {/* ── Project Modal ────────────────────────────────────────────────── */}
       <ProjectModal
