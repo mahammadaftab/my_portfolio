@@ -25,7 +25,6 @@ interface Certificate {
   issuer: string;
   date: string;
   description: string;
-  enrollLink?: string;
   media: Media[];
 }
 
@@ -50,7 +49,6 @@ interface Internship {
   issuer: string;
   date: string;
   description: string;
-  enrollLink?: string;
   media: Media[];
 }
 
@@ -60,7 +58,6 @@ interface Bootcamp {
   issuer: string;
   date: string;
   description: string | string[];
-  enrollLink?: string;
   media: Media[];
 }
 
@@ -415,7 +412,6 @@ export default function Experience() {
                     issuer: cert.issuer,
                     date: cert.date,
                     description: cert.description,
-                    enrollLink: cert.enrollLink,
                     media: cert.media ? cert.media.map((media: any) => ({
                       type: media.type as "image" | "pdf" | "video",
                       url: media.url,
@@ -535,7 +531,6 @@ export default function Experience() {
                   issuer: internship.issuer,
                   date: internship.date,
                   description: internship.description,
-                  enrollLink: internship.enrollLink,
                   media: internship.media.map((media: any) => ({
                     type: media.type as "image" | "pdf" | "video",
                     url: media.url,
@@ -639,7 +634,6 @@ export default function Experience() {
                   issuer: bootcamp.issuer,
                   date: bootcamp.date,
                   description: bootcamp.description,
-                  enrollLink: bootcamp.enrollLink,
                   media: bootcamp.media.map((media: any) => ({
                     type: media.type as "image" | "pdf" | "video",
                     url: media.url,

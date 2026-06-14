@@ -9,16 +9,52 @@
       "technologies": 15
     },
     "timeline": [
-      { "year": "2023", "label": "Started Computer Science Journey", "icon": "🎓", "detail": "Basic Computer & Tally certifications" },
-      { "year": "2024", "label": "Web Development Foundations", "icon": "💻", "detail": "HTML, CSS, Photoshop certifications" },
-      { "year": "2025", "label": "Hackathons & Internships", "icon": "🏆", "detail": "First hackathon, Pinnacle Labs internship, 2nd place win" },
-      { "year": "2026", "label": "AI & Grand Finale", "icon": "🚀", "detail": "GenAI certifications, Meta Hackathon Finalist, IDE BootCamp" }
+      {
+        "year": "2023",
+        "label": "Started Computer Science Journey",
+        "icon": "🎓",
+        "detail": "Basic Computer & Tally certifications"
+      },
+      {
+        "year": "2024",
+        "label": "Web Development Foundations",
+        "icon": "💻",
+        "detail": "HTML, CSS, Photoshop certifications"
+      },
+      {
+        "year": "2025",
+        "label": "Hackathons & Internships",
+        "icon": "🏆",
+        "detail": "First hackathon, Pinnacle Labs internship, 2nd place win"
+      },
+      {
+        "year": "2026",
+        "label": "AI & Grand Finale",
+        "icon": "🚀",
+        "detail": "GenAI certifications, Meta Hackathon Finalist, IDE BootCamp"
+      }
     ],
     "futureVision": [
-      { "title": "Advanced AI & ML Research", "description": "Deep dive into reinforcement learning, LLMs, and generative AI systems", "icon": "🧠" },
-      { "title": "Open Source Contributions", "description": "Contributing to major open-source AI and web development frameworks", "icon": "🌐" },
-      { "title": "Cloud Architecture Mastery", "description": "AWS, GCP, and Azure certifications for enterprise-scale deployments", "icon": "☁️" },
-      { "title": "Engineering Leadership", "description": "Leading cross-functional teams to deliver impactful technology solutions", "icon": "🎯" }
+      {
+        "title": "Advanced AI & ML Research",
+        "description": "Deep dive into reinforcement learning, LLMs, and generative AI systems",
+        "icon": "🧠"
+      },
+      {
+        "title": "Open Source Contributions",
+        "description": "Contributing to major open-source AI and web development frameworks",
+        "icon": "🌐"
+      },
+      {
+        "title": "Cloud Architecture Mastery",
+        "description": "AWS, GCP, and Azure certifications for enterprise-scale deployments",
+        "icon": "☁️"
+      },
+      {
+        "title": "Engineering Leadership",
+        "description": "Leading cross-functional teams to deliver impactful technology solutions",
+        "icon": "🎯"
+      }
     ]
   },
   "experiences": [
@@ -62,7 +98,6 @@
       ]
     }
   ],
-
   "certificates": [
     {
       "id": 1,
@@ -70,14 +105,13 @@
       "title": "Oracle University",
       "issuer": "Generative AI",
       "date": "2025",
-      "enrollLink": "https://education.oracle.com/learning-explorer",
       "description": "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
       "media": [
         {
           "type": "pdf",
           "url": "/images/certificates/Oracle Certificate.pdf",
           "caption": "Certificate of completion"
-        }, 
+        },
         {
           "type": "image",
           "url": "/images/certificates/OCI25GAIOCP.jpg",
@@ -91,7 +125,6 @@
       "title": "STP computer education",
       "issuer": "Basic Certificates",
       "date": "2023-2025",
-      "enrollLink": "https://stpcomputereducation.com/",
       "description": "Certificates Collections in STP computer education (Basic Computer, Tally Prime, HTML, CSS, Photoshop)",
       "media": [
         {
@@ -127,7 +160,6 @@
       "title": "My Bharat",
       "issuer": "My Bharat Certificate",
       "date": "2025",
-      "enrollLink": "https://mybharat.gov.in/",
       "description": "Empowering youth is empowering the nation. MY Bharat is your platform to connect, learn, and contribute to India's progress.",
       "media": [
         {
@@ -158,7 +190,6 @@
       "title": "LetsUpgrade",
       "issuer": "LetsUpgrade Certificate",
       "date": "2025",
-      "enrollLink": "https://letsupgrade.in/",
       "description": "LetsUpgrade is an online learning platform that provides courses in technology and soft skills.",
       "media": [
         {
@@ -194,7 +225,6 @@
       "title": "Python Course in Internshala",
       "issuer": "Python Programming with AI Course Completion Certificate",
       "date": "2025",
-      "enrollLink": "https://internshala.com/",
       "description": "Internshala Python Programming with AI Course Completion Certificate",
       "media": [
         {
@@ -215,7 +245,6 @@
       "title": "Generative AI Course in Internshala",
       "issuer": "Generative AI Course Completion Certificate",
       "date": "2026",
-      "enrollLink": "https://internshala.com/",
       "description": "Generative AI Course: Build Innovative Apps and Websites",
       "media": [
         {
@@ -236,7 +265,6 @@
       "title": "GeeksforGeeks",
       "issuer": "GeeksforGeeks Certificates",
       "date": "2026",
-      "enrollLink": "https://www.geeksforgeeks.org/",
       "description": "GeeksforGeeks Certificates",
       "media": [
         {
@@ -257,14 +285,12 @@
       ]
     }
   ],
-
   "internships": [
     {
       "id": 1,
       "title": "Pinnacle Labs Internship Offer Letter",
       "issuer": "Offer Letter",
       "date": "Nov 2025",
-      "enrollLink": "https://pinnaclelabs.in/",
       "description": "Gained hands-on experience in Pinnacle Labs and collaborated with senior developers on client projects. Developed a real-time Projects using Java Development.",
       "media": [
         {
@@ -279,7 +305,6 @@
       "title": "Pinnacle Labs Internship Certificate",
       "issuer": "Certificate",
       "date": "Dec 2025",
-      "enrollLink": "https://pinnaclelabs.in/",
       "description": "Worked on a real-time projects and learned modern frontend development practices. Developed a real-time disease detection system using Java Development.",
       "media": [
         {
@@ -290,18 +315,18 @@
       ]
     }
   ],
-
   "bootcamps": [
     {
       "id": 1,
       "title": "𝐃𝐚𝐲 𝟏",
       "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
       "date": "6th Apr, 2026",
-      "enrollLink": "https://www.aicte-india.org/schemes/ide-bootcamp",
-      "description": ["Central and Local Inauguration of IDE BootCamp", 
-                      "Session 1: Design Thinking Basics.", 
-                      "Session 2: From Idea to Impact: Building a Startup Journey Powered by AI.", 
-                      "Session 3: problem identification and opportunity discovery."],
+      "description": [
+        "Central and Local Inauguration of IDE BootCamp",
+        "Session 1: Design Thinking Basics.",
+        "Session 2: From Idea to Impact: Building a Startup Journey Powered by AI.",
+        "Session 3: problem identification and opportunity discovery."
+      ],
       "media": [
         {
           "type": "image",
@@ -330,11 +355,11 @@
       "title": "𝐃𝐚𝐲 𝟐",
       "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
       "date": "7th Apr, 2026",
-      "enrollLink": "https://www.aicte-india.org/schemes/ide-bootcamp",
-      "description": ["Session 4: customer discovery lab: identify customer segments and build customer personas", 
-                      "Session 5: crafting your unique value proposition: explore opportunities for differentiation ", 
-                      "Session 6: mastering your business model: lean Canvas overview and hands-On sketching " 
-                      ],
+      "description": [
+        "Session 4: customer discovery lab: identify customer segments and build customer personas",
+        "Session 5: crafting your unique value proposition: explore opportunities for differentiation ",
+        "Session 6: mastering your business model: lean Canvas overview and hands-On sketching "
+      ],
       "media": [
         {
           "type": "image",
@@ -368,12 +393,12 @@
       "title": "𝐃𝐚𝐲 𝟑",
       "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
       "date": "8th Apr, 2026",
-      "enrollLink": "https://www.aicte-india.org/schemes/ide-bootcamp",
-      "description": ["Session 7: Pitch your lean Canvas: An interactive feedback session", 
-                      "Session 8: revenue models: important and impact ", 
-                      "Session 9: prototype to MVP: transforming validation into actionable insights ",
-                      "Incubator Visit: Guided Tour and Interaction with Startups 'We Visit in Amrith Noni Company'"
-                      ],
+      "description": [
+        "Session 7: Pitch your lean Canvas: An interactive feedback session",
+        "Session 8: revenue models: important and impact ",
+        "Session 9: prototype to MVP: transforming validation into actionable insights ",
+        "Incubator Visit: Guided Tour and Interaction with Startups 'We Visit in Amrith Noni Company'"
+      ],
       "media": [
         {
           "type": "image",
@@ -412,10 +437,10 @@
       "title": "𝐃𝐚𝐲 𝟒",
       "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
       "date": "9th Apr, 2026",
-      "enrollLink": "https://www.aicte-india.org/schemes/ide-bootcamp",
-      "description": ["Session 10: introduction to product design and development: Aligning product design with business goals", 
-                      "Session 11: financial literacy:  planning and projecting financial for your venture"
-                      ],
+      "description": [
+        "Session 10: introduction to product design and development: Aligning product design with business goals",
+        "Session 11: financial literacy:  planning and projecting financial for your venture"
+      ],
       "media": [
         {
           "type": "image",
@@ -464,11 +489,11 @@
       "title": "𝐃𝐚𝐲 𝟓",
       "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
       "date": "10th Apr, 2026",
-      "enrollLink": "https://www.aicte-india.org/schemes/ide-bootcamp",
-      "description": ["Unlocking Innovation: Commercialization, IP, and Funding for Student Startups", 
-                      "Pitch Presentation Mastery: Assessment and Insightful Feedback", 
-                      "Valedictory Session"
-                      ],
+      "description": [
+        "Unlocking Innovation: Commercialization, IP, and Funding for Student Startups",
+        "Pitch Presentation Mastery: Assessment and Insightful Feedback",
+        "Valedictory Session"
+      ],
       "media": [
         {
           "type": "image",
@@ -487,7 +512,6 @@
       "title": "BootCamp Certificate",
       "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
       "date": "10th Apr, 2026",
-      "enrollLink": "https://www.aicte-india.org/schemes/ide-bootcamp",
       "description": "Certificate of Completion for successfully participating in the 5-day Innovation, Design, and Entrepreneurship (IDE) BootCamp.",
       "media": [
         {
@@ -502,7 +526,6 @@
       "title": "BootCamp E-Certificate",
       "issuer": "𝗜𝗗𝗘 𝗕𝗼𝗼𝘁𝗖𝗮𝗺𝗽",
       "date": "10th Apr, 2026",
-      "enrollLink": "https://www.aicte-india.org/schemes/ide-bootcamp",
       "description": "Digital E-Certificate awarded for successfully completing Phase 1 of the IDE BootCamp.",
       "media": [
         {
@@ -513,7 +536,6 @@
       ]
     }
   ],
-
   "hackthons": [
     {
       "id": 1,
