@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -412,6 +412,54 @@ function TimelineItem({
   );
 }
 
+// Immersive CSS-based StarField background from the achievements/experience page
+function StarField() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const stars = useMemo(() => {
+    if (!mounted) return [];
+    return Array.from({ length: 120 }, (_, i) => ({
+      id: i,
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      size: Math.random() * 2.5 + 0.5,
+      delay: Math.random() * 5,
+      duration: Math.random() * 3 + 2,
+    }));
+  }, [mounted]);
+
+  return (
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {/* Deep space gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-[#0a0025] to-[#050010]" />
+
+      {/* Nebula orbs */}
+      <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] rounded-full bg-purple-900/20 blur-[120px] animate-float-orb" />
+      <div className="absolute top-[60%] right-[10%] w-[400px] h-[400px] rounded-full bg-blue-900/15 blur-[100px] animate-float-orb" style={{ animationDelay: "-7s" }} />
+      <div className="absolute top-[35%] right-[40%] w-[300px] h-[300px] rounded-full bg-indigo-900/10 blur-[80px] animate-float-orb" style={{ animationDelay: "-14s" }} />
+
+      {/* Star particles (only render on client after mount to prevent hydration mismatch) */}
+      {mounted && stars.map((star) => (
+        <div
+          key={star.id}
+          className="absolute rounded-full bg-white"
+          style={{
+            top: `${star.top}%`,
+            left: `${star.left}%`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            animation: `twinkle ${star.duration}s ease-in-out ${star.delay}s infinite`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 // ─── Main About Page ────────────────────────────────────────────────────────
 
 export default function About() {
@@ -419,15 +467,14 @@ export default function About() {
   const certsContainerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-white overflow-hidden">
+    <div className="min-h-screen relative text-white overflow-hidden">
+      {/* Immersive Space Background */}
+      <StarField />
+
       {/* ── Section 1: Hero Banner ─────────────────────────────────────── */}
-      <section className="relative h-screen min-h-[700px] lg:min-h-[800px] w-full flex items-center justify-center overflow-hidden bg-[#02040A]">
-        {/* Deep ambient backgrounds */}
+      <section className="relative h-screen min-h-[700px] lg:min-h-[800px] w-full flex items-center justify-center overflow-hidden bg-transparent">
+        {/* Deep space ambient lighting (overlaying StarField) */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Subtle grid pattern */}
-          <div 
-            className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)]"
-          />
           {/* Ambient lighting */}
           <motion.div
             animate={{ 
@@ -729,8 +776,8 @@ export default function About() {
           {/* Row 1 — Scroll Left */}
           <div className="relative overflow-hidden mb-4">
             {/* Fade edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030712] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#030712] to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0a0025] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0025] to-transparent z-10 pointer-events-none" />
 
             <div className="animate-marquee-left flex gap-4 w-max">
               {[...techSkillsRow1, ...techSkillsRow1].map((skill, i) => {
@@ -752,8 +799,8 @@ export default function About() {
 
           {/* Row 2 — Scroll Right */}
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#030712] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#030712] to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0a0025] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0025] to-transparent z-10 pointer-events-none" />
 
             <div className="animate-marquee-right flex gap-4 w-max">
               {[...techSkillsRow2, ...techSkillsRow2].map((skill, i) => {

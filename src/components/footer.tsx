@@ -18,7 +18,7 @@ export default function Footer() {
         hour12: false,
         timeZone: 'Asia/Kolkata'
       };
-      
+
       const formatter = new Intl.DateTimeFormat('en-US', options);
       const now = new Date();
       const indianTime = formatter.format(now);
@@ -32,7 +32,7 @@ export default function Footer() {
     <footer className="relative z-50 bg-black/60 backdrop-blur-xl border-t border-white/10">
       <div className="container mx-auto px-4 py-6">
         {/* Copyright Section */}
-        <motion.div 
+        <motion.div
           className="flex flex-col md:flex-row justify-between items-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -46,18 +46,18 @@ export default function Footer() {
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
             <span className="text-sm text-gray-500">Current Time | {time}</span>
           </div>
-          
+
           {/* Centered copyright */}
           <div className="mb-4 md:mb-0">
             <p className="text-gray-500 text-sm">
               © {new Date().getUTCFullYear()} Mahammad Aftab. All rights reserved.
             </p>
           </div>
-          
+
           {/* Right side - Privacy and Terms */}
-          <motion.div 
+          <motion.div
             className="flex space-x-4"
-            animate={{ 
+            animate={{
               x: isHovered ? [0, -5, 5, -5, 5, 0] : 0,
               y: isHovered ? [0, -3, 3, -3, 3, 0] : 0
             }}

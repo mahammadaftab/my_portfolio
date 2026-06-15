@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import projectsData from "@/data/projects.json";
 import ProjectModal from "@/components/project-modal";
@@ -391,6 +391,54 @@ const projectMatchesTech = (project: Project, tech: string): boolean => {
   return project.tags.some(t => t.toLowerCase().includes(searchStr));
 };
 
+// Immersive CSS-based StarField background from the achievements/experience page
+function StarField() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const stars = useMemo(() => {
+    if (!mounted) return [];
+    return Array.from({ length: 120 }, (_, i) => ({
+      id: i,
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      size: Math.random() * 2.5 + 0.5,
+      delay: Math.random() * 5,
+      duration: Math.random() * 3 + 2,
+    }));
+  }, [mounted]);
+
+  return (
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {/* Deep space gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-[#0a0025] to-[#050010]" />
+
+      {/* Nebula orbs */}
+      <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] rounded-full bg-purple-900/20 blur-[120px] animate-float-orb" />
+      <div className="absolute top-[60%] right-[10%] w-[400px] h-[400px] rounded-full bg-blue-900/15 blur-[100px] animate-float-orb" style={{ animationDelay: "-7s" }} />
+      <div className="absolute top-[35%] right-[40%] w-[300px] h-[300px] rounded-full bg-indigo-900/10 blur-[80px] animate-float-orb" style={{ animationDelay: "-14s" }} />
+
+      {/* Star particles (only render on client after mount to prevent hydration mismatch) */}
+      {mounted && stars.map((star) => (
+        <div
+          key={star.id}
+          className="absolute rounded-full bg-white"
+          style={{
+            top: `${star.top}%`,
+            left: `${star.left}%`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            animation: `twinkle ${star.duration}s ease-in-out ${star.delay}s infinite`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 // ─── Main Projects Page ─────────────────────────────────────────────────────
 
 export default function Projects() {
@@ -464,58 +512,16 @@ export default function Projects() {
   }, {} as Record<string, number>);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-white overflow-hidden">
+    <div className="min-h-screen relative text-white overflow-hidden">
+      {/* Immersive Space Background */}
+      <StarField />
+
       {/* ── Hero Section ─────────────────────────────────────────────────── */}
-      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 lg:min-h-[600px] flex items-center overflow-hidden">
-        {/* ── Ambient background layers ─────────────────────────────────── */}
+      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 lg:min-h-[600px] flex items-center overflow-hidden bg-transparent">
+        {/* ── Ambient background layers ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Base grid pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_30%,#000_10%,transparent_100%)]" />
 
-          {/* Pulsing concentric rings — center */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <motion.div
-              animate={{ scale: [1, 1.15, 1], opacity: [0.06, 0.12, 0.06] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full border border-indigo-500/10"
-            />
-          </div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <motion.div
-              animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.08, 0.04] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="w-[700px] h-[700px] md:w-[1000px] md:h-[1000px] rounded-full border border-purple-500/8"
-            />
-          </div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <motion.div
-              animate={{ scale: [1, 1.1, 1], opacity: [0.03, 0.06, 0.03] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-              className="w-[900px] h-[900px] md:w-[1300px] md:h-[1300px] rounded-full border border-blue-500/5"
-            />
-          </div>
 
-          {/* Gradient orbs — multi-layered */}
-          <motion.div
-            animate={{ opacity: [0.25, 0.5, 0.25], x: [0, 20, 0] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-40 -left-40 w-[55vw] h-[55vw] max-w-[650px] max-h-[650px] bg-indigo-600/12 rounded-full blur-[200px]"
-          />
-          <motion.div
-            animate={{ opacity: [0.2, 0.4, 0.2], x: [0, -15, 0] }}
-            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-            className="absolute -top-20 -right-20 w-[45vw] h-[45vw] max-w-[550px] max-h-[550px] bg-purple-600/10 rounded-full blur-[180px]"
-          />
-          <motion.div
-            animate={{ opacity: [0.1, 0.25, 0.1] }}
-            transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 5 }}
-            className="absolute bottom-0 left-1/4 w-[35vw] h-[35vw] max-w-[450px] max-h-[450px] bg-blue-500/8 rounded-full blur-[150px]"
-          />
-          <motion.div
-            animate={{ opacity: [0.08, 0.18, 0.08] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            className="absolute bottom-10 right-10 w-[25vw] h-[25vw] max-w-[350px] max-h-[350px] bg-cyan-500/6 rounded-full blur-[120px]"
-          />
 
           {/* Floating code snippets — left side (desktop only) */}
           <div className="hidden lg:block">
@@ -630,38 +636,6 @@ export default function Projects() {
             </motion.div>
           </div>
 
-          {/* Floating particles — subtle animated dots */}
-          {[
-            { top: "15%", left: "10%", size: 3, delay: 0, duration: 4 },
-            { top: "25%", left: "85%", size: 2, delay: 1, duration: 5 },
-            { top: "70%", left: "15%", size: 2, delay: 2, duration: 6 },
-            { top: "60%", left: "90%", size: 3, delay: 0.5, duration: 4.5 },
-            { top: "40%", left: "5%", size: 2, delay: 3, duration: 5.5 },
-            { top: "80%", left: "75%", size: 2, delay: 1.5, duration: 4 },
-            { top: "10%", left: "60%", size: 1.5, delay: 2.5, duration: 5 },
-            { top: "55%", left: "30%", size: 1.5, delay: 0.8, duration: 6.5 },
-          ].map((particle, i) => (
-            <motion.div
-              key={i}
-              animate={{
-                y: [0, -20, 0],
-                opacity: [0.15, 0.5, 0.15],
-              }}
-              transition={{
-                duration: particle.duration,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: particle.delay,
-              }}
-              className="absolute rounded-full bg-indigo-400"
-              style={{
-                top: particle.top,
-                left: particle.left,
-                width: particle.size,
-                height: particle.size,
-              }}
-            />
-          ))}
         </div>
 
         {/* ── Hero Content ──────────────────────────────────────────────── */}

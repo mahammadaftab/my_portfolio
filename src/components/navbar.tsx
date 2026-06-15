@@ -28,7 +28,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -38,7 +38,7 @@ export default function Navbar() {
     const trackVisitor = async () => {
       try {
         const hasVisited = sessionStorage.getItem("hasVisited");
-        
+
         if (!hasVisited) {
           // New session: Increment count
           sessionStorage.setItem("hasVisited", "true");
@@ -64,12 +64,11 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header 
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? "py-2 bg-white/90 dark:bg-black/90 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 shadow-lg" 
-          : "py-4 bg-white/80 dark:bg-black/80 backdrop-blur-lg"
-      }`}
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${isScrolled
+        ? "py-2 bg-white/90 dark:bg-black/90 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 shadow-lg"
+        : "py-4 bg-white/80 dark:bg-black/80 backdrop-blur-lg"
+        }`}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
@@ -82,20 +81,20 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="group flex items-center -m-1.5 p-1.5 text-2xl font-bold"
             >
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-purple-500 transition-all duration-300">
                 Portfolio
               </span>
-              <motion.span 
+              <motion.span
                 className="ml-2 text-blue-500 dark:text-blue-400"
-                animate={{ 
+                animate={{
                   y: [0, -2, 0],
                   opacity: [0.7, 1, 0.7]
                 }}
-                transition={{ 
+                transition={{
                   duration: 2,
                   repeat: Infinity,
                   ease: "easeInOut"
@@ -106,10 +105,11 @@ export default function Navbar() {
             </Link>
           </motion.div>
         </div>
-        
+
         {/* Mobile menu button */}
         <div className="flex lg:hidden">
           <button
+            suppressHydrationWarning={true}
             type="button"
             className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300"
             onClick={() => setIsMobileMenuOpen(true)}
@@ -118,21 +118,20 @@ export default function Navbar() {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        
+
         <div className="hidden lg:flex lg:gap-x-1">
           {navigation.map((item) => (
             <div key={item.name} className="relative px-2">
               <Link
                 href={item.href}
-                className={`text-sm font-medium leading-6 transition-all duration-300 px-3 py-2 rounded-lg ${
-                  pathname === item.href
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30"
-                    : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
-                }`}
+                className={`text-sm font-medium leading-6 transition-all duration-300 px-3 py-2 rounded-lg ${pathname === item.href
+                  ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30"
+                  : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
+                  }`}
               >
                 {item.name}
               </Link>
-              
+
               {pathname === item.href && (
                 <motion.div
                   className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full"
@@ -148,7 +147,7 @@ export default function Navbar() {
             </div>
           ))}
         </div>
-        
+
         <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
           {/* Visitor Counter */}
           <div className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800/60 px-3 py-1.5 rounded-full border border-gray-200 dark:border-gray-700/60 shadow-sm transition-all duration-300 hover:shadow-md hover:border-blue-500/30">
@@ -168,6 +167,7 @@ export default function Navbar() {
           </div>
 
           <motion.button
+            suppressHydrationWarning={true}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="ml-2 relative inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
@@ -176,11 +176,11 @@ export default function Navbar() {
             <motion.span
               className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100"
               initial={false}
-              animate={{ 
-                x: ["-100%", "100%"] 
+              animate={{
+                x: ["-100%", "100%"]
               }}
-              transition={{ 
-                duration: 0.8, 
+              transition={{
+                duration: 0.8,
                 repeat: Infinity,
                 repeatType: "loop"
               }}
@@ -188,15 +188,15 @@ export default function Navbar() {
           </motion.button>
         </div>
       </nav>
-      
+
       {/* Animated underline that spans full width on hover */}
-      <motion.div 
+      <motion.div
         className="h-0.5 bg-gradient-to-r from-blue-500/20 via-blue-500 to-blue-500/20 mt-2"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: isHovering ? 1 : 0 }}
         transition={{ duration: 0.5 }}
       />
-      
+
       {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
@@ -211,6 +211,7 @@ export default function Navbar() {
               {/* Mobile menu close button */}
               <div className="flex justify-end">
                 <button
+                  suppressHydrationWarning={true}
                   type="button"
                   className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -219,7 +220,7 @@ export default function Navbar() {
                   <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
-              
+
               {/* Mobile Visitor Counter */}
               <div className="flex items-center justify-center mb-4 pb-4 border-b border-gray-100 dark:border-gray-800">
                 <div className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800/60 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700/60">
@@ -235,11 +236,10 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${
-                    pathname === item.href
-                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30"
-                      : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
-                  }`}
+                  className={`block px-3 py-2 rounded-md text-base font-medium ${pathname === item.href
+                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30"
+                    : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
+                    }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
@@ -247,6 +247,7 @@ export default function Navbar() {
               ))}
               <div className="pt-4 flex justify-center">
                 <motion.button
+                  suppressHydrationWarning={true}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="relative inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
@@ -255,11 +256,11 @@ export default function Navbar() {
                   <motion.span
                     className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100"
                     initial={false}
-                    animate={{ 
-                      x: ["-100%", "100%"] 
+                    animate={{
+                      x: ["-100%", "100%"]
                     }}
-                    transition={{ 
-                      duration: 0.8, 
+                    transition={{
+                      duration: 0.8,
                       repeat: Infinity,
                       repeatType: "loop"
                     }}

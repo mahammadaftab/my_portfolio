@@ -121,7 +121,14 @@ function SectionHeader({ title, subtitle, icon }: { title: string; subtitle?: st
 // ─── Star Background Layer ───────────────────────────────────────────────────
 
 function StarField() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const stars = useMemo(() => {
+    if (!mounted) return [];
     return Array.from({ length: 120 }, (_, i) => ({
       id: i,
       top: Math.random() * 100,
@@ -130,7 +137,7 @@ function StarField() {
       delay: Math.random() * 5,
       duration: Math.random() * 3 + 2,
     }));
-  }, []);
+  }, [mounted]);
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
@@ -142,8 +149,8 @@ function StarField() {
       <div className="absolute top-[60%] right-[10%] w-[400px] h-[400px] rounded-full bg-blue-900/15 blur-[100px] animate-float-orb" style={{ animationDelay: "-7s" }} />
       <div className="absolute top-[35%] right-[40%] w-[300px] h-[300px] rounded-full bg-indigo-900/10 blur-[80px] animate-float-orb" style={{ animationDelay: "-14s" }} />
 
-      {/* Star particles */}
-      {stars.map((star) => (
+      {/* Star particles (only render on client after mount to prevent hydration mismatch) */}
+      {mounted && stars.map((star) => (
         <div
           key={star.id}
           className="absolute rounded-full bg-white"
