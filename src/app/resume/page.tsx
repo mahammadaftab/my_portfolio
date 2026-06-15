@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 declare global {
   interface Window {
     gtag: (...args: unknown[]) => void;
@@ -32,7 +34,6 @@ import {
   FaCertificate, 
   FaFilePdf, 
   FaRocket, 
-  FaExternalLinkAlt, 
   FaFileWord, 
   FaCopy, 
   FaCheck, 
@@ -68,25 +69,26 @@ function StatCounter({ value, duration = 1.5 }: { value: number; duration?: numb
   return <span>{count}</span>;
 }
 
+// Pre-generated static stars to prevent react-hooks/purity errors during render
+const staticStars = Array.from({ length: 120 }, (_, i) => ({
+  id: i,
+  top: Math.random() * 100,
+  left: Math.random() * 100,
+  size: Math.random() * 2.5 + 0.5,
+  delay: Math.random() * 5,
+  duration: Math.random() * 3 + 2,
+}));
+
 // Immersive CSS-based StarField background from the achievements/experience page
 function StarField() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
-  const stars = useMemo(() => {
-    if (!mounted) return [];
-    return Array.from({ length: 120 }, (_, i) => ({
-      id: i,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      size: Math.random() * 2.5 + 0.5,
-      delay: Math.random() * 5,
-      duration: Math.random() * 3 + 2,
-    }));
-  }, [mounted]);
+  const stars = mounted ? staticStars : [];
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
@@ -418,7 +420,7 @@ export default function Resume() {
                   activeTab === "interactive" ? "text-white" : "text-gray-400 hover:text-gray-200"
                 }`}
               >
-                <span>🚀 Interactive Timeline & Credentials</span>
+                <span>🚀 <span className="hidden sm:inline">Interactive </span>Timeline<span className="hidden md:inline"> & Credentials</span></span>
               </button>
               <button
                 suppressHydrationWarning={true}
@@ -427,7 +429,7 @@ export default function Resume() {
                   activeTab === "document" ? "text-white" : "text-gray-400 hover:text-gray-200"
                 }`}
               >
-                <span>📄 Official Document Viewer</span>
+                <span>📄 <span className="hidden sm:inline">Official </span>Document<span className="hidden md:inline"> Viewer</span></span>
               </button>
               
               {/* Sliding Background */}
@@ -600,7 +602,7 @@ export default function Resume() {
                     </div>
 
                     {/* Category Filter Pills */}
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-row overflow-x-auto whitespace-nowrap pb-2 scrollbar-none max-w-full gap-2 sm:flex-wrap">
                       {[
                         { id: "all", label: "All Credentials" },
                         { id: "ai", label: "AI & GenAI" },
@@ -721,9 +723,9 @@ export default function Resume() {
                       </span>
                     </div>
 
-                    <div className="max-h-[80vh] overflow-y-auto min-h-[500px]">
+                    <div className="max-h-[80vh] overflow-y-auto min-h-[500px] w-full max-w-full overflow-x-hidden">
                       {fileExists ? (
-                        <PDFViewer file={resumePath} className="w-full" />
+                        <PDFViewer file={resumePath} className="w-full max-w-full" />
                       ) : (
                         <div className="flex items-center justify-center min-h-[500px] bg-white/[0.01]">
                           <div className="text-center p-8 max-w-sm">

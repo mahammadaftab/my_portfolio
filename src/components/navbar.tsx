@@ -111,7 +111,7 @@ export default function Navbar() {
           <button
             suppressHydrationWarning={true}
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300"
+            className="inline-flex items-center justify-center rounded-full p-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 transition-colors focus:outline-none"
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
@@ -197,23 +197,40 @@ export default function Navbar() {
         transition={{ duration: 0.5 }}
       />
 
-      {/* Mobile menu */}
+      {/* Mobile menu slide-in drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            className="lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 shadow-lg"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="px-6 py-4 space-y-1">
-              {/* Mobile menu close button */}
-              <div className="flex justify-end">
+          <>
+            {/* Backdrop overlay */}
+            <motion.div
+              className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Glassmorphism Drawer Panel */}
+            <motion.div
+              className="lg:hidden fixed inset-y-0 right-0 z-50 w-72 max-w-[85vw] bg-white/85 dark:bg-black/85 backdrop-blur-2xl border-l border-gray-200/50 dark:border-white/10 shadow-2xl flex flex-col p-6 overflow-y-auto"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 220 }}
+            >
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100 dark:border-white/10">
+                <Link
+                  href="/"
+                  className="text-xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Portfolio
+                </Link>
                 <button
                   suppressHydrationWarning={true}
                   type="button"
-                  className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  className="rounded-full p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span className="sr-only">Close main menu</span>
@@ -222,35 +239,39 @@ export default function Navbar() {
               </div>
 
               {/* Mobile Visitor Counter */}
-              <div className="flex items-center justify-center mb-4 pb-4 border-b border-gray-100 dark:border-gray-800">
-                <div className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800/60 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700/60">
-                  <UsersIcon className="w-4 h-4 text-blue-500" />
-                  <span>Total Visitors:</span>
-                  <span className="font-bold text-blue-600 dark:text-blue-400">
-                    {visitorCount !== null ? visitorCount.toLocaleString() : "..."}
-                  </span>
-                </div>
+              <div className="flex items-center gap-2.5 text-xs font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 px-4 py-2.5 rounded-2xl mb-6 shadow-md shadow-black/5">
+                <UsersIcon className="w-4 h-4 text-blue-500" />
+                <span>Total Visitors:</span>
+                <span className="font-bold text-blue-600 dark:text-blue-400 ml-auto">
+                  {visitorCount !== null ? visitorCount.toLocaleString() : "..."}
+                </span>
               </div>
 
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${pathname === item.href
-                    ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30"
-                    : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
+              {/* Navigation Items (Touch friendly spacing) */}
+              <div className="flex flex-col gap-1.5">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`flex items-center px-4 py-3.5 rounded-xl text-base font-semibold transition-all duration-200 ${
+                      pathname === item.href
+                        ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500"
+                        : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
                     }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="pt-4 flex justify-center">
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Action Call To Action */}
+              <div className="mt-auto pt-8 flex justify-center">
                 <motion.button
                   suppressHydrationWarning={true}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full relative inline-flex items-center justify-center px-4 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
                 >
                   <span className="relative z-10">Hire Me</span>
                   <motion.span
@@ -267,8 +288,8 @@ export default function Navbar() {
                   />
                 </motion.button>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

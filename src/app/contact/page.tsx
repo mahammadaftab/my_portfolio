@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -30,25 +30,26 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
+// Pre-generated static stars to prevent react-hooks/purity errors during render
+const staticStars = Array.from({ length: 150 }, (_, i) => ({
+  id: i,
+  top: Math.random() * 100,
+  left: Math.random() * 100,
+  size: Math.random() * 2 + 0.5,
+  delay: Math.random() * 5,
+  duration: Math.random() * 4 + 3,
+}));
+
 // Twinkling space background with atmospheric nebulae and Earth crescent glow
 function StarField() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
-  const stars = useMemo(() => {
-    if (!mounted) return [];
-    return Array.from({ length: 150 }, (_, i) => ({
-      id: i,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      size: Math.random() * 2 + 0.5,
-      delay: Math.random() * 5,
-      duration: Math.random() * 4 + 3,
-    }));
-  }, [mounted]);
+  const stars = mounted ? staticStars : [];
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
@@ -467,7 +468,7 @@ export default function Contact() {
               initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 35 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: prefersReducedMotion ? 0 : 0.7, delay: 0.1 }}
-              className="grid grid-cols-2 gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
               {contactCards.map((card, idx) => (
                 <a
@@ -475,7 +476,7 @@ export default function Contact() {
                   href={card.href}
                   target={card.target || "_self"}
                   rel={card.target ? "noopener noreferrer" : ""}
-                  className="backdrop-blur-md bg-white/[0.01] border border-white/5 hover:border-purple-500/20 rounded-2xl p-4 flex flex-col justify-between hover:shadow-[0_4px_25px_rgba(0,0,0,0.35)] transition-all duration-300 group cursor-pointer"
+                  className="backdrop-blur-md bg-white/[0.01] border border-white/5 hover:border-purple-500/20 rounded-2xl p-4 flex flex-col justify-between hover:shadow-[0_4px_25px_rgba(0,0,0,0.35)] transition-all duration-300 group cursor-pointer min-w-0"
                 >
                   <div className="flex items-center justify-between mb-3">
                     <span className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 group-hover:scale-110 transition-transform duration-300">

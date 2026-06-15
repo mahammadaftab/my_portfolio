@@ -214,6 +214,13 @@ const AlienSpaceship = () => {
 // Enhanced Space Galaxy Background
 function SpaceGalaxy() {
   const galaxyRef = useRef<THREE.Group>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth < 768);
+    }
+  }, []);
   
   useFrame((state) => {
     if (galaxyRef.current) {
@@ -225,19 +232,26 @@ function SpaceGalaxy() {
   
   return (
     <group ref={galaxyRef}>
-      {/* Dense, realistic background stars */}
+      {/* Dense, realistic background stars (optimized for mobile) */}
       <Stars 
         radius={300} 
         depth={150} 
-        count={15000} 
-        factor={7} 
+        count={isMobile ? 4000 : 12000} 
+        factor={isMobile ? 5 : 7} 
         saturation={0.5} 
         fade 
-        speed={1} 
+        speed={0.5} 
       />
       
-      {/* Sparkling magic dust/mini-stars in the foreground */}
-      <Sparkles count={2000} scale={200} size={3} speed={0.4} opacity={0.3} color="#ffffff" />
+      {/* Sparkling magic dust/mini-stars in the foreground (optimized for mobile) */}
+      <Sparkles 
+        count={isMobile ? 600 : 1800} 
+        scale={200} 
+        size={isMobile ? 2 : 3} 
+        speed={0.3} 
+        opacity={0.3} 
+        color="#ffffff" 
+      />
 
       {/* Animated UFO / Spaceship flying through the stars */}
       <AlienSpaceship />
@@ -322,8 +336,7 @@ export default function Home() {
       </div>
       
       {/* Hero Section */}
-      {/* Hero Section */}
-      <div ref={containerRef} className="container mx-auto px-4 relative z-10 flex-1 flex flex-col justify-center">
+      <div ref={containerRef} className="container mx-auto px-4 relative z-10 flex-1 flex flex-col justify-center py-6 sm:py-8 lg:py-0">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
           {/* 3D Scene (Foreground Element) */}
           <motion.div 
@@ -333,7 +346,7 @@ export default function Home() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.8 }}
             style={{ y: prefersReducedMotion ? 0 : threeSceneY }}
           >
-            <div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white/20 shadow-[0_0_50px_rgba(138,43,226,0.3)] backdrop-blur-sm">
+            <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white/20 shadow-[0_0_50px_rgba(138,43,226,0.3)] backdrop-blur-sm">
               <ThreeScene />
             </div>
           </motion.div>
@@ -358,7 +371,7 @@ export default function Home() {
             </motion.div>
 
             {/* Massive modern typography for the name */}
-            <h1 className="text-4xl md:text-6xl lg:text-[4.5rem] font-black tracking-tighter text-white leading-none mb-3 drop-shadow-[0_0_30px_rgba(0,0,0,1)]">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black tracking-tighter text-white leading-none mb-3 drop-shadow-[0_0_30px_rgba(0,0,0,1)]">
               <span className="block text-lg md:text-xl font-bold tracking-normal text-white mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Hi, I&#39;m</span>
               <span className="bg-gradient-to-r from-blue-300 via-purple-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(168,85,247,0.8)]">
                 Mahammad Aftab
@@ -367,7 +380,7 @@ export default function Home() {
 
             {/* Highly stylized typing effect */}
             <div className="h-8 mt-1 mb-5">
-              <h2 className="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400 tracking-tight drop-shadow-[0_0_20px_rgba(0,0,0,1)]">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-400 tracking-tight drop-shadow-[0_0_20px_rgba(0,0,0,1)]">
                 <span className="inline-block text-left">
                   {text}
                   <motion.span 
@@ -380,7 +393,7 @@ export default function Home() {
             </div>
 
             {/* Professional, elegant paragraph */}
-            <p className="text-sm md:text-base text-white max-w-xl leading-relaxed font-medium mb-8 mx-auto lg:mx-0 drop-shadow-[0_0_15px_rgba(0,0,0,1)]">
+            <p className="text-xs sm:text-sm md:text-base text-white max-w-xl leading-relaxed font-medium mb-6 sm:mb-8 mx-auto lg:mx-0 drop-shadow-[0_0_15px_rgba(0,0,0,1)]">
               I build exceptional digital experiences that are fast, accessible, visually appealing, and responsive. 
               <span className="block mt-1 text-white font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Even if you don&#39;t hire me, these qualities should be baseline for whatever you build.</span>
             </p>

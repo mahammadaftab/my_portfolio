@@ -72,13 +72,16 @@ export default function Skills() {
         </motion.div>
 
         {/* Category Tabs */}
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex rounded-md bg-white dark:bg-gray-800 p-1 shadow">
+        <div className="flex justify-center mb-12 w-full max-w-full">
+          <div 
+            className="flex overflow-x-auto whitespace-nowrap rounded-lg bg-white dark:bg-gray-800 p-1 shadow max-w-full scrollbar-none snap-x snap-mandatory"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
             {skillCategories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-3 text-sm font-medium rounded-md transition-all duration-300 flex items-center ${
+                className={`px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-medium rounded-md transition-all duration-300 flex items-center shrink-0 snap-start ${
                   activeCategory === category.id
                     ? "bg-blue-600 text-white shadow"
                     : "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
@@ -136,7 +139,7 @@ export default function Skills() {
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
             Technologies I Work With
           </h2>
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-3.5 sm:gap-6">
             {techStack.map((tech, index) => (
               <motion.div
                 key={tech}
@@ -165,17 +168,17 @@ export default function Skills() {
                 whileTap={prefersReducedMotion ? {} : { 
                   scale: 0.95 
                 }}
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg flex items-center justify-center w-32 h-32 cursor-pointer"
+                className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-lg flex items-center justify-center w-28 h-28 sm:w-32 sm:h-32 cursor-pointer"
               >
                 <div className="text-center">
                   <div className="mb-2 flex justify-center">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                      <span className="text-white font-bold text-lg">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                      <span className="text-white font-bold text-base sm:text-lg">
                         {tech.charAt(0)}
                       </span>
                     </div>
                   </div>
-                  <span className="text-lg font-semibold text-gray-900 dark:text-white">{tech}</span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900 dark:text-white">{tech}</span>
                 </div>
               </motion.div>
             ))}

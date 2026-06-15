@@ -601,29 +601,29 @@ export default function About() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-[400px] lg:h-[400px] xl:w-[480px] xl:h-[480px] flex-shrink-0"
               >
-                {/* Decorative Rings */}
-                <div className="absolute inset-[-20px] lg:inset-[-30px] rounded-full border border-white/10 animate-[spin_10s_linear_infinite]" />
-                <div className="absolute inset-[-40px] lg:inset-[-60px] rounded-full border border-white/5 animate-[spin_15s_linear_infinite_reverse]" />
+                {/* Decorative Rings (optimized responsiveness) */}
+                <div className="absolute inset-[-10px] sm:inset-[-20px] lg:inset-[-30px] rounded-full border border-white/10 animate-[spin_10s_linear_infinite]" />
+                <div className="absolute inset-[-20px] sm:inset-[-40px] lg:inset-[-60px] rounded-full border border-white/5 animate-[spin_15s_linear_infinite_reverse]" />
                 
-                {/* Orbiting Icons */}
+                {/* Orbiting Icons (optimized responsiveness) */}
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -left-4 top-12 lg:-left-12 lg:top-24 w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_30px_rgba(97,218,251,0.2)] z-20"
+                  className="absolute -left-2 top-12 sm:-left-4 lg:-left-12 lg:top-24 w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_30px_rgba(97,218,251,0.2)] z-20"
                 >
                   <FaReact className="w-5 h-5 lg:w-8 lg:h-8 text-[#61DAFB]" />
                 </motion.div>
                 <motion.div
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="absolute -right-2 bottom-12 lg:-right-8 lg:bottom-24 w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_30px_rgba(49,120,198,0.2)] z-20"
+                  className="absolute -right-1 bottom-12 sm:-right-2 lg:-right-8 lg:bottom-24 w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_30px_rgba(49,120,198,0.2)] z-20"
                 >
                   <SiTypescript className="w-5 h-5 lg:w-8 lg:h-8 text-[#3178C6]" />
                 </motion.div>
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute left-12 -top-6 lg:left-24 lg:-top-12 w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)] z-20"
+                  className="absolute left-12 -top-4 sm:-top-6 lg:left-24 lg:-top-12 w-10 h-10 lg:w-16 lg:h-16 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)] z-20"
                 >
                   <SiNextdotjs className="w-5 h-5 lg:w-8 lg:h-8 text-white" />
                 </motion.div>
@@ -774,7 +774,7 @@ export default function About() {
           </div>
 
           {/* Row 1 — Scroll Left */}
-          <div className="relative overflow-hidden mb-4">
+          <div className="relative overflow-hidden mb-4 w-full max-w-full">
             {/* Fade edges */}
             <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0a0025] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0025] to-transparent z-10 pointer-events-none" />
@@ -798,7 +798,7 @@ export default function About() {
           </div>
 
           {/* Row 2 — Scroll Right */}
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-hidden w-full max-w-full">
             <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0a0025] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0025] to-transparent z-10 pointer-events-none" />
 

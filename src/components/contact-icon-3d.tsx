@@ -2,7 +2,7 @@
 
 import { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { Stars } from "@react-three/drei";
 import * as THREE from "three";
 
 // Advanced realistic astronaut model with increased breadth movement
@@ -318,34 +318,30 @@ function RealisticAstronaut() {
   );
 }
 
+// Helper to generate random star positions
+const generateStars = (count: number, range: number) => {
+  const stars = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    stars[i * 3] = (Math.random() - 0.5) * range;
+    stars[i * 3 + 1] = (Math.random() - 0.5) * range;
+    stars[i * 3 + 2] = (Math.random() - 0.5) * range;
+  }
+  return stars;
+};
+
+const distantStarsData = generateStars(5000, 2000);
+const mediumStarsData = generateStars(3000, 1000);
+const nearStarsData = generateStars(2000, 500);
+
 // Space Galaxy Background - Matching the home page implementation
 function SpaceGalaxy() {
   const galaxyRef = useRef<THREE.Group>(null);
   const nebulaRef = useRef<THREE.Group>(null);
   const starsRef = useRef<THREE.Group>(null);
   
-  // Create multiple star layers for depth
-  const distantStars = new Float32Array(5000 * 3);
-  const mediumStars = new Float32Array(3000 * 3);
-  const nearStars = new Float32Array(2000 * 3);
-  
-  for (let i = 0; i < 5000; i++) {
-    distantStars[i * 3] = (Math.random() - 0.5) * 2000;
-    distantStars[i * 3 + 1] = (Math.random() - 0.5) * 2000;
-    distantStars[i * 3 + 2] = (Math.random() - 0.5) * 2000;
-  }
-  
-  for (let i = 0; i < 3000; i++) {
-    mediumStars[i * 3] = (Math.random() - 0.5) * 1000;
-    mediumStars[i * 3 + 1] = (Math.random() - 0.5) * 1000;
-    mediumStars[i * 3 + 2] = (Math.random() - 0.5) * 1000;
-  }
-  
-  for (let i = 0; i < 2000; i++) {
-    nearStars[i * 3] = (Math.random() - 0.5) * 500;
-    nearStars[i * 3 + 1] = (Math.random() - 0.5) * 500;
-    nearStars[i * 3 + 2] = (Math.random() - 0.5) * 500;
-  }
+  const distantStars = distantStarsData;
+  const mediumStars = mediumStarsData;
+  const nearStars = nearStarsData;
   
   useFrame((state) => {
     if (galaxyRef.current) {
@@ -515,12 +511,12 @@ function Scene() {
 export default function ContactIcon3D({ size = 300 }: { size?: number }) {
   return (
     <div 
-      className="w-full h-full aspect-square"
-      style={{ width: '100%', height: '100%', minHeight: size, minWidth: size }}
+      className="w-full h-full relative"
+      style={{ minHeight: size }}
     >
       <Canvas 
         camera={{ position: [0, 0, 8], fov: 50 }}
-        style={{ width: '100%', height: '75%' }}
+        style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}
         shadows
       >
         <Suspense fallback={null}>

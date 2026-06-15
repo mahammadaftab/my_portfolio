@@ -698,7 +698,7 @@ export default function Projects() {
               <span className="text-white font-medium">cloud-native systems</span>.
             </motion.p>
 
-            {/* Metrics — glassmorphism cards */}
+            {/* Metrics — responsive grid */}
             <motion.div
               layout
               initial={
@@ -706,7 +706,7 @@ export default function Projects() {
               }
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
-              className="flex flex-wrap justify-center gap-4 md:gap-6 items-start"
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-4xl mx-auto items-start"
             >
               {stats.map((stat) => (
                 <motion.div
@@ -714,9 +714,9 @@ export default function Projects() {
                   key={stat.id}
                   onClick={() => setExpandedStat(expandedStat === stat.id ? null : stat.id)}
                   whileHover={prefersReducedMotion || expandedStat === stat.id ? {} : { y: -4, scale: 1.03 }}
-                  className={`group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl px-6 py-5 md:px-8 md:py-6 min-w-[140px] md:min-w-[180px] overflow-hidden transition-all duration-500 cursor-pointer ${
+                  className={`group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl px-4 py-4 md:px-8 md:py-6 overflow-hidden transition-all duration-500 cursor-pointer ${
                     expandedStat === stat.id
-                      ? "bg-white/[0.08] border-white/[0.2] shadow-[0_16px_60px_rgba(99,102,241,0.2)] md:min-w-[240px] flex-grow md:flex-grow-0"
+                      ? "bg-white/[0.08] border-white/[0.2] shadow-[0_16px_60px_rgba(99,102,241,0.2)]"
                       : "hover:shadow-[0_8px_40px_rgba(99,102,241,0.12)] hover:border-white/[0.12]"
                   }`}
                 >
@@ -845,11 +845,14 @@ export default function Projects() {
               </span>
             </div>
 
-            {/* Filter pills */}
-            <div className="flex flex-wrap gap-2.5">
+            {/* Filter pills (optimized for mobile horizontal scroll) */}
+            <div 
+              className="flex flex-row overflow-x-auto whitespace-nowrap pb-2 gap-2.5 max-w-full scrollbar-none snap-x snap-mandatory lg:flex-wrap lg:justify-center lg:overflow-visible lg:whitespace-normal"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
               <button
                 onClick={() => setFilter("all")}
-                className={`relative px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                className={`relative shrink-0 snap-start px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                   filter === "all"
                     ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-[0_4px_20px_rgba(99,102,241,0.3)]"
                     : "bg-white/[0.04] border border-white/[0.08] text-gray-400 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.15]"
@@ -865,7 +868,7 @@ export default function Projects() {
                 <button
                   key={tag}
                   onClick={() => setFilter(tag)}
-                  className={`relative px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  className={`relative shrink-0 snap-start px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                     filter === tag
                       ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-[0_4px_20px_rgba(99,102,241,0.3)]"
                       : "bg-white/[0.04] border border-white/[0.08] text-gray-400 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.15]"

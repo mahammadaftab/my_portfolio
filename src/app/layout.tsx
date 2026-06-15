@@ -70,16 +70,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="max-w-full overflow-x-clip">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900 dark:text-white relative flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-gray-900 dark:text-white relative flex flex-col min-h-screen max-w-full overflow-x-clip`}
       >
         <DevToolsFixProvider>
           <ThemeProvider>
             <ScrollProgress />
             <CustomCursor />
             <Navbar />
-            <main className="flex-1 relative pt-16 flex flex-col">
+            <main className="flex-1 relative pt-16 flex flex-col w-full max-w-full overflow-x-clip">
               {children}
             </main>
             <Footer />

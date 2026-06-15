@@ -377,13 +377,16 @@ export default function Experience() {
               icon="📜"
             />
 
-            {/* Category Filter Tabs */}
-            <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {/* Category Filter Tabs (optimized for mobile scroll) */}
+            <div 
+              className="flex flex-row overflow-x-auto whitespace-nowrap pb-2 gap-2 max-w-full scrollbar-none snap-x snap-mandatory md:flex-wrap md:justify-center md:overflow-visible md:whitespace-normal mb-12"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
               {certCategories.map((cat) => (
                 <button
                   key={cat.key}
                   onClick={() => setCertFilter(cat.key)}
-                  className={`relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  className={`relative shrink-0 snap-start px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                     certFilter === cat.key
                       ? "text-white shadow-lg"
                       : "text-gray-400 hover:text-white bg-[#0f0f23] hover:bg-[#161633] border border-white/10 hover:border-purple-500/25"

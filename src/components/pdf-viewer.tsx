@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 
@@ -49,7 +51,7 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
       
       canvas.height = viewport.height;
       canvas.width = viewport.width;
-      canvas.className = "w-full h-auto mb-4";
+      canvas.className = "w-full max-w-full block h-auto mb-4";
       
       // Set background based on theme
       context.fillStyle = theme === "dark" ? "#111827" : "#ffffff";
@@ -154,6 +156,7 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
         pdfRef.current = null;
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file, theme, pdfjsLib]);
 
   // Show loading state while pdfjs-lib is loading
