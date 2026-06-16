@@ -17,7 +17,7 @@
     "urls": [
       {
         "label": "Live Demo",
-        "url": "https://cert-forge-ai.vercel.app/"
+        "url": "https://certforge-ai-front.onrender.com"
       }
     ],
     "githubUrl": "https://github.com/mahammadaftab/CertForge-AI"
@@ -107,7 +107,7 @@
     "urls": [
       {
         "label": "Live Demo",
-        "url": "https://tourism-and-travel-tech.vercel.app/"
+        "url": "https://tourism-and-travel-tech-front.onrender.com"
       }
     ],
     "githubUrl": "https://github.com/mahammadaftab/Tourism_and_Travel_Tech"
