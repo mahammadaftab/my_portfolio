@@ -143,21 +143,10 @@ function AnimatedSection({
   className?: string;
   id?: string;
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const prefersReducedMotion = usePrefersReducedMotion();
-
   return (
-    <motion.section
-      ref={ref}
-      id={id}
-      initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: prefersReducedMotion ? 0 : 0.7, ease: "easeOut" }}
-      className={className}
-    >
+    <section id={id} className={`relative z-10 ${className}`}>
       {children}
-    </motion.section>
+    </section>
   );
 }
 
@@ -172,29 +161,14 @@ function ProjectCard({
   index: number;
   onSelect: (project: Project) => void;
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const prefersReducedMotion = usePrefersReducedMotion();
   const imageUrl = getProjectImage(project);
   const projectHasVideos = hasVideos(project);
   const accent = cardAccents[index % cardAccents.length];
 
   return (
-    <motion.div
-      ref={ref}
-      initial={
-        prefersReducedMotion
-          ? { opacity: 1 }
-          : { opacity: 0, y: 40, scale: 0.96 }
-      }
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{
-        duration: prefersReducedMotion ? 0 : 0.6,
-        delay: prefersReducedMotion ? 0 : index * 0.1,
-        ease: "easeOut",
-      }}
-      whileHover={prefersReducedMotion ? {} : { y: -10, scale: 1.015 }}
-      className="group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-[0_16px_80px_rgba(99,102,241,0.18)] hover:border-white/[0.15]"
+    <div
+      className="group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-[0_16px_80px_rgba(99,102,241,0.18)] hover:border-white/[0.15] hover:-translate-y-1.5"
       onClick={() => onSelect(project)}
     >
       {/* Top gradient accent — unique per card */}
@@ -250,7 +224,7 @@ function ProjectCard({
       {/* Content — more spacious */}
       <div className="p-6 sm:p-7">
         {/* Title */}
-        <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300 leading-tight">
+        <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-indigo-400 transition-colors duration-300 leading-tight">
           {project.title}
         </h3>
 
@@ -329,7 +303,7 @@ function ProjectCard({
             )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -512,28 +486,21 @@ export default function Projects() {
   }, {} as Record<string, number>);
 
   return (
-    <div className="min-h-screen relative text-white overflow-hidden">
+    <div className="min-h-screen relative text-white overflow-x-clip">
       {/* Immersive Space Background */}
       <StarField />
 
       {/* ── Hero Section ─────────────────────────────────────────────────── */}
-      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 lg:min-h-[600px] flex items-center overflow-hidden bg-transparent">
+      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 lg:min-h-[600px] flex items-center overflow-x-clip bg-transparent">
         {/* ── Ambient background layers ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
 
-
-
           {/* Floating code snippets — left side (desktop only) */}
           <div className="hidden lg:block">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.8 }}
+            <div
               className="absolute top-24 left-8 xl:left-16"
             >
-              <motion.div
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              <div
                 className="bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-xl px-5 py-4 font-mono text-[11px] leading-relaxed shadow-2xl shadow-black/20"
               >
                 <div className="text-gray-600 mb-1">{"// build something great"}</div>
@@ -556,19 +523,14 @@ export default function Projects() {
                 <div>
                   <span className="text-gray-400">{"});"}</span>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Floating terminal — right side */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 1.1 }}
+            <div
               className="absolute top-32 right-8 xl:right-16"
             >
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              <div
                 className="bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-xl px-5 py-4 font-mono text-[11px] leading-relaxed shadow-2xl shadow-black/20"
               >
                 <div className="flex items-center gap-1.5 mb-2 pb-2 border-b border-white/[0.06]">
@@ -591,19 +553,14 @@ export default function Projects() {
                   <span className="text-gray-400">Deployed to</span>{" "}
                   <span className="text-indigo-400">production</span>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Floating git badge — bottom left */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.4 }}
+            <div
               className="absolute bottom-20 left-12 xl:left-24"
             >
-              <motion.div
-                animate={{ y: [0, -8, 0], rotate: [0, 2, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              <div
                 className="bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-xl px-4 py-3 font-mono text-[11px] shadow-2xl shadow-black/20"
               >
                 <div className="flex items-center gap-2">
@@ -613,27 +570,22 @@ export default function Projects() {
                     lines shipped
                   </span>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Floating tech badge — bottom right */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.6 }}
+            <div
               className="absolute bottom-24 right-12 xl:right-24"
             >
-              <motion.div
-                animate={{ y: [0, 8, 0], rotate: [0, -1, 0] }}
-                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              <div
                 className="bg-white/[0.03] backdrop-blur-md border border-white/[0.06] rounded-xl px-4 py-3 font-mono text-[11px] shadow-2xl shadow-black/20"
               >
                 <div className="flex items-center gap-2">
                   <span className="text-indigo-400">⚡</span>
                   <span className="text-gray-400">{allTagsCount} tech stack</span>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -642,12 +594,7 @@ export default function Projects() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             {/* Badge */}
-            <motion.div
-              initial={
-                prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 15 }
-              }
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+            <div
               className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md mb-8 shadow-lg shadow-black/10"
             >
               <span className="relative flex h-2 w-2">
@@ -657,37 +604,27 @@ export default function Projects() {
               <span className="text-[11px] font-bold text-indigo-400/90 tracking-[0.2em] uppercase">
                 Project Section
               </span>
-            </motion.div>
+            </div>
 
             {/* Title */}
-            <motion.h1
-              initial={
-                prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 15 }
-              }
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+            <h1
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-[5rem] font-black tracking-tighter mb-8 leading-[0.92]"
             >
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-gray-300">
+              <span className="text-white">
                 Engineering
               </span>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
+              <span className="text-white">
                 Production-Grade
               </span>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 animate-gradient-text">
+              <span className="text-purple-400">
                 Digital Products.
               </span>
-            </motion.h1>
+            </h1>
 
             {/* Subtitle */}
-            <motion.p
-              initial={
-                prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 15 }
-              }
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            <p
               className="text-base md:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed"
             >
               From concept to deployment —{" "}
@@ -696,45 +633,35 @@ export default function Projects() {
               <span className="text-white font-medium">full-stack development</span>,{" "}
               <span className="text-white font-medium">AI/ML</span>, and{" "}
               <span className="text-white font-medium">cloud-native systems</span>.
-            </motion.p>
+            </p>
 
             {/* Metrics — responsive grid */}
-            <motion.div
-              layout
-              initial={
-                prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
-              }
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
+            <div
               className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-4xl mx-auto items-start"
             >
               {stats.map((stat) => (
-                <motion.div
-                  layout
+                <div
                   key={stat.id}
                   onClick={() => setExpandedStat(expandedStat === stat.id ? null : stat.id)}
-                  whileHover={prefersReducedMotion || expandedStat === stat.id ? {} : { y: -4, scale: 1.03 }}
-                  className={`group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl px-4 py-4 md:px-8 md:py-6 overflow-hidden transition-all duration-500 cursor-pointer ${
+                  className={`group relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl px-4 py-4 md:px-8 md:py-6 overflow-hidden transition-all duration-300 cursor-pointer ${
                     expandedStat === stat.id
                       ? "bg-white/[0.08] border-white/[0.2] shadow-[0_16px_60px_rgba(99,102,241,0.2)]"
-                      : "hover:shadow-[0_8px_40px_rgba(99,102,241,0.12)] hover:border-white/[0.12]"
+                      : "hover:shadow-[0_8px_40px_rgba(99,102,241,0.12)] hover:border-white/[0.12] hover:-translate-y-1"
                   }`}
                 >
                   {/* Top accent line */}
-                  <motion.div
-                    layout="position"
+                  <div
                     className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${stat.gradient} opacity-50 group-hover:opacity-100 transition-opacity duration-500`}
                   />
-                  <motion.div layout="position" className="text-lg mb-2">{stat.icon}</motion.div>
-                  <motion.div
-                    layout="position"
-                    className={`text-3xl md:text-4xl font-black bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent flex items-center justify-between`}
+                  <div className="text-lg mb-2">{stat.icon}</div>
+                  <div
+                    className="text-3xl md:text-4xl font-black text-white flex items-center justify-between"
                   >
                     <div>
                       {stat.value}
                       <span className="text-xl">{stat.suffix}</span>
                     </div>
-                  </motion.div>
+                  </div>
                   <motion.div
                     layout="position"
                     className="text-[11px] text-gray-500 font-semibold tracking-wider uppercase mt-1.5 flex justify-between items-center"
@@ -798,9 +725,9 @@ export default function Projects() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -970,7 +897,7 @@ export default function Projects() {
               <FaGithub className="w-8 h-8 text-white" />
             </div>
             
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-4 tracking-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight">
               Explore More
             </h2>
             <p className="text-gray-400 text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
