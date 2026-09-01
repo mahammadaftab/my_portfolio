@@ -283,6 +283,51 @@
           "caption": "Certificate of badge_converted"
         }
       ]
+    },
+    {
+      "id": 8,
+      "category": "Unstop",
+      "title": "Unstop Week-of-Wins",
+      "issuer": "Unstop Certificates",
+      "date": "01-Jun-26 to 07-Jun-26",
+      "description": "Certificates on Giva, Hammer, Blue Tea, Joyspoon, Mavi pantry, IntrCity, Unstop.",
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/certificates/Unstop Certify/Day 1 GIVA Unstop_page-0001.jpg",
+          "caption": "Certificate of Day 1 GIVA"
+        },
+        {
+          "type": "image",
+          "url": "/images/certificates/Unstop Certify/Day 2 Hammer Unstop_page-0001.jpg",
+          "caption": "Certificate of Day 2 Hammer"
+        },
+        {
+          "type": "image",
+          "url": "/images/certificates/Unstop Certify/Day 3 Blue Tea Unstop_page-0001.jpg",
+          "caption": "Certificate of Day 3 Blue Tea"
+        },
+        {
+          "type": "image",
+          "url": "/images/certificates/Unstop Certify/Day 4 Joyspoon Unstop_page-0001.jpg",
+          "caption": "Certificate of Day 4 Joyspoon"
+        },
+        {
+          "type": "image",
+          "url": "/images/certificates/Unstop Certify/Day 5 Mavi pantry Unstop_page-0001.jpg",
+          "caption": "Certificate of Day 5 Mavi pantry"
+        },
+        {
+          "type": "image",
+          "url": "/images/certificates/Unstop Certify/Day 6 IntrCity Unstop_page-0001.jpg",
+          "caption": "Certificate of Day 6 IntrCity"
+        },
+        {
+          "type": "image",
+          "url": "/images/certificates/Unstop Certify/Day 7 Unstop_page-0001.jpg",
+          "caption": "Certificate of Day 7 Unstop"
+        }
+      ]
     }
   ],
   "internships": [
@@ -701,8 +746,8 @@
       "id": 5,
       "mode": "Offline",
       "title": "Hugging Face × Meta PyTorch Hackathon",
-      "githubLink": "https://github.com/yourusername/your-repo",
-      "liveLink": "https://your-live-demo.com",
+      "githubLink": "https://github.com/mahammadaftab/AI_Society_Simulator",
+      "liveLink": "https://huggingface.co/spaces/mahammadaftab/CivicAI",
       "issuer": "Scaler School of Technology, Bangalore",
       "date": "25th & 26th April 2026",
       "description": "Participating in the Scaler School of Technology, 𝗕𝗔𝗡𝗚𝗔𝗟𝗢𝗥𝗘\n\n𝗣𝗥𝗜𝗠𝗔𝗥𝗬 𝗦𝗣𝗢𝗡𝗦𝗢𝗥: Meta\n𝗘𝗖𝗢𝗦𝗬𝗦𝗧𝗘𝗠 𝗣𝗔𝗥𝗧𝗡𝗘𝗥: Hugging Face\n𝗙𝗥𝗔𝗠𝗘𝗪𝗢𝗥𝗞 𝗣𝗔𝗥𝗧𝗡𝗘𝗥: PyTorch\n𝗣𝗢𝗪𝗘𝗥𝗘𝗗 𝗕𝗬: Scaler School of Technology\n\nGrateful to be here as a 𝗙𝗜𝗡𝗔𝗟𝗜𝗦𝗧, representing one of the 𝗧𝗢𝗣 𝟴𝟬𝟬 𝗧𝗘𝗔𝗠𝗦 selected from 𝟯𝟭,𝟬𝟬𝟬+ 𝗥𝗘𝗚𝗜𝗦𝗧𝗥𝗔𝗧𝗜𝗢𝗡𝗦 across the country. Additionally, proud to be part of the Hugging Face × Meta  PyTorch ecosystem, alongside 𝟱𝟮,𝟬𝟬𝟬+ 𝗗𝗘𝗩𝗘𝗟𝗢𝗣𝗘𝗥𝗦 𝗪𝗢𝗥𝗟𝗗𝗪𝗜𝗗𝗘.\n\n💡 𝗟𝗘𝗔𝗥𝗡𝗜𝗡𝗚 & 𝗙𝗢𝗖𝗨𝗦\n\nExploring 𝗥𝗘𝗜𝗡𝗙𝗢𝗥𝗖𝗘𝗠𝗘𝗡𝗧 𝗟𝗘𝗔𝗥𝗡𝗜𝗡𝗚 in real-world scenarios\n\nI would appreciate connecting with professionals who have insights into real-world clinical challenges, as we aim to build impactful AI-driven solutions.",
@@ -759,6 +804,128 @@
           "type": "image",
           "url": "/images/hackathons/SST/Warrior.avif",
           "caption": "Warrior Profile"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "mode": "Offline",
+      "title": "AROGYA MANTHAN 2K26",
+      "githubLink": "https://github.com/mahammadaftab/JANANI360-AI",
+      "liveLink": "#",
+      "issuer": "The ME-RIISE FOUNDATION at Malnad College of Engineering, Hassan",
+      "date": "27th & 28th July 2026",
+      "description": "Arogya Manthan 2K26—a 48-hour, inter-collegiate hackathon hosted by The ME-RIISE FOUNDATION at Malnad College of Engineering, Hassan.\n\n🎯 Theme: Innovative Solutions for Healthcare Challenges \nWe tackled real-world healthcare problems by building a tech-driven solution to empower healthcare providers and improve patient outcomes.\n\n💡 Key Learning Experience: \nI gained practical exposure to healthcare innovation, problem-solving under time constraints, and cross-disciplinary collaboration, further strengthening my interest in leveraging technology for social impact.",
+      "achievement": "Consolation Place, Top 5",
+      "keyAchievement": "68 Teams Participated, Shortlisted among the Top 15 Finalists, Top 5 Finish, Consolation Place.",
+      "highlighted": true,
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/Malnad/Certificate.png",
+          "caption": "Participate Certificate"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/Malnad/Consolation Place.png",
+          "caption": "Consolation Place Certificate"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/Malnad/Team.jpeg",
+          "caption": "Team Image with doing work"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/Malnad/Group image.jpeg",
+          "caption": "Group Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/Malnad/Group.png",
+          "caption": "Group Image with Mentor and Jurry"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/Malnad/Banner.png",
+          "caption": "Solo Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/Malnad/Solo.png",
+          "caption": "Solo Image"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "mode": "Online",
+      "title": "Vibe2Ship | India's Biggest Vibe Coding Hackathon",
+      "githubLink": "https://github.com/mahammadaftab/Civentra-AI",
+      "issuer": "Coding Ninjas",
+      "date": "21st May 2026",
+      "description": "Vibe2Ship is a national-level vibe coding hackathon by Coding Ninjas.",
+      "highlighted": false,
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/Vibe2Ship/Certificate.jpg",
+          "caption": "Certificate of Participation"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "mode": "Online",
+      "title": "ChatGPT Codex Hackathon 2026",
+      "githubLink": "https://github.com/mahammadaftab/bharat-biz-ai",
+      "issuer": "ChatGPT",
+      "date": "09 July 2026",
+      "description": "ChatGPT Codex Hackathon 2026 is a national-level hackathon organized by ChatGPT.",
+      "highlighted": false,
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/OpenAI/OpenAI Certificate.png",
+          "caption": "Certificate of Participation"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "mode": "Online",
+      "title": "GDGoC Summer DevSprint 2026",
+      "githubLink": "https://github.com/mahammadaftab/Panchayat-AI",
+      "issuer": "Google Developer Groups on Campus",
+      "date": "12 - 14 August 2026",
+      "description": "I have received the 𝗖𝗲𝗿𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗲 𝗼𝗳 𝗔𝗰𝗵𝗶𝗲𝘃𝗲𝗺𝗲𝗻𝘁 recognizing me as the 𝗠𝗩𝗣 (𝗠𝗼𝘀𝘁 𝗩𝗮𝗹𝘂𝗮𝗯𝗹𝗲 𝗣𝗹𝗮𝘆𝗲𝗿) 𝗼𝗳 𝗧𝗲𝗮𝗺 𝟳 during the GDGoC Summer DevSprint 2026.",
+      "achievement": "Most Valuable Player (MVP) of Team 7",
+      "highlighted": true,
+      "media": [
+        {
+          "type": "image",
+          "url": "/images/hackathons/GDGoC/Mvp Certificate.jpg",
+          "caption": "MVP Certificate"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/GDGoC/Participate Certificate.jpg",
+          "caption": "Participate Certificate"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/GDGoC/MVP.png",
+          "caption": "MVP Badge"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/GDGoC/Panchayat AI.png",
+          "caption": "Project Image"
+        },
+        {
+          "type": "image",
+          "url": "/images/hackathons/GDGoC/Logo.png",
+          "caption": "DevSprint Logo"
         }
       ]
     }

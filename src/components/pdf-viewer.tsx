@@ -113,13 +113,10 @@ export default function PDFViewer({ file, className = "" }: PDFViewerProps) {
       pdfRef.current = pdf;
       setNumPages(pdf.numPages);
       
-      // Render all pages
-      const renderPromises = [];
+      // Render pages strictly sequentially (Page 1, then Page 2, etc.) to guarantee correct order
       for (let i = 1; i <= pdf.numPages; i++) {
-        renderPromises.push(renderPage(pdf, i));
+        await renderPage(pdf, i);
       }
-      
-      await Promise.all(renderPromises);
       
       setLoading(false);
       setRetryCount(0); // Reset retry count on success
