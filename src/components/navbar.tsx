@@ -21,7 +21,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [visitorCount, setVisitorCount] = useState<number>(1248);
+  const [visitorCount, setVisitorCount] = useState<number | null>(null);
 
   // Handle scroll effect
   useEffect(() => {
@@ -162,7 +162,7 @@ export default function Navbar() {
                   exit={{ y: 10, opacity: 0 }}
                   className="font-bold text-blue-600 dark:text-blue-400 min-w-[36px] text-center inline-block"
                 >
-                  {visitorCount !== null ? visitorCount.toLocaleString() : "..."}
+                  {visitorCount !== null ? visitorCount.toLocaleString() : "---"}
                 </motion.span>
               </AnimatePresence>
             </div>
@@ -245,7 +245,7 @@ export default function Navbar() {
                 <UsersIcon className="w-4 h-4 text-blue-500" />
                 <span>Total Visitors:</span>
                 <span className="font-bold text-blue-600 dark:text-blue-400 ml-auto">
-                  {visitorCount !== null ? visitorCount.toLocaleString() : "..."}
+                  {visitorCount !== null ? visitorCount.toLocaleString() : "---"}
                 </span>
               </div>
   
