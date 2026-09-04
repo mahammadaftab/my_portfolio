@@ -79,6 +79,7 @@ function StarField() {
 export default function CredlyPage() {
   const [badges, setBadges] = useState<CredlyBadge[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isSyncing, setIsSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
@@ -86,13 +87,20 @@ export default function CredlyPage() {
   const [selectedBadge, setSelectedBadge] = useState<CredlyBadge | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Fetch Credly Badges dynamically from API route
-  const fetchBadges = async () => {
+  // Fetch Credly Badges dynamically from API route with optional forced live sync
+  const fetchBadges = async (forceRefresh = false) => {
     try {
-      setLoading(true);
+      if (forceRefresh) {
+        setIsSyncing(true);
+      } else {
+        setLoading(true);
+      }
       setError(null);
-      const res = await fetch("/api/credly");
+
+      const url = forceRefresh ? "/api/credly?refresh=true" : "/api/credly";
+      const res = await fetch(url, { cache: "no-store" });
       const data = await res.json();
+
       if (data.success && Array.isArray(data.badges)) {
         setBadges(data.badges);
       } else {
@@ -103,11 +111,12 @@ export default function CredlyPage() {
       setError(err.message || "Unable to fetch live Credly badges");
     } finally {
       setLoading(false);
+      setIsSyncing(false);
     }
   };
 
   useEffect(() => {
-    fetchBadges();
+    fetchBadges(false);
   }, []);
 
   // Filter & Sort Badges
@@ -185,6 +194,14 @@ export default function CredlyPage() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={() => fetchBadges(true)}
+              disabled={isSyncing || loading}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition-all shadow-[0_0_25px_rgba(99,102,241,0.3)] disabled:opacity-50 cursor-pointer"
+            >
+              <HiOutlineArrowPath className={`w-4 h-4 ${isSyncing ? "animate-spin" : ""}`} />
+              {isSyncing ? "Syncing Credly..." : "Sync Live Badges"}
+            </button>
             <a
               href="https://www.credly.com/users/mahammadaftab"
               target="_blank"
@@ -220,8 +237,14 @@ export default function CredlyPage() {
           </div>
 
           <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center">
-            <div className="text-3xl font-black text-purple-400 mb-1">Live</div>
-            <div className="text-xs font-mono font-bold uppercase text-gray-400">Credly API Sync</div>
+            <div className="flex items-center justify-center gap-2 text-3xl font-black text-purple-400 mb-1">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+              </span>
+              <span>Live</span>
+            </div>
+            <div className="text-xs font-mono font-bold uppercase text-gray-400">Credly API Real-Time Sync</div>
           </div>
         </div>
 
@@ -298,7 +321,7 @@ export default function CredlyPage() {
           <div className="py-16 text-center max-w-xl mx-auto bg-white/[0.02] border border-white/10 rounded-3xl p-8">
             <p className="text-red-400 font-semibold mb-4">{error}</p>
             <button
-              onClick={fetchBadges}
+              onClick={() => fetchBadges(false)}
               className="px-6 py-2.5 bg-indigo-600 text-white rounded-full text-xs font-mono font-bold hover:bg-indigo-500 transition-colors"
             >
               Retry Connection
