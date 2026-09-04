@@ -195,7 +195,7 @@ export default function Navbar() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
               <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                {activeVisitors !== null ? activeVisitors : 1} Live
+                {activeVisitors !== null ? activeVisitors : "---"} Live
               </span>
               <span className="text-gray-300 dark:text-gray-600">|</span>
               <UsersIcon className="w-3.5 h-3.5 text-blue-500" />
@@ -207,7 +207,7 @@ export default function Navbar() {
                   exit={{ y: 6, opacity: 0 }}
                   className="font-bold text-blue-600 dark:text-blue-400 min-w-[32px] text-center inline-block"
                 >
-                  {visitorCount !== null ? visitorCount.toLocaleString() : "1,248+"}
+                  {visitorCount !== null ? visitorCount.toLocaleString() : "---"}
                 </motion.span>
               </AnimatePresence>
             </div>
@@ -293,14 +293,14 @@ export default function Navbar() {
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
                   <span className="font-bold text-emerald-600 dark:text-emerald-400">
-                    {activeVisitors !== null ? activeVisitors : 1} Live
+                    {activeVisitors !== null ? activeVisitors : "---"} Live
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
                   <UsersIcon className="w-3.5 h-3.5 text-blue-500" />
                   <span>Total:</span>
                   <span className="font-bold text-blue-600 dark:text-blue-400">
-                    {visitorCount !== null ? visitorCount.toLocaleString() : "1,248+"}
+                    {visitorCount !== null ? visitorCount.toLocaleString() : "---"}
                   </span>
                 </div>
               </div>
