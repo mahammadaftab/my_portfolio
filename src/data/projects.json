@@ -1,6 +1,54 @@
 [
   {
     "id": 1,
+    "title": "Panchayat AI",
+    "description": "Autonomous Local Market Negotiation & Price-Discovery Platform.",
+    "tags": {
+      "backend": ["Python 3.11 + FastAPI", "MongoDB", "Scikit-Learn"],
+      "frontend": ["Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"]
+    },
+    "images": [
+      {
+        "url": "/images/projects/Panchayat AI.png",
+        "label": "Main Interface",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Demo",
+        "url": "#"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/Panchayat-AI"
+  },
+
+  {
+    "id": 2,
+    "title": "JANANI360-AI",
+    "description": "AI-Powered Maternal & Child Healthcare Ecosystem for Smart Pregnancy Monitoring, Emergency Referrals, and Public Health Management.",
+    "tags": {
+      "backend": ["Node.js", "Express.js","PostgreSQ", "Prisma ORM", "JWT Authentication"],
+      "frontend": ["React + Vite + TypeScript", "Framer Motion", "Tailwind CSS"]
+    },
+    "images": [
+      {
+        "url": "/images/projects/JANANI360-AI.png",
+        "label": "Main Interface",
+        "type": "image"
+      }
+    ],
+    "urls": [
+      {
+        "label": "Live Demo",
+        "url": "#"
+      }
+    ],
+    "githubUrl": "https://github.com/mahammadaftab/JANANI360-AI"
+  },
+
+  {
+    "id": 3,
     "title": "CertForge AI — The Enterprise Certification Intelligence OS",
     "description": "Predicting readiness, architecting success, and bridging the gap between workforce potential and technical mastery.",
     "tags": {
@@ -24,7 +72,7 @@
   },
 
   {
-    "id": 2,
+    "id": 4,
     "title": "OpenEnv: Email Triage",
     "description": "OpenEnv simulates autonomous Spam Email Detect for automated Email classification - a critical real-world challenge faced by logistics companies worldwide.",
     "tags": ["Python + Libraries", "HuggingFace", "Reinforcement Learning", "OPENENV", "Agent", "Dockerfile", "Rewards", "Action"],
@@ -45,7 +93,7 @@
   },
 
   {
-    "id": 3,
+    "id": 5,
     "title": "🏛 CivicAI: Multi-Agent Society Decision & Resource Management Environment",
     "description": "Train AI agents to manage societal decision-making under uncertainty. Government planning • Resource allocation • Crisis response • Economic balancing",
     "tags": ["Python + Libraries", "HuggingFace", "Multi-Agent", "Dockerfile", "Rewards", "Action"],
@@ -66,7 +114,7 @@
   },
 
   {
-    "id": 4,
+    "id": 6,
     "title": "Accident and Crime Report App",
     "description": "A full-featured crime report app with user authentication and data storage.",
     "tags": {
@@ -90,7 +138,7 @@
   },
 
   {
-    "id": 5,
+    "id": 7,
     "title": "Tourism and Travel Tech",
     "description": "A full-stack tourism platform with AI-powered personalized itineraries, real-time travel intelligence, and sustainability-focused recommendations.",
     "tags": {
@@ -114,7 +162,7 @@
   },
 
   {
-    "id": 6,
+    "id": 8,
     "title": "E-Commerce Platform",
     "description": "A full-featured online shopping platform with payment integration and inventory management.",
     "tags": {
@@ -137,7 +185,7 @@
     "githubUrl": "https://github.com/mahammadaftab/my-e-commerce"
   },
   {
-    "id": 7,
+    "id": 9,
     "title": "Food-Order-Easy",
     "description": "A food ordering application for easy ordering and delivery.",
     "tags": {
@@ -181,7 +229,7 @@
     "githubUrl": "https://github.com/mahammadaftab/food-order-easy.git"
   },
   {
-    "id": 8,
+    "id": 10,
     "title": "Portfolio Website",
     "description": "A responsive portfolio website with 3D animations and dark mode support.",
     "tags": {
@@ -203,7 +251,7 @@
     "githubUrl": "https://github.com/mahammadaftab/my_portfolio.git"
   },
   {
-    "id": 9,
+    "id": 11,
     "title": "Durood Counter",
     "description": "A durood counter application.",
     "tags": ["React", "Tailwind CSS", "vite"],
@@ -223,7 +271,7 @@
     "githubUrl": "https://github.com/mahammadaftab/Dawateislami_app.git"
   },
   {
-    "id": 10,
+    "id": 12,
     "title": "Java Development Quiz App",
     "description": "A quiz app for testing java development knowledge.",
     "tags": ["Java JDK 17", "springboot", "Maven", "React.js"],
@@ -250,7 +298,7 @@
     "githubUrl": "https://github.com/mahammadaftab/Quiz_Game.git"
   },
   {
-    "id": 11,
+    "id": 13,
     "title": "Java Development Currency Converter",
     "description": "A currency converter application for java development.",
     "tags": ["Java JDK 17", "springboot", "Apache Maven", "React.js", "Node.js"],
@@ -278,7 +326,7 @@
   },
   
   {
-    "id": 12,
+    "id": 14,
     "title": "Java Development Weather Forecast",
     "description": "A Weather forecast application for java development.",
     "tags": {
